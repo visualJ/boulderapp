@@ -11,7 +11,17 @@ public class Session {
     private long id;
     private Date date;
 
+    public Session(long id, Date date) {
+        this.id = id;
+        this.date = date;
+    }
+
+    public Session() {
+        // empty constructor for serialization
+    }
+
     public long getId() {
+
         return id;
     }
 

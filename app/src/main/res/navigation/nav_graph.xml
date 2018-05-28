@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/timelineFragment"
-        android:name="de.ringleinknorr.boulderapp.TimelineFragment"
+        android:name="de.ringleinknorr.boulderapp.timeline.TimelineFragment"
         android:label="Timeline" />
 
 

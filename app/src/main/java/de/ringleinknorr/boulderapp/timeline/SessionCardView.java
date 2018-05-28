@@ -3,6 +3,7 @@ package de.ringleinknorr.boulderapp.timeline;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Constraints;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class SessionCardView extends ConstraintLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.view_sessioncard, this);
         ButterKnife.bind(this);
+        setLayoutParams(new Constraints.LayoutParams(-1,-2));
     }
 
     public SessionCardView(Context context) {
