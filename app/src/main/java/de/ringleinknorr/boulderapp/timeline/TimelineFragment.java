@@ -1,10 +1,12 @@
-package de.ringleinknorr.boulderapp;
+package de.ringleinknorr.boulderapp.timeline;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import de.ringleinknorr.boulderapp.R;
 
 public class TimelineFragment extends Fragment {
 
