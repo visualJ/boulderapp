@@ -14,6 +14,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.ringleinknorr.boulderapp.App;
 import de.ringleinknorr.boulderapp.R;
 
 public class TimelineFragment extends Fragment {
@@ -27,7 +29,6 @@ public class TimelineFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class TimelineFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         viewModel = ViewModelProviders.of(this).get(TimelineViewModel.class);
+        viewModel.init(new SessionRepository(new SessionDB(((App) getActivity().getApplication()).getBoxStore())));
         viewModel.getSessions().observe(this, sessions -> adapter.setSessions(sessions));
 
         sessionList.setHasFixedSize(true);
@@ -43,7 +45,16 @@ public class TimelineFragment extends Fragment {
         adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault());
         sessionList.setAdapter(adapter);
 
-
         return view;
+    }
+
+    @OnClick(R.id.addButton)
+    public void onAddButton() {
+        viewModel.addSession();
+    }
+
+    @OnClick(R.id.removeButton)
+    public void onRemoveButton() {
+        viewModel.removeSessions();
     }
 }

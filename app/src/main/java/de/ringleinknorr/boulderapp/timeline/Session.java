@@ -11,8 +11,7 @@ public class Session {
     private long id;
     private Date date;
 
-    public Session(long id, Date date) {
-        this.id = id;
+    public Session(Date date) {
         this.date = date;
     }
 

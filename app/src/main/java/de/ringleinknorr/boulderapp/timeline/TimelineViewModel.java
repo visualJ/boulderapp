@@ -11,19 +11,25 @@ public class TimelineViewModel extends ViewModel {
     private SessionRepository sessionRepository;
 
     public TimelineViewModel() {
-        if (sessions == null) {
-            sessionRepository = new SessionRepository();
-            reloadSessions();
-        }
     }
 
-    public LiveData<List<Session>> reloadSessions() {
-        sessions = sessionRepository.getAllSessions();
-        return sessions;
+    public void init(SessionRepository sessionRepository) {
+        if (sessions == null) {
+            this.sessionRepository = sessionRepository;
+            sessions = sessionRepository.getAllSessions();
+        }
     }
 
     public LiveData<List<Session>> getSessions() {
         return sessions;
+    }
+
+    public void addSession() {
+        sessionRepository.addSession();
+    }
+
+    public void removeSessions() {
+        sessionRepository.removeAllSessions();
     }
 
 }
