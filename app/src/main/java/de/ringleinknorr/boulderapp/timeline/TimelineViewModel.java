@@ -5,17 +5,19 @@ import android.arch.lifecycle.ViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class TimelineViewModel extends ViewModel {
 
     private LiveData<List<Session>> sessions;
     private SessionRepository sessionRepository;
 
-    public TimelineViewModel() {
+    @Inject public TimelineViewModel(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
     }
 
-    public void init(SessionRepository sessionRepository) {
+    public void init() {
         if (sessions == null) {
-            this.sessionRepository = sessionRepository;
             sessions = sessionRepository.getAllSessions();
         }
     }

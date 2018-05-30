@@ -1,6 +1,7 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,16 +13,23 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.ringleinknorr.boulderapp.App;
+import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
+import de.ringleinknorr.boulderapp.ViewModelFactory;
 
 public class TimelineFragment extends Fragment {
 
     @BindView(R.id.sessionList)
     RecyclerView sessionList;
+
+    @Inject
+    ViewModelFactory<TimelineViewModel> viewModelFactory;
+
     private TimelineViewModel viewModel;
     private SessionListAdapter adapter;
 
@@ -36,8 +44,8 @@ public class TimelineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
         ButterKnife.bind(this, view);
 
-        viewModel = ViewModelProviders.of(this).get(TimelineViewModel.class);
-        viewModel.init(new SessionRepository(new SessionDB(((App) getActivity().getApplication()).getBoxStore())));
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TimelineViewModel.class);
+        viewModel.init();
         viewModel.getSessions().observe(this, sessions -> adapter.setSessions(sessions));
 
         sessionList.setHasFixedSize(true);
@@ -46,6 +54,12 @@ public class TimelineFragment extends Fragment {
         sessionList.setAdapter(adapter);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @OnClick(R.id.addButton)

@@ -5,10 +5,13 @@ import android.arch.lifecycle.LiveData;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class SessionRepository {
 
     private SessionDB db;
 
+    @Inject
     public SessionRepository(SessionDB db) {
         this.db = db;
     }

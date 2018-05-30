@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import io.objectbox.android.ObjectBoxLiveData;
@@ -13,6 +15,7 @@ public class SessionDB {
 
     private Box<Session> box;
 
+    @Inject
     public SessionDB(BoxStore boxStore) {
         this.box = boxStore.boxFor(Session.class);
     }
