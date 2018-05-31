@@ -14,12 +14,7 @@ public class TimelineViewModel extends ViewModel {
 
     @Inject public TimelineViewModel(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
-    }
-
-    public void init() {
-        if (sessions == null) {
-            sessions = sessionRepository.getAllSessions();
-        }
+        sessions = sessionRepository.getAllSessions();
     }
 
     public LiveData<List<Session>> getSessions() {

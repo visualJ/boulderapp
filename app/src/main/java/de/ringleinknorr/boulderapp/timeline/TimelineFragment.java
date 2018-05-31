@@ -45,7 +45,6 @@ public class TimelineFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TimelineViewModel.class);
-        viewModel.init();
         viewModel.getSessions().observe(this, sessions -> adapter.setSessions(sessions));
 
         sessionList.setHasFixedSize(true);
