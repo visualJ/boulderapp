@@ -60,9 +60,9 @@
             android:id="@+id/gymText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:text="Wiesbadener Nordwand"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/divider"
@@ -75,11 +75,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="17 Routen"
+            android:text="17"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/gymText"
-            tools:text="17 Routen" />
+            app:layout_constraintBottom_toBottomOf="@+id/routeIcon"
+            app:layout_constraintStart_toEndOf="@+id/routeIcon"
+            app:layout_constraintTop_toTopOf="@+id/routeIcon"
+            tools:text="17" />
 
         <TextView
             android:id="@+id/workoutsText"
@@ -87,10 +88,33 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="3 Workouts"
+            android:text="3"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/workoutIcon"
+            app:layout_constraintStart_toEndOf="@+id/workoutIcon"
+            app:layout_constraintTop_toTopOf="@+id/workoutIcon"
+            tools:text="3" />
+
+        <ImageView
+            android:id="@+id/workoutIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/routesText"
+            app:layout_constraintTop_toBottomOf="@+id/gymText"
+            app:srcCompat="@drawable/workout_icon" />
+
+        <ImageView
+            android:id="@+id/routeIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/routesText"
-            tools:text="3 Workouts" />
+            app:layout_constraintTop_toBottomOf="@+id/gymText"
+            app:srcCompat="@drawable/route_icon" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
