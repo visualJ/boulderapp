@@ -33,6 +33,8 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:titleTextColor="@color/colorDarkGrey"
+            app:navigationIcon="@drawable/ic_toolbar_menu"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.constraint.ConstraintLayout>
 
