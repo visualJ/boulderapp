@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Bolder</string>
+    <string name="gym_auto_complete_textview_label">Halle</string>
+    <string name="level_textview_label">Schwierigkeit</string>
+    <string name="gym_sector_textview_label">Hallensektor</string>
+    <string name="route_search_button_label">Suchen</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

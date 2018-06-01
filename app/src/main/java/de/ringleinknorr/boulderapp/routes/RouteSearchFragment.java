@@ -5,18 +5,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RouteSearchFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RouteSearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RouteSearchFragment extends Fragment {
+
+    @BindView(R.id.auto_complete_text_view)
+    AutoCompleteTextView
+            autoCompleteTextView;
 
     public RouteSearchFragment() {
         // Required empty public constructor
@@ -25,7 +25,19 @@ public class RouteSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_route_search, container, false);
+        ButterKnife.bind(this, view);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_dropdown_item_1line, HALLEN);
+
+        AutoCompleteTextView textView = autoCompleteTextView;
+        textView.setAdapter(adapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_route_search, container, false);
+        return view;
     }
+
+    private static final String[] HALLEN = new String[]{
+            "Nordwand Wiesbaden", "Boulderwelt Frankfurt", "Blockwerk Mainz"
+    };
 }
