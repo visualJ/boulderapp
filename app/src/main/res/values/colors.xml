@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#558b2f</color>
     <color name="colorPrimaryDark">#33691e</color>
-    <color name="colorAccent">#aeea00</color>
+    <color name="colorAccent">#558b2f</color>
     <color name="colorGrey">#808080</color>
     <color name="colorDarkGrey">#333333</color>
 </resources>
