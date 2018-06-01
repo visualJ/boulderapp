@@ -6,15 +6,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@id/routeSearchFragment"
+            android:icon="@drawable/ic_menu_search"
             android:title="Routen Suche" />
         <item
             android:id="@id/timelineFragment"
+            android:icon="@drawable/ic_menu_timeline"
             android:title="Timeline" />
         <item
             android:id="@+id/statistics"
+            android:icon="@drawable/ic_menu_statistics"
             android:title="Statistiken" />
         <item
             android:id="@+id/nav_offlinemaps"
+            android:icon="@drawable/ic_menu_offline"
             android:title="Offline Hallen" />
     </group>
 
