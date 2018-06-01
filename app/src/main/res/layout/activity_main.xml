@@ -17,15 +17,15 @@
         app:navGraph="@navigation/nav_graph" />
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/testNav"
+        android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
 

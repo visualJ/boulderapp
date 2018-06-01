@@ -5,10 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/route_search"
+            android:id="@id/routeSearchFragment"
             android:title="Routen Suche" />
         <item
-            android:id="@+id/timelineFragment"
+            android:id="@id/timelineFragment"
             android:title="Timeline" />
         <item
             android:id="@+id/statistics"
@@ -17,11 +17,5 @@
             android:id="@+id/nav_offlinemaps"
             android:title="Offline Hallen" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-
-        </menu>
-    </item>
 
 </menu>

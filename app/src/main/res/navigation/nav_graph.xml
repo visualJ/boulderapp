@@ -9,6 +9,9 @@
         android:id="@+id/timelineFragment"
         android:name="de.ringleinknorr.boulderapp.timeline.TimelineFragment"
         android:label="Timeline" />
-
+    <fragment
+        android:id="@+id/routeSearchFragment"
+        android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
+        android:label="RouteSearch" />
 
 </navigation>
