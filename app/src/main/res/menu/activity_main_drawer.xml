@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/route_search"
+            android:title="Routen Suche" />
+        <item
+            android:id="@+id/timelineFragment"
+            android:title="Timeline" />
+        <item
+            android:id="@+id/statistics"
+            android:title="Statistiken" />
+        <item
+            android:id="@+id/nav_offlinemaps"
+            android:title="Offline Hallen" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+
+        </menu>
+    </item>
+
+</menu>
