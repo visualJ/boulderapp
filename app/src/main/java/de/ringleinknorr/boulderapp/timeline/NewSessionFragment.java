@@ -8,13 +8,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -40,6 +42,7 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
     Button cancelButton;
 
     private OnResultListener onResultListener;
+    private ArrayAdapter<String> gymAdapter;
 
     @Inject
     GymRepository gymRepository;
@@ -81,6 +84,15 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
 
+        gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
+                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+        gymText.setAdapter(gymAdapter);
+        gymRepository.getAllGymNames().observe(this, names -> {
+            gymAdapter.clear();
+            if (names != null) {
+                gymAdapter.addAll(names);
+            }
+        });
     }
 
     @Override
