@@ -4,6 +4,8 @@
     <string name="level_textview_label">Schwierigkeit</string>
     <string name="gym_sector_textview_label">Hallensektor</string>
     <string name="route_search_button_label">Suchen</string>
+    <string name="navigation_drawer_close">close drawer</string>
+    <string name="navigation_drawer_open">open drawer</string>
 
 
 </resources>
