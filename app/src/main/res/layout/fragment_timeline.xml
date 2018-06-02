@@ -30,7 +30,7 @@
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/add_icon" />
+        app:srcCompat="@drawable/ic_add" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/session_list"
