@@ -23,10 +23,6 @@ public class App extends Application implements HasSupportFragmentInjector {
         DaggerAppDIComponent.builder().boxStore(boxStore).build().inject(this);
     }
 
-    public BoxStore getBoxStore() {
-        return boxStore;
-    }
-
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;

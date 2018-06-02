@@ -2,7 +2,6 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import android.arch.lifecycle.LiveData;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;

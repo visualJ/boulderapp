@@ -3,6 +3,7 @@ package de.ringleinknorr.boulderapp.timeline;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -42,7 +44,7 @@ public class TimelineFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
@@ -72,7 +74,7 @@ public class TimelineFragment extends Fragment {
             Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)));
             viewModel.addSession(session);
         });
-        newSessionFragment.show(getActivity().getSupportFragmentManager(), newSessionFragment.getTag());
+        newSessionFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), newSessionFragment.getTag());
     }
 
     @OnClick(R.id.remove_button)
