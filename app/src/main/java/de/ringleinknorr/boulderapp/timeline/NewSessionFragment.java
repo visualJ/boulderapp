@@ -3,11 +3,14 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,12 +21,14 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
+import de.ringleinknorr.boulderapp.routes.GymRepository;
 
 public class NewSessionFragment extends BottomSheetDialogFragment {
 
     @BindView(R.id.gym_text)
-    TextView gymText;
+    AutoCompleteTextView gymText;
 
     @BindView(R.id.date_text)
     TextView dateText;
@@ -35,6 +40,9 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
     Button cancelButton;
 
     private OnResultListener onResultListener;
+
+    @Inject
+    GymRepository gymRepository;
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -72,6 +80,13 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @OnClick(R.id.cancel_button)
@@ -87,17 +102,6 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
 
     interface OnResultListener {
         void onResult(long gymId, Date date);
-    }
-
-    static class Factory {
-
-        @Inject
-        public Factory() {
-        }
-
-        public NewSessionFragment create() {
-            return new NewSessionFragment();
-        }
     }
 
 }

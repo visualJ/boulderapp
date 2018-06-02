@@ -33,9 +33,6 @@ public class TimelineFragment extends Fragment {
     @Inject
     ViewModelFactory<TimelineViewModel> viewModelFactory;
 
-    @Inject
-    NewSessionFragment.Factory newSessionFragmentFactory;
-
     private TimelineViewModel viewModel;
     private SessionListAdapter adapter;
 
@@ -69,7 +66,7 @@ public class TimelineFragment extends Fragment {
 
     @OnClick(R.id.add_fab)
     public void onAddFAB() {
-        NewSessionFragment newSessionFragment = newSessionFragmentFactory.create();
+        NewSessionFragment newSessionFragment = new NewSessionFragment();
         newSessionFragment.setOnResultListener((gymName, date) -> {
             Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)));
             viewModel.addSession(session);
