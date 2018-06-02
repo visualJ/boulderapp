@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -24,11 +25,14 @@ import de.ringleinknorr.boulderapp.ViewModelFactory;
 
 public class TimelineFragment extends Fragment {
 
-    @BindView(R.id.sessionList)
+    @BindView(R.id.session_list)
     RecyclerView sessionList;
 
     @Inject
     ViewModelFactory<TimelineViewModel> viewModelFactory;
+
+    @Inject
+    NewSessionFragment.Factory newSessionFragmentFactory;
 
     private TimelineViewModel viewModel;
     private SessionListAdapter adapter;
@@ -61,12 +65,17 @@ public class TimelineFragment extends Fragment {
         super.onAttach(context);
     }
 
-    @OnClick(R.id.addButton)
-    public void onAddButton() {
-        viewModel.addSession();
+    @OnClick(R.id.add_fab)
+    public void onAddFAB() {
+        NewSessionFragment newSessionFragment = newSessionFragmentFactory.create();
+        newSessionFragment.setOnResultListener((gymName, date) -> {
+            Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)));
+            viewModel.addSession(session);
+        });
+        newSessionFragment.show(getActivity().getSupportFragmentManager(), newSessionFragment.getTag());
     }
 
-    @OnClick(R.id.removeButton)
+    @OnClick(R.id.remove_button)
     public void onRemoveButton() {
         viewModel.removeSessions();
     }

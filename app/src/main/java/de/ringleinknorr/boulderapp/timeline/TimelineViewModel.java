@@ -21,8 +21,8 @@ public class TimelineViewModel extends ViewModel {
         return sessions;
     }
 
-    public void addSession() {
-        sessionRepository.addSession();
+    public void addSession(Session session) {
+        sessionRepository.addSession(session);
     }
 
     public void removeSessions() {

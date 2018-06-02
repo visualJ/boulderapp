@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/route_search_button_label"

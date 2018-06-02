@@ -20,8 +20,7 @@ public class SessionRepository {
         return db.getAllSessions();
     }
 
-    public Session addSession() {
-        Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)));
+    public Session addSession(Session session) {
         db.addSession(session);
         return session;
     }
