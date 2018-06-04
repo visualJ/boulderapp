@@ -50,6 +50,7 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         holder.view.dayText.setText(day);
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, locale);
         holder.view.monthText.setText(String.valueOf(month.toUpperCase()));
+        holder.view.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
     }
 
     @Override

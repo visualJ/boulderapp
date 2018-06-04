@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:710369053063257764",
-      "lastPropertyId": "2:4066602994123770217",
+      "lastPropertyId": "3:1327129411892404239",
       "name": "Session",
       "properties": [
         {
@@ -15,6 +15,10 @@
         {
           "id": "2:4066602994123770217",
           "name": "date"
+        },
+        {
+          "id": "3:1327129411892404239",
+          "name": "gymId"
         }
       ],
       "relations": []

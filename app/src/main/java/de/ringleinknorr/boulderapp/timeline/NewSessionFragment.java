@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
+import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymRepository;
 
 public class NewSessionFragment extends BottomSheetDialogFragment {
@@ -108,12 +109,12 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.add_button)
     public void onAddButton() {
-        onResultListener.onResult(0, new Date());
+        onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), new Date());
         dismiss();
     }
 
     interface OnResultListener {
-        void onResult(long gymId, Date date);
+        void onResult(Gym gym, Date date);
     }
 
 }

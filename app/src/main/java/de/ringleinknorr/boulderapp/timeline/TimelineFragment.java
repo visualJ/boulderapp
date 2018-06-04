@@ -67,8 +67,8 @@ public class TimelineFragment extends Fragment {
     @OnClick(R.id.add_fab)
     public void onAddFAB() {
         NewSessionFragment newSessionFragment = new NewSessionFragment();
-        newSessionFragment.setOnResultListener((gymName, date) -> {
-            Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)));
+        newSessionFragment.setOnResultListener((gym, date) -> {
+            Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)), gym);
             viewModel.addSession(session);
         });
         newSessionFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), newSessionFragment.getTag());

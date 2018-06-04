@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:710369053063257764",
-      "lastPropertyId": "2:4066602994123770217",
+      "lastPropertyId": "3:1327129411892404239",
       "name": "Session",
       "properties": [
         {
@@ -15,6 +15,11 @@
         {
           "id": "2:4066602994123770217",
           "name": "date"
+        },
+        {
+          "id": "3:1327129411892404239",
+          "indexId": "1:5026796927962012330",
+          "name": "gymId"
         }
       ],
       "relations": []
@@ -85,7 +90,7 @@
     }
   ],
   "lastEntityId": "6:7511832544498786339",
-  "lastIndexId": "0:0",
+  "lastIndexId": "1:5026796927962012330",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
