@@ -9,4 +9,11 @@
         <item name="android:windowBackground">@color/colorDarkGrey</item>
     </style>
 
+    <style name="Autocomplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:background">@color/colorDarkGrey</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/colorLightGrey</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
 </resources>
