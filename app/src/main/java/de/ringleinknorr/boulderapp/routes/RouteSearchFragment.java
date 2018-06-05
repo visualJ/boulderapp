@@ -49,7 +49,6 @@ public class RouteSearchFragment extends Fragment {
             return true;
         });
 
-
         return view;
     }
 
