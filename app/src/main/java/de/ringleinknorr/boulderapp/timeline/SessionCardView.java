@@ -18,7 +18,7 @@ public class SessionCardView extends ConstraintLayout {
     TextView dayText;
     @BindView(R.id.monthText)
     TextView monthText;
-    @BindView(R.id.gymText)
+    @BindView(R.id.gym_text)
     TextView gymText;
     @BindView(R.id.routesText)
     TextView routesText;

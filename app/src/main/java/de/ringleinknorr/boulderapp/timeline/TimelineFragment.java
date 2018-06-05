@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,7 +55,7 @@ public class TimelineFragment extends Fragment {
 
         sessionList.setHasFixedSize(true);
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault());
+        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), this::onSessionSelected);
         sessionList.setAdapter(adapter);
 
         return view;
@@ -77,5 +80,12 @@ public class TimelineFragment extends Fragment {
     @OnClick(R.id.remove_button)
     public void onRemoveButton() {
         viewModel.removeSessions();
+    }
+
+    private void onSessionSelected(long sessionId) {
+        Log.i(getClass().getSimpleName(), "onCreateView: clicked session " + sessionId);
+        Bundle bundle = new Bundle();
+        bundle.putLong(SessionFragment.ARG_SESSION_ID, sessionId);
+        NavHostFragment.findNavController(this).navigate(R.id.selectSession, bundle);
     }
 }

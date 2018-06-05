@@ -69,6 +69,8 @@
             android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:hint="Halle"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
     </android.support.design.widget.TextInputLayout>
@@ -86,13 +88,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gym_text_layout">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/date_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Datum"
+            android:imeOptions="actionDone"
             android:inputType="date"
             tools:layout_editor_absoluteX="111dp"
             tools:layout_editor_absoluteY="165dp" />

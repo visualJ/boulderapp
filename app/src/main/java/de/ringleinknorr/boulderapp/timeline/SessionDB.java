@@ -24,6 +24,10 @@ public class SessionDB {
         return new ObjectBoxLiveData<>(box.query().order(Session_.date, QueryBuilder.DESCENDING).build());
     }
 
+    public Session getSession(long sessionId) {
+        return box.get(sessionId);
+    }
+
     public void addSession(Session session) {
         box.put(session);
     }

@@ -15,6 +15,10 @@ public class SessionRepository {
         this.db = db;
     }
 
+    public Session getSession(long sessionId) {
+        return db.getSession(sessionId);
+    }
+
     public LiveData<List<Session>> getAllSessions() {
         return db.getAllSessions();
     }

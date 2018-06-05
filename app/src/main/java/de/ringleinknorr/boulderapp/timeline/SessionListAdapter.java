@@ -2,8 +2,11 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -12,27 +15,21 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
 
     private List<Session> sessions;
     private Locale locale;
+    private OnSessionSelectedListener onSessionSelectedListener;
+
+    public SessionListAdapter(List<Session> sessions, Locale locale, OnSessionSelectedListener onSessionSelectedListener) {
+        this.sessions = sessions;
+        this.locale = locale;
+        this.onSessionSelectedListener = onSessionSelectedListener;
+    }
 
     public List<Session> getSessions() {
         return sessions;
     }
 
-    public SessionListAdapter(List<Session> sessions, Locale locale) {
-        this.sessions = sessions;
-        this.locale = locale;
-    }
-
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
         notifyDataSetChanged();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        public SessionCardView view;
-        public ViewHolder(SessionCardView itemView) {
-            super(itemView);
-            view = itemView;
-        }
     }
 
     @NonNull
@@ -58,5 +55,29 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
         return sessions.size();
     }
 
+    public OnSessionSelectedListener getOnSessionSelectedListener() {
+        return onSessionSelectedListener;
+    }
+
+    public void setOnSessionSelectedListener(OnSessionSelectedListener onSessionSelectedListener) {
+        this.onSessionSelectedListener = onSessionSelectedListener;
+    }
+
+    interface OnSessionSelectedListener {
+        void onSessionSelected(long sessionId);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        public SessionCardView view;
+
+        public ViewHolder(SessionCardView itemView) {
+            super(itemView);
+            view = itemView;
+            view.setOnClickListener(ignore -> {
+                long sessionId = sessions.get(getAdapterPosition()).getId();
+                onSessionSelectedListener.onSessionSelected(sessionId);
+            });
+        }
+    }
 
 }

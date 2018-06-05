@@ -57,7 +57,7 @@
             tools:text="APR" />
 
         <TextView
-            android:id="@+id/gymText"
+            android:id="@+id/gym_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -103,7 +103,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/routesText"
-            app:layout_constraintTop_toBottomOf="@+id/gymText"
+            app:layout_constraintTop_toBottomOf="@+id/gym_text"
             app:srcCompat="@drawable/ic_workout" />
 
         <ImageView
@@ -114,7 +114,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/gymText"
+            app:layout_constraintTop_toBottomOf="@+id/gym_text"
             app:srcCompat="@drawable/ic_route" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
