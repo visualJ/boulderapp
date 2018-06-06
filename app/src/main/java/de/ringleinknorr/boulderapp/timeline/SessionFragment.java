@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
@@ -58,5 +59,10 @@ public class SessionFragment extends Fragment {
     public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
+    }
+
+    @OnClick(R.id.add_fab)
+    public void onAddFAB() {
+        // TODO implement adding a route or workout
     }
 }
