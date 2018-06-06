@@ -1,5 +1,6 @@
 package de.ringleinknorr.boulderapp.timeline;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import javax.inject.Inject;
@@ -9,7 +10,7 @@ public class SessionViewModel extends ViewModel {
     private SessionRepository sessionRepository;
 
     private Long sessionId;
-    private Session session;
+    private LiveData<Session> session;
 
     @Inject
     public SessionViewModel(SessionRepository repository) {
@@ -18,7 +19,7 @@ public class SessionViewModel extends ViewModel {
 
     public void init(long sessionId) {
         if (this.sessionId == null) {
-            setSessionId(sessionId);
+            this.session = sessionRepository.getSession(sessionId);
         }
     }
 
@@ -26,12 +27,7 @@ public class SessionViewModel extends ViewModel {
         return sessionId;
     }
 
-    public void setSessionId(Long sessionId) {
-        this.sessionId = sessionId;
-        this.session = sessionRepository.getSession(sessionId);
-    }
-
-    public Session getSession() {
+    public LiveData<Session> getSession() {
         return session;
     }
 }

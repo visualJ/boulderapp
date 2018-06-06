@@ -15,7 +15,7 @@ public class SessionRepository {
         this.db = db;
     }
 
-    public Session getSession(long sessionId) {
+    public LiveData<Session> getSession(long sessionId) {
         return db.getSession(sessionId);
     }
 
@@ -23,9 +23,8 @@ public class SessionRepository {
         return db.getAllSessions();
     }
 
-    public Session addSession(Session session) {
-        db.addSession(session);
-        return session;
+    public long addSession(Session session) {
+        return db.addSession(session);
     }
 
     public void removeAllSessions() {

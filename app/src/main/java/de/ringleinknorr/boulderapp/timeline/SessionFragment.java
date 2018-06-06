@@ -46,10 +46,10 @@ public class SessionFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SessionViewModel.class);
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_SESSION_ID));
-
-        Session session = viewModel.getSession();
-        sessionCard.setDate(session.getDate(), Locale.getDefault());
-        sessionCard.setGym(session.getGym().getTarget().getName());
+        viewModel.getSession().observe(this, session -> {
+            sessionCard.setDate(session.getDate(), Locale.getDefault());
+            sessionCard.setGym(session.getGym().getTarget().getName());
+        });
 
         return view;
     }

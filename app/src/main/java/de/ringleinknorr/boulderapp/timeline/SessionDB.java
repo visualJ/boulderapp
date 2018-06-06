@@ -1,6 +1,7 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
 
 import java.util.List;
 
@@ -24,12 +25,15 @@ public class SessionDB {
         return new ObjectBoxLiveData<>(box.query().order(Session_.date, QueryBuilder.DESCENDING).build());
     }
 
-    public Session getSession(long sessionId) {
-        return box.get(sessionId);
+    public LiveData<Session> getSession(long sessionId) {
+        MediatorLiveData<Session> liveData = new MediatorLiveData<>();
+        LiveData<List<Session>> query = new ObjectBoxLiveData<>(box.query().equal(Session_.id, sessionId).build());
+        liveData.addSource(query, list -> liveData.postValue(list.get(0)) );
+        return liveData;
     }
 
-    public void addSession(Session session) {
-        box.put(session);
+    public long addSession(Session session) {
+        return box.put(session);
     }
 
     public void removeAllSessions() {
