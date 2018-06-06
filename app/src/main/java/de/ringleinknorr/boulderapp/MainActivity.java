@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(appToolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, appToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerSlideAnimationEnabled(false);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navDrawer, navController);
