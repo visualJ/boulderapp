@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -29,6 +30,9 @@ public class SessionFragment extends Fragment {
     @BindView(R.id.session_text)
     TextView sessionText;
 
+    @BindView(R.id.session_card)
+    SessionCardView sessionCard;
+
     @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
 
@@ -43,7 +47,9 @@ public class SessionFragment extends Fragment {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SessionViewModel.class);
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_SESSION_ID));
 
-        sessionText.setText("Session am " + viewModel.getSession().getDate().toString());
+        Session session = viewModel.getSession();
+        sessionCard.setDate(session.getDate(), Locale.getDefault());
+        sessionCard.setGym(session.getGym().getTarget().getName());
 
         return view;
     }
