@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -26,6 +30,9 @@ public class RouteSearchFragment extends Fragment {
     @BindView(R.id.gym_sector_view)
     ImageView gymSectorImageView;
 
+    @BindView(R.id.route_list)
+    RecyclerView routeList;
+
     public RouteSearchFragment() {
         // Required empty public constructor
     }
@@ -39,6 +46,12 @@ public class RouteSearchFragment extends Fragment {
         ButterKnife.bind(this, view);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, HALLEN);
+
+        List<Route> routeListData = new ArrayList<Route>();
+        routeListData.add(new Route("Leicht"));
+        routeList.setHasFixedSize(true);
+        routeList.setLayoutManager(new LinearLayoutManager(getContext()));
+        routeList.setAdapter(new RouteListAdapter(routeListData));
 
         AutoCompleteTextView textView = autoCompleteTextView;
         textView.setAdapter(adapter);
