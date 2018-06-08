@@ -22,4 +22,7 @@ public class RouteRepository {
         return db.getRoute(routeId);
     }
 
+    public LiveData<List<Route>> queryRoutes(RouteSearchParameter routeSearchParameter) {
+        return db.queryRoutes(routeSearchParameter);
+    }
 }

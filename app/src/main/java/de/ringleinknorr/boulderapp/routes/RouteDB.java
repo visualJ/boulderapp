@@ -18,8 +18,9 @@ public class RouteDB {
     public RouteDB(BoxStore boxStore) {
         this.box = boxStore.boxFor(Route.class);
         if (box.count() == 0) {
-            box.put(new Route("Leicht"));
-            box.put(new Route("Schwer"));
+            box.put(new Route(Route.Level.LEICHT));
+            box.put(new Route(Route.Level.SCHWER));
+            box.put(new Route(Route.Level.MITTEL));
         }
     }
 
@@ -31,6 +32,15 @@ public class RouteDB {
         MediatorLiveData<Route> liveData = new MediatorLiveData<>();
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(box.query().equal(Route_.id, routeId).build());
         liveData.addSource(query, list -> liveData.postValue(list.get(0)));
+        return liveData;
+    }
+
+    public LiveData<List<Route>> queryRoutes(RouteSearchParameter routeSearchParameter) {
+        int minLevel = routeSearchParameter.minLevel;
+        int maxLevel = routeSearchParameter.maxLevel;
+        MediatorLiveData<List<Route>> liveData = new MediatorLiveData<>();
+        LiveData<List<Route>> query = new ObjectBoxLiveData<>(box.query().between(Route_.level, minLevel, maxLevel).build());
+        liveData.addSource(query, list -> liveData.postValue(list));
         return liveData;
     }
 }

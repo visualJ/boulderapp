@@ -32,7 +32,7 @@ public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String routeLevel = routeList.get(position).getLevel();
+        String routeLevel = routeList.get(position).getLevel().name();
         holder.view.getRouteLevelText().setText(routeLevel);
     }
 

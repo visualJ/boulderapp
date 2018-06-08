@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+import com.appyvet.materialrangebar.RangeBar;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +27,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
@@ -36,6 +39,9 @@ public class RouteSearchFragment extends Fragment {
             autoCompleteTextView;
     @BindView(R.id.gym_sector_view)
     ImageView gymSectorImageView;
+
+    @BindView(R.id.rangeBar)
+    RangeBar rangeBar;
 
     @BindView(R.id.route_list)
     RecyclerView routeList;
@@ -65,7 +71,7 @@ public class RouteSearchFragment extends Fragment {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setRoutes(routes));
 
-        routeList.setHasFixedSize(true);
+        routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new LinearLayoutManager(getContext()));
         routeList.setAdapter(routeListAdapter);
 
@@ -80,6 +86,15 @@ public class RouteSearchFragment extends Fragment {
 
         return view;
     }
+
+
+    @OnClick(R.id.add_button)
+    public void onAddButton() {
+        int minLevel = rangeBar.getLeftIndex();
+        int maxLevel = rangeBar.getRightIndex();
+        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel));
+    }
+
 
     @Override
     public void onAttach(Context context) {

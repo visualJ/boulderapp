@@ -34,7 +34,7 @@ public class SessionViewModel extends ViewModel {
     }
 
     public void addRoute() {
-        session.getValue().getRoutes().add(new SessionRoute(new Route("Test"), session.getValue()));
+        session.getValue().getRoutes().add(new SessionRoute(new Route(Route.Level.LEICHT), session.getValue()));
         sessionRepository.putSession(session.getValue());
     }
 }

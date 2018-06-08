@@ -29,7 +29,6 @@ dependencies {
     def nav_version = "1.0.0-alpha01"
     def dagger_version = "2.16"
 
-    implementation 'com.edmodo:rangebar:1.0.0'
     implementation 'com.appyvet:materialrangebar:1.4.2'
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation "android.arch.navigation:navigation-fragment:$nav_version" // use -ktx for Kotlin

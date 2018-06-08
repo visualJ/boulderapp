@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import de.ringleinknorr.boulderapp.routes.Route;
-
 public class SessionRouteListAdapter extends RecyclerView.Adapter<SessionRouteListAdapter.ViewHolder> {
     private List<SessionRoute> routeList;
 
@@ -32,7 +30,7 @@ public class SessionRouteListAdapter extends RecyclerView.Adapter<SessionRouteLi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String routeLevel = routeList.get(position).getRoute().getTarget().getLevel();
+        String routeLevel = routeList.get(position).getRoute().getTarget().getLevel().name();
         holder.view.getRouteLevelText().setText(routeLevel);
     }
 
