@@ -26,24 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <de.ringleinknorr.boulderapp.routes.GymSectorView
-                    android:id="@+id/gymSectorView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/add_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView"
-                    app:layout_constraintVertical_bias="0.0" />
-
                 <android.support.v7.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
@@ -61,14 +43,47 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+                        <Button
+                            android:id="@+id/add_button"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/route_search_button_label"
+                            android:textColor="@color/colorDarkGrey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <de.ringleinknorr.boulderapp.routes.GymSectorView
+                            android:id="@+id/gymSectorView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toTopOf="@+id/add_button"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rangeBar" />
+
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/textInputLayout"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="16dp"
                             app:hintAnimationEnabled="false"
                             app:hintEnabled="false"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -94,13 +109,11 @@
                             android:id="@+id/rangeBar"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/label_route_level"
@@ -125,9 +138,9 @@
                             android:id="@+id/label_gym_selection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
                             android:text="@string/gym_auto_complete_textview_label"
                             android:textColor="@color/colorDarkGrey"
                             app:layout_constraintStart_toStartOf="parent"
@@ -137,10 +150,11 @@
                             android:id="@+id/label_route_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginStart="8dp"
-                            android:text="@string/route_level_textview_label"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
 
+                            android:text="@string/route_level_textview_label"
                             android:textColor="@color/colorDarkGrey"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
@@ -148,20 +162,6 @@
 
                 </android.support.v7.widget.CardView>
 
-                <Button
-                    android:id="@+id/add_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/route_search_button_label"
-                    android:textColor="@color/colorDarkGrey"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
