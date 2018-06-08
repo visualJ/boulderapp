@@ -15,7 +15,7 @@ import de.ringleinknorr.boulderapp.R;
 
 public class RouteCardView extends ConstraintLayout {
     @BindView(R.id.route_level_text)
-    public TextView routeLevelText;
+    TextView routeLevelText;
     @BindView(R.id.image)
     ImageView image;
 
@@ -33,5 +33,14 @@ public class RouteCardView extends ConstraintLayout {
     public RouteCardView(Context context) {
         this(context, null);
     }
+
+    public TextView getRouteLevelText() {
+        return routeLevelText;
+    }
+
+    public ImageView getImage() {
+        return image;
+    }
+
 
 }

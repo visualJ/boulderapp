@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:animateLayoutChanges="true"
-        android:clipToPadding="false"
-        android:fillViewport="false"
+        android:clipToPadding="true"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -85,7 +84,7 @@
                                 android:layout_marginTop="0dp"
                                 android:layout_weight="1"
                                 android:imeOptions="actionDone"
-                                android:inputType="text"
+                                android:inputType="textNoSuggestions"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

@@ -71,6 +71,7 @@
             android:hint="Halle"
             android:imeOptions="actionNext"
             android:singleLine="true"
+            android:inputType="textNoSuggestions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
     </android.support.design.widget.TextInputLayout>

@@ -1,6 +1,9 @@
 package de.ringleinknorr.boulderapp.routes;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,9 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
+import de.ringleinknorr.boulderapp.ViewModelFactory;
 
 public class RouteSearchFragment extends Fragment {
 
@@ -32,6 +39,13 @@ public class RouteSearchFragment extends Fragment {
 
     @BindView(R.id.route_list)
     RecyclerView routeList;
+    LiveData<List<Route>> routes;
+    RouteListAdapter routeListAdapter;
+
+    @Inject
+    ViewModelFactory<RouteSearchViewModel> viewModelFactory;
+
+    private RouteSearchViewModel viewModel;
 
     public RouteSearchFragment() {
         // Required empty public constructor
@@ -41,17 +55,19 @@ public class RouteSearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, HALLEN);
 
-        List<Route> routeListData = new ArrayList<Route>();
-        routeListData.add(new Route("Leicht"));
+        routeListAdapter = new RouteListAdapter(new ArrayList<>());
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
+        viewModel.getRoutes().observe(this, routes -> routeListAdapter.setRoutes(routes));
+
         routeList.setHasFixedSize(true);
         routeList.setLayoutManager(new LinearLayoutManager(getContext()));
-        routeList.setAdapter(new RouteListAdapter(routeListData));
+        routeList.setAdapter(routeListAdapter);
 
         AutoCompleteTextView textView = autoCompleteTextView;
         textView.setAdapter(adapter);
@@ -63,6 +79,12 @@ public class RouteSearchFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     private static final String[] HALLEN = new String[]{
