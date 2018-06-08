@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
+import de.ringleinknorr.boulderapp.routes.Route;
+
 public class SessionViewModel extends ViewModel {
 
     private SessionRepository sessionRepository;
@@ -29,5 +31,10 @@ public class SessionViewModel extends ViewModel {
 
     public LiveData<Session> getSession() {
         return session;
+    }
+
+    public void addRoute() {
+        session.getValue().getRoutes().add(new SessionRoute(new Route("Test"), session.getValue()));
+        sessionRepository.putSession(session.getValue());
     }
 }

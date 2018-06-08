@@ -22,7 +22,7 @@ public class TimelineViewModel extends ViewModel {
     }
 
     public void addSession(Session session) {
-        sessionRepository.addSession(session);
+        sessionRepository.putSession(session);
     }
 
     public void removeSessions() {

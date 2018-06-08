@@ -23,7 +23,7 @@ public class SessionRepository {
         return db.getAllSessions();
     }
 
-    public long addSession(Session session) {
+    public long putSession(Session session) {
         return db.addSession(session);
     }
 

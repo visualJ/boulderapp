@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -28,18 +31,20 @@ public class SessionFragment extends Fragment {
 
     public static final String ARG_SESSION_ID = "sessionId";
 
-    @BindView(R.id.session_text)
-    TextView sessionText;
-
     @BindView(R.id.session_card)
     SessionCardView sessionCard;
+
+    @BindView(R.id.session_route_list)
+    RecyclerView sessionRouteList;
 
     @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
 
     private SessionViewModel viewModel;
+    private SessionRouteListAdapter adapter;
 
     @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_session, container, false);
@@ -50,7 +55,13 @@ public class SessionFragment extends Fragment {
         viewModel.getSession().observe(this, session -> {
             sessionCard.setDate(session.getDate(), Locale.getDefault());
             sessionCard.setGym(session.getGym().getTarget().getName());
+            adapter.setRoutes(session.getRoutes());
         });
+
+        sessionRouteList.setHasFixedSize(true);
+        sessionRouteList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new SessionRouteListAdapter(new ArrayList<>());
+        sessionRouteList.setAdapter(adapter);
 
         return view;
     }
@@ -64,5 +75,6 @@ public class SessionFragment extends Fragment {
     @OnClick(R.id.add_fab)
     public void onAddFAB() {
         // TODO implement adding a route or workout
+        viewModel.addRoute();
     }
 }

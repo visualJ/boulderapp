@@ -3,8 +3,10 @@ package de.ringleinknorr.boulderapp.timeline;
 import java.util.Date;
 
 import de.ringleinknorr.boulderapp.routes.Gym;
+import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
 import io.objectbox.relation.ToOne;
 
 @Entity
@@ -13,6 +15,8 @@ public class Session {
     private long id;
     private Date date;
     private ToOne<Gym> gym;
+    @Backlink
+    private ToMany<SessionRoute> routes;
 
     public Session(Date date, Gym gym) {
         this.date = date;
@@ -45,5 +49,9 @@ public class Session {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public ToMany<SessionRoute> getRoutes() {
+        return routes;
     }
 }

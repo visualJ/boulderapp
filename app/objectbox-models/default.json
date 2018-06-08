@@ -70,12 +70,22 @@
     },
     {
       "id": "5:2618593583127761907",
-      "lastPropertyId": "1:2309317795370874550",
+      "lastPropertyId": "3:1326020617985898010",
       "name": "SessionRoute",
       "properties": [
         {
           "id": "1:2309317795370874550",
           "name": "id"
+        },
+        {
+          "id": "2:5402610154674413699",
+          "indexId": "2:5526489393671684892",
+          "name": "routeId"
+        },
+        {
+          "id": "3:1326020617985898010",
+          "indexId": "3:5233643085613356973",
+          "name": "sessionId"
         }
       ],
       "relations": []
@@ -94,7 +104,7 @@
     }
   ],
   "lastEntityId": "6:3884213150038417823",
-  "lastIndexId": "1:4032983071400073112",
+  "lastIndexId": "3:5233643085613356973",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
