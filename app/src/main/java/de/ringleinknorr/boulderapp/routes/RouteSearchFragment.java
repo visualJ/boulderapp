@@ -33,16 +33,13 @@ import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 
 public class RouteSearchFragment extends Fragment {
-
     @BindView(R.id.auto_complete_text_view)
     AutoCompleteTextView
             autoCompleteTextView;
     @BindView(R.id.gym_sector_view)
     ImageView gymSectorImageView;
-
     @BindView(R.id.rangeBar)
     RangeBar rangeBar;
-
     @BindView(R.id.route_list)
     RecyclerView routeList;
     LiveData<List<Route>> routes;
@@ -52,6 +49,10 @@ public class RouteSearchFragment extends Fragment {
     ViewModelFactory<RouteSearchViewModel> viewModelFactory;
 
     private RouteSearchViewModel viewModel;
+    private ArrayAdapter<String> gymAdapter;
+
+    @Inject
+    GymRepository gymRepository;
 
     public RouteSearchFragment() {
         // Required empty public constructor
@@ -64,8 +65,6 @@ public class RouteSearchFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
-                android.R.layout.simple_dropdown_item_1line, HALLEN);
 
         routeListAdapter = new RouteListAdapter(new ArrayList<>());
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
@@ -75,8 +74,18 @@ public class RouteSearchFragment extends Fragment {
         routeList.setLayoutManager(new LinearLayoutManager(getContext()));
         routeList.setAdapter(routeListAdapter);
 
+        gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
+                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+
         AutoCompleteTextView textView = autoCompleteTextView;
-        textView.setAdapter(adapter);
+        textView.setAdapter(gymAdapter);
+        gymRepository.getAllGymNames().observe(this, names -> {
+            gymAdapter.clear();
+            if (names != null) {
+                gymAdapter.addAll(names);
+            }
+        });
+
         gymSectorImageView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 // Select sector
@@ -102,9 +111,6 @@ public class RouteSearchFragment extends Fragment {
         super.onAttach(context);
     }
 
-    private static final String[] HALLEN = new String[]{
-            "Nordwand Wiesbaden", "Boulderwelt Frankfurt", "Blockwerk Mainz"
-    };
     private static final Integer[][] COORDS = new Integer[][]{
             {0, 0, 100, 100}
     };
