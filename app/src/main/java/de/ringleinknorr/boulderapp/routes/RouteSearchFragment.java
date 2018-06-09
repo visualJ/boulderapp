@@ -96,14 +96,13 @@ public class RouteSearchFragment extends Fragment {
         return view;
     }
 
-
     @OnClick(R.id.add_button)
     public void onAddButton() {
         int minLevel = rangeBar.getLeftIndex();
         int maxLevel = rangeBar.getRightIndex();
-        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel));
+        String gymName = String.valueOf(autoCompleteTextView.getText());
+        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName));
     }
-
 
     @Override
     public void onAttach(Context context) {

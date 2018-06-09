@@ -4,11 +4,14 @@ import io.objectbox.annotation.Convert;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.converter.PropertyConverter;
+import io.objectbox.relation.ToOne;
 
 @Entity
 public class Route {
     @Id
     private long id;
+
+    private ToOne<Gym> gym;
 
     @Convert(converter = LevelConverter.class, dbType = Integer.class)
     private Level level;
@@ -21,6 +24,15 @@ public class Route {
         Level(int id) {
             this.id = id;
         }
+    }
+
+    public Route(Level level, Gym gym) {
+        this.level = level;
+        this.gym.setTarget(gym);
+    }
+
+    public Route() {
+
     }
 
     public static class LevelConverter implements PropertyConverter<Level, Integer> {
@@ -46,19 +58,15 @@ public class Route {
         return id;
     }
 
-    public Route(Level level) {
-        this.level = level;
-    }
-
-    public Route() {
-
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
     public Level getLevel() {
         return level;
+    }
+
+    public ToOne<Gym> getGym() {
+        return gym;
     }
 }

@@ -33,7 +33,7 @@
     },
     {
       "id": "3:7014252586461339632",
-      "lastPropertyId": "2:2565296634231265729",
+      "lastPropertyId": "3:1750555575987883096",
       "name": "Route",
       "properties": [
         {
@@ -43,6 +43,11 @@
         {
           "id": "2:2565296634231265729",
           "name": "level"
+        },
+        {
+          "id": "3:1750555575987883096",
+          "indexId": "4:7103347133278107651",
+          "name": "gymId"
         }
       ],
       "relations": []
@@ -104,7 +109,7 @@
     }
   ],
   "lastEntityId": "6:3884213150038417823",
-  "lastIndexId": "3:5233643085613356973",
+  "lastIndexId": "4:7103347133278107651",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,

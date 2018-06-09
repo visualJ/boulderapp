@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
+import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.Route;
 
 public class SessionViewModel extends ViewModel {
@@ -34,7 +35,7 @@ public class SessionViewModel extends ViewModel {
     }
 
     public void addRoute() {
-        session.getValue().getRoutes().add(new SessionRoute(new Route(Route.Level.LEICHT), session.getValue()));
+        session.getValue().getRoutes().add(new SessionRoute(new Route(Route.Level.LEICHT, new Gym("Wiesbadener Nordwand")), session.getValue()));
         sessionRepository.putSession(session.getValue());
     }
 }
