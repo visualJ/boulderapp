@@ -1,11 +1,14 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.appyvet.materialrangebar.RangeBar;
 
@@ -42,6 +46,10 @@ public class RouteSearchFragment extends Fragment {
     RangeBar rangeBar;
     @BindView(R.id.route_list)
     RecyclerView routeList;
+    @BindView(R.id.route_search_scrollview)
+    ScrollView routeSearchScrollview;
+    @BindView(R.id.route_search_results_view)
+    ConstraintLayout routeSearchResultView;
     LiveData<List<Route>> routes;
     RouteListAdapter routeListAdapter;
 
@@ -50,6 +58,7 @@ public class RouteSearchFragment extends Fragment {
 
     private RouteSearchViewModel viewModel;
     private ArrayAdapter<String> gymAdapter;
+    private int mShortAnimationDuration;
 
     @Inject
     GymRepository gymRepository;
@@ -65,6 +74,10 @@ public class RouteSearchFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
+
+        routeSearchResultView.setVisibility(View.GONE);
+        mShortAnimationDuration = getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
 
         routeListAdapter = new RouteListAdapter(new ArrayList<>());
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
@@ -100,14 +113,58 @@ public class RouteSearchFragment extends Fragment {
     public void onAddButton() {
         int minLevel = rangeBar.getLeftIndex();
         int maxLevel = rangeBar.getRightIndex();
+        switchToSearchResults();
         String gymName = String.valueOf(autoCompleteTextView.getText());
         viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName));
+    }
+
+    @OnClick(R.id.switch_to_route_search)
+    public void onSwitchView() {
+        switchToRouteSearch();
     }
 
     @Override
     public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
+    }
+
+    private void switchToSearchResults() {
+        routeSearchResultView.setAlpha(0f);
+        routeSearchResultView.setVisibility(View.VISIBLE);
+
+        routeSearchResultView.animate()
+                .alpha(1f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(null);
+        routeSearchScrollview.animate()
+                .alpha(0f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        routeSearchScrollview.setVisibility(View.GONE);
+                    }
+                });
+    }
+
+    private void switchToRouteSearch() {
+        routeSearchScrollview.setAlpha(0f);
+        routeSearchScrollview.setVisibility(View.VISIBLE);
+
+        routeSearchScrollview.animate()
+                .alpha(1f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(null);
+        routeSearchResultView.animate()
+                .alpha(0f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        routeSearchResultView.setVisibility(View.GONE);
+                    }
+                });
     }
 
     private static final Integer[][] COORDS = new Integer[][]{
