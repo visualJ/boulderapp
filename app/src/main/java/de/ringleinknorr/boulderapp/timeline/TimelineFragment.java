@@ -77,11 +77,6 @@ public class TimelineFragment extends Fragment {
         newSessionFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), newSessionFragment.getTag());
     }
 
-    @OnClick(R.id.remove_button)
-    public void onRemoveButton() {
-        viewModel.removeSessions();
-    }
-
     private void onSessionSelected(long sessionId) {
         Log.i(getClass().getSimpleName(), "onCreateView: clicked session " + sessionId);
         Bundle bundle = new Bundle();

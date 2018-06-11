@@ -41,13 +41,17 @@ public class SessionListAdapter extends RecyclerView.Adapter<SessionListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Session session = sessions.get(position);
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(session.getDate());
         String day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
-        holder.view.dayText.setText(day);
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, locale);
-        holder.view.monthText.setText(String.valueOf(month.toUpperCase()));
-        holder.view.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
+
+        SessionCardView view = holder.view;
+        view.dayText.setText(day);
+        view.monthText.setText(String.valueOf(month.toUpperCase()));
+        view.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
+        view.setRoutes(session.getRoutes().size());
     }
 
     @Override

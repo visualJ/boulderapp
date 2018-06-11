@@ -18,7 +18,7 @@
         android:id="@+id/sessionFragment"
         android:name="de.ringleinknorr.boulderapp.timeline.SessionFragment"
         android:label="Timeline">
-        <argument android:name="sessionId"/>
+        <argument android:name="sessionId" />
     </fragment>
     <fragment
         android:id="@+id/routeSearchFragment"

@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".timeline.TimelineFragment">
 
-    <Button
-        android:id="@+id/remove_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/holo_red_dark"
-        android:text="X"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"

@@ -44,7 +44,6 @@ public class SessionFragment extends Fragment {
     private SessionRouteListAdapter adapter;
 
     @Override
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_session, container, false);
@@ -55,6 +54,7 @@ public class SessionFragment extends Fragment {
         viewModel.getSession().observe(this, session -> {
             sessionCard.setDate(session.getDate(), Locale.getDefault());
             sessionCard.setGym(session.getGym().getTarget().getName());
+            sessionCard.setRoutes(session.getRoutes().size());
             adapter.setRoutes(session.getRoutes());
         });
 
