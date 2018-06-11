@@ -27,7 +27,7 @@
             android:layout_marginRight="8dp"
             android:text="Zurück"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/add_button" />
 
         <Button
             android:id="@+id/add_button"
@@ -36,10 +36,11 @@
             android:layout_height="49dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:text="Hinzufügen"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/switch_to_route_search"
-            app:layout_constraintTop_toTopOf="@+id/switch_to_route_search" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/route_list" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/route_list"
@@ -69,154 +70,148 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <android.support.constraint.ConstraintLayout
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cardView"
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="wrap_content">
 
-                    <android.support.constraint.ConstraintLayout
+                    <Button
+                        android:id="@+id/search_button"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/route_search_button_label"
+                        android:textColor="@color/colorDarkGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                        <Button
-                            android:id="@+id/search_button"
-                            style="@style/Widget.AppCompat.Button.Borderless"
+                    <de.ringleinknorr.boulderapp.routes.GymSectorView
+                        android:id="@+id/gymSectorView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/search_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rangeBar" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="16dp"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/label_gym_selection">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/auto_complete_text_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginStart="8dp"
-                            android:text="@string/route_search_button_label"
-                            android:textColor="@color/colorDarkGrey"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="1"
+                            android:imeOptions="actionDone"
+                            android:inputType="textNoSuggestions"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                        <de.ringleinknorr.boulderapp.routes.GymSectorView
-                            android:id="@+id/gymSectorView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            android:visibility="visible"
-                            app:layout_constraintBottom_toTopOf="@+id/search_button"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/rangeBar" />
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/textInputLayout"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginStart="16dp"
-                            app:hintAnimationEnabled="false"
-                            app:hintEnabled="false"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/label_gym_selection">
-
-                            <AutoCompleteTextView
-                                android:id="@+id/auto_complete_text_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="0dp"
-                                android:layout_weight="1"
-                                android:imeOptions="actionDone"
-                                android:inputType="textNoSuggestions"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <com.appyvet.materialrangebar.RangeBar
-                            android:id="@+id/rangeBar"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/label_route_level"
-                            app:mrb_connectingLineColor="@color/colorPrimary"
-                            app:mrb_pinColor="@color/colorPrimary"
-                            app:mrb_pinMaxFont="8sp"
-                            app:mrb_pinPadding="10dp"
-                            app:mrb_pinRadius="7dp"
-                            app:mrb_pinTextColor="@color/colorDarkGrey"
-                            app:mrb_rangeBarColor="@color/colorLightGrey"
-                            app:mrb_rangeBarPaddingBottom="12dp"
-                            app:mrb_selectorBoundaryColor="@android:color/white"
-                            app:mrb_selectorBoundarySize="2dp"
-                            app:mrb_selectorColor="@color/colorDarkGrey"
-                            app:mrb_selectorSize="5dp"
-                            app:mrb_temporaryPins="true"
-                            app:mrb_tickEnd="8"
-                            app:mrb_tickInterval="1"
-                            app:mrb_tickStart="0" />
-
-                        <TextView
-                            android:id="@+id/label_gym_selection"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:text="@string/gym_auto_complete_textview_label"
-                            android:textColor="@color/colorDarkGrey"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.design.widget.TextInputLayout>
 
-                        <TextView
-                            android:id="@+id/label_route_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
+                    <com.appyvet.materialrangebar.RangeBar
+                        android:id="@+id/rangeBar"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/label_route_level"
+                        app:mrb_connectingLineColor="@color/colorPrimary"
+                        app:mrb_pinColor="@color/colorPrimary"
+                        app:mrb_pinMaxFont="8sp"
+                        app:mrb_pinPadding="10dp"
+                        app:mrb_pinRadius="7dp"
+                        app:mrb_pinTextColor="@color/colorDarkGrey"
+                        app:mrb_rangeBarColor="@color/colorLightGrey"
+                        app:mrb_rangeBarPaddingBottom="12dp"
+                        app:mrb_selectorBoundaryColor="@android:color/white"
+                        app:mrb_selectorBoundarySize="2dp"
+                        app:mrb_selectorColor="@color/colorDarkGrey"
+                        app:mrb_selectorSize="5dp"
+                        app:mrb_temporaryPins="true"
+                        app:mrb_tickEnd="8"
+                        app:mrb_tickInterval="1"
+                        app:mrb_tickStart="0" />
 
-                            android:text="@string/route_level_textview_label"
-                            android:textColor="@color/colorDarkGrey"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-                    </android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/label_gym_selection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/gym_auto_complete_textview_label"
+                        android:textColor="@color/colorDarkGrey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/label_route_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
 
-            </android.support.constraint.ConstraintLayout>
+                        android:text="@string/route_level_textview_label"
+                        android:textColor="@color/colorDarkGrey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                </android.support.constraint.ConstraintLayout>
 
-        </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

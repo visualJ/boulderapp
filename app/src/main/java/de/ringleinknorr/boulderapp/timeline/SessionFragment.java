@@ -76,8 +76,6 @@ public class SessionFragment extends Fragment {
 
     @OnClick(R.id.add_fab)
     public void onAddFAB() {
-        // TODO implement adding a route or workout
-        viewModel.addRoute();
         Bundle bundle = new Bundle();
         bundle.putLong(RouteSearchFragment.KEY_SESSION_ID, viewModel.getSessionId());
         NavHostFragment.findNavController(this).navigate(R.id.addRoute, bundle);

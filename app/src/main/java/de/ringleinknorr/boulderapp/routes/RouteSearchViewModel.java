@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import de.ringleinknorr.boulderapp.timeline.Session;
 import de.ringleinknorr.boulderapp.timeline.SessionRepository;
+import de.ringleinknorr.boulderapp.timeline.SessionRoute;
 
 public class RouteSearchViewModel extends ViewModel {
     private MediatorLiveData<List<Route>> routes;
@@ -44,5 +45,10 @@ public class RouteSearchViewModel extends ViewModel {
 
     public LiveData<Session> getSession() {
         return session;
+    }
+
+    public void addRoutesToSession() {
+        session.getValue().getRoutes().add(new SessionRoute(routes.getValue().get(0), session.getValue()));
+        sessionRepository.putSession(session.getValue());
     }
 }

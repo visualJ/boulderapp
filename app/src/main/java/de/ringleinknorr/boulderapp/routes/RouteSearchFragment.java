@@ -128,6 +128,7 @@ public class RouteSearchFragment extends Fragment {
 
     @OnClick(R.id.add_button)
     public void onAddButton() {
+        viewModel.addRoutesToSession();
         NavHostFragment.findNavController(this).popBackStack();
     }
 

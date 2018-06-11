@@ -35,8 +35,4 @@ public class SessionViewModel extends ViewModel {
         return session;
     }
 
-    public void addRoute() {
-        session.getValue().getRoutes().add(new SessionRoute(new Route(Route.Level.LEICHT, new Gym("Wiesbadener Nordwand")), session.getValue()));
-        sessionRepository.putSession(session.getValue());
-    }
 }
