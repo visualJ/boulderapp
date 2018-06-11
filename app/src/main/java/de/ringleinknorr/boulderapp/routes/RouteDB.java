@@ -18,11 +18,6 @@ public class RouteDB {
     @Inject
     public RouteDB(BoxStore boxStore) {
         this.box = boxStore.boxFor(Route.class);
-        if (box.count() == 0) {
-            box.put(new Route(Route.Level.LEICHT, new Gym("Kletterhalle Wiesbaden")));
-            box.put(new Route(Route.Level.SCHWER, new Gym("Wiesbadener Nordwand")));
-            box.put(new Route(Route.Level.MITTEL, new Gym("Kletterhalle Wiesbaden")));
-        }
     }
 
     public LiveData<List<Route>> getAllRoutes() {
@@ -44,7 +39,7 @@ public class RouteDB {
         QueryBuilder<Route> builder = box.query();
         builder.between(Route_.level, minLevel, maxLevel).filter((route) -> route.getGym().getTarget().getName().equals(gymName));
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(builder.build());
-        liveData.addSource(query, list -> liveData.postValue(list));
+        liveData.addSource(query, liveData::postValue);
         return liveData;
     }
 }

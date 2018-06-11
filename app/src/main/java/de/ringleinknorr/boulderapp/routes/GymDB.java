@@ -19,9 +19,6 @@ public class GymDB {
     @Inject
     public GymDB(BoxStore boxStore) {
         this.box = boxStore.boxFor(Gym.class);
-        if (box.count() == 0) {
-            box.put(new Gym( "Wiesbadener Nordwand"), new Gym( "Kletterhalle Wiesbaden"));
-        }
     }
 
     public Gym getGymWithName(String name) {
