@@ -36,7 +36,7 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
     @BindView(R.id.date_text)
     TextView dateText;
 
-    @BindView(R.id.add_button)
+    @BindView(R.id.search_button)
     Button addButton;
 
     private OnResultListener onResultListener;
@@ -99,7 +99,7 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
         super.onAttach(context);
     }
 
-    @OnClick(R.id.add_button)
+    @OnClick(R.id.search_button)
     public void onAddButton() {
         onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), new Date());
         dismiss();

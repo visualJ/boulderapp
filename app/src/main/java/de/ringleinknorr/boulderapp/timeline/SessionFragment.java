@@ -20,12 +20,14 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
+import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
+import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 
 public class SessionFragment extends Fragment {
 
@@ -76,5 +78,8 @@ public class SessionFragment extends Fragment {
     public void onAddFAB() {
         // TODO implement adding a route or workout
         viewModel.addRoute();
+        Bundle bundle = new Bundle();
+        bundle.putLong(RouteSearchFragment.KEY_SESSION_ID, viewModel.getSessionId());
+        NavHostFragment.findNavController(this).navigate(R.id.addRoute, bundle);
     }
 }

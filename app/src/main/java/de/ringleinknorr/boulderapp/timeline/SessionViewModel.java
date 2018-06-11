@@ -22,6 +22,7 @@ public class SessionViewModel extends ViewModel {
 
     public void init(long sessionId) {
         if (this.sessionId == null) {
+            this.sessionId = sessionId;
             this.session = sessionRepository.getSession(sessionId);
         }
     }
