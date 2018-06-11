@@ -39,9 +39,6 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
     @BindView(R.id.add_button)
     Button addButton;
 
-    @BindView(R.id.cancel_button)
-    Button cancelButton;
-
     private OnResultListener onResultListener;
     private ArrayAdapter<String> gymAdapter;
 
@@ -100,11 +97,6 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
     public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
-    }
-
-    @OnClick(R.id.cancel_button)
-    public void onCancelButton() {
-        dismiss();
     }
 
     @OnClick(R.id.add_button)
