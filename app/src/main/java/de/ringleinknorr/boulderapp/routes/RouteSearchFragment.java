@@ -76,16 +76,21 @@ public class RouteSearchFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
 
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(KEY_SESSION_ID)) {
             addButton.setVisibility(View.VISIBLE);
+            viewModel.setSessionId(bundle.getLong(KEY_SESSION_ID));
+            viewModel.getSession().observe(this, session -> {
+                autoCompleteTextView.setText(session.getGym().getTarget().getName());
+                autoCompleteTextView.setEnabled(false);
+            });
         }
 
         routeSearchResultView.setVisibility(View.GONE);
 
         routeListAdapter = new RouteListAdapter(new ArrayList<>());
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setRoutes(routes));
 
         routeList.setHasFixedSize(false);
