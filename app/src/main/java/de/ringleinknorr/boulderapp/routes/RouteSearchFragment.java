@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +127,8 @@ public class RouteSearchFragment extends InjectableFragment {
 
     @OnClick(R.id.add_button)
     public void onAddButton() {
-        viewModel.addRoutesToSession();
+        Log.i(getClass().getSimpleName(), "onAddButton: " + routeListAdapter.getSelectedPositions());
+        viewModel.addRoutesToSession(routeListAdapter.getSelectedPositions());
         NavHostFragment.findNavController(this).popBackStack();
     }
 

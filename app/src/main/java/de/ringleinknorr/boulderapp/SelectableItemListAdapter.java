@@ -41,7 +41,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
     public interface Selectable {
         void setOnSelectedListener(OnSelectedListener listener);
 
-        void setSelected(boolean selected);
+        void setItemSelected(boolean selected);
     }
 
     public interface OnSelectedListener {

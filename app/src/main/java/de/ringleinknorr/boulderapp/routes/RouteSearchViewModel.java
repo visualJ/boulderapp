@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,8 +48,12 @@ public class RouteSearchViewModel extends ViewModel {
         return session;
     }
 
-    public void addRoutesToSession() {
-        session.getValue().getRoutes().add(new SessionRoute(routes.getValue().get(0), session.getValue()));
+    public void addRoutesToSession(List<Integer> positions) {
+        List<SessionRoute> sessionRoutes = new ArrayList<>();
+        for (int position : positions) {
+            sessionRoutes.add(new SessionRoute(routes.getValue().get(position), session.getValue()));
+        }
+        session.getValue().getRoutes().addAll(sessionRoutes);
         sessionRepository.putSession(session.getValue());
     }
 }
