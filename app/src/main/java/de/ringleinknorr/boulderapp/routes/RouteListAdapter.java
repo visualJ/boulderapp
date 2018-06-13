@@ -6,41 +6,22 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.ViewHolder> {
-    private List<Route> routeList;
+import de.ringleinknorr.boulderapp.ItemListAdapter;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public RouteCardView view;
-
-        public ViewHolder(RouteCardView v) {
-            super(v);
-            view = v;
-        }
-    }
+public class RouteListAdapter extends ItemListAdapter<Route, RouteCardView> {
 
     public RouteListAdapter(List<Route> routeList) {
-        this.routeList = routeList;
+        super(routeList);
     }
 
     @Override
-    public RouteListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                          int viewType) {
-        return new ViewHolder(new RouteCardView(parent.getContext()));
+    public void onBindView(RouteCardView routeCardView, int position, Route route) {
+        String routeLevel = route.getLevel().name();
+        routeCardView.getRouteLevelText().setText(routeLevel);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String routeLevel = routeList.get(position).getLevel().name();
-        holder.view.getRouteLevelText().setText(routeLevel);
-    }
-
-    public void setRoutes(List<Route> routeList) {
-        this.routeList = routeList;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemCount() {
-        return routeList.size();
+    public RouteCardView onCreateView(@NonNull ViewGroup parent, int viewType) {
+        return new RouteCardView(parent.getContext());
     }
 }

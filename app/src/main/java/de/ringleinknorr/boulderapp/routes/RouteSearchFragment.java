@@ -89,7 +89,7 @@ public class RouteSearchFragment extends InjectableFragment {
         routeSearchResultView.setVisibility(View.GONE);
 
         routeListAdapter = new RouteListAdapter(new ArrayList<>());
-        viewModel.getRoutes().observe(this, routes -> routeListAdapter.setRoutes(routes));
+        viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
 
         routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new LinearLayoutManager(getContext()));
