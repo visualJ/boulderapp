@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import de.ringleinknorr.boulderapp.timeline.RouteCardView;
-
 public class RouteListAdapter extends RecyclerView.Adapter<RouteListAdapter.ViewHolder> {
     private List<Route> routeList;
 

@@ -1,4 +1,4 @@
-package de.ringleinknorr.boulderapp.timeline;
+package de.ringleinknorr.boulderapp.routes;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

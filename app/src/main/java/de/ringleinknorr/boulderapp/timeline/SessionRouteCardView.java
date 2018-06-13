@@ -21,7 +21,7 @@ public class SessionRouteCardView extends ConstraintLayout {
 
     public SessionRouteCardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.view_routecard, this);
+        LayoutInflater.from(context).inflate(R.layout.view_sessionroutecard, this);
         ButterKnife.bind(this);
         setLayoutParams(new Constraints.LayoutParams(-1, -2));
     }

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import de.ringleinknorr.boulderapp.routes.RouteCardView;
+
 public class SessionRouteListAdapter extends RecyclerView.Adapter<SessionRouteListAdapter.ViewHolder> {
     private List<SessionRoute> routeList;
 
