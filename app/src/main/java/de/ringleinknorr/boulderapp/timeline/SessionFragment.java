@@ -58,7 +58,7 @@ public class SessionFragment extends InjectableFragment {
             sessionCard.setDate(session.getDate(), Locale.getDefault());
             sessionCard.setGym(session.getGym().getTarget().getName());
             sessionCard.setRoutes(session.getRoutes().size());
-            adapter.setRoutes(session.getRoutes());
+            adapter.setItems(session.getRoutes());
         });
 
         sessionRouteList.setHasFixedSize(true);

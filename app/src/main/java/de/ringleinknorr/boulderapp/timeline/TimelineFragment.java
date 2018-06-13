@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -73,7 +74,6 @@ public class TimelineFragment extends InjectableFragment {
     }
 
     private void onSessionSelected(long sessionId) {
-        Log.i(getClass().getSimpleName(), "onCreateView: clicked session " + sessionId);
         Bundle bundle = new Bundle();
         bundle.putLong(SessionFragment.ARG_SESSION_ID, sessionId);
         NavHostFragment.findNavController(this).navigate(R.id.selectSession, bundle);
