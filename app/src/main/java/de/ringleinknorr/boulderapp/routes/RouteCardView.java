@@ -6,9 +6,12 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
@@ -21,6 +24,9 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     ImageView image;
     @BindView(R.id.selected_icon)
     ImageView selectedIcon;
+
+    @BindInt(android.R.integer.config_shortAnimTime)
+    int mShortAnimationDuration;
 
     private boolean itemSelected = false;
     private SelectableItemListAdapter.OnSelectedListener onSelectedListener = selected -> {
@@ -63,10 +69,21 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     public void setItemSelected(boolean selected) {
         this.itemSelected = selected;
         onSelectedListener.onSelected(selected);
-        selectedIcon.setAlpha(selected ? 1f : 0.2f);
-        selectedIcon.setScaleX(selected ? 1f : 0.8f);
-        selectedIcon.setScaleY(selected ? 1f : 0.8f);
-        invalidate();
+        if (selected) {
+            selectedIcon.animate()
+                    .setDuration(mShortAnimationDuration)
+                    .setInterpolator(new OvershootInterpolator(5))
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .scaleY(1f);
+        } else {
+            selectedIcon.animate()
+                    .setDuration(mShortAnimationDuration)
+                    .setInterpolator(new AccelerateInterpolator(0.1f))
+                    .alpha(0.2f)
+                    .scaleX(0.8f)
+                    .scaleY(0.8f);
+        }
     }
 
     public boolean isItemSelected() {

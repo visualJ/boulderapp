@@ -127,7 +127,6 @@ public class RouteSearchFragment extends InjectableFragment {
 
     @OnClick(R.id.add_button)
     public void onAddButton() {
-        Log.i(getClass().getSimpleName(), "onAddButton: " + routeListAdapter.getSelectedPositions());
         viewModel.addRoutesToSession(routeListAdapter.getSelectedPositions());
         NavHostFragment.findNavController(this).popBackStack();
     }
