@@ -20,8 +20,8 @@ public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, Route
     }
 
     @Override
-    public void onBindView(@NonNull RouteCardView view, int position) {
-        String routeLevel = getItems().get(position).getRoute().getTarget().getLevel().name();
+    public void onBindView(@NonNull RouteCardView view, int position, SessionRoute route) {
+        String routeLevel = route.getRoute().getTarget().getLevel().name();
         view.getRouteLevelText().setText(routeLevel);
     }
 }

@@ -53,7 +53,7 @@ public class TimelineFragment extends InjectableFragment {
         ButterKnife.bind(this, view);
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TimelineViewModel.class);
-        viewModel.getSessions().observe(this, sessions -> adapter.setSessions(sessions));
+        viewModel.getSessions().observe(this, sessions -> adapter.setItems(sessions));
 
         sessionList.setHasFixedSize(true);
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -73,9 +73,9 @@ public class TimelineFragment extends InjectableFragment {
         newSessionFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), newSessionFragment.getTag());
     }
 
-    private void onSessionSelected(long sessionId) {
+    private void onSessionSelected(int position, Session session) {
         Bundle bundle = new Bundle();
-        bundle.putLong(SessionFragment.ARG_SESSION_ID, sessionId);
+        bundle.putLong(SessionFragment.ARG_SESSION_ID, session.getId());
         NavHostFragment.findNavController(this).navigate(R.id.selectSession, bundle);
     }
 }
