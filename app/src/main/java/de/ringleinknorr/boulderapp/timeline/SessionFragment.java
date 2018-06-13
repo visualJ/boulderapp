@@ -25,11 +25,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
+import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 
-public class SessionFragment extends Fragment {
+public class SessionFragment extends InjectableFragment {
 
     public static final String ARG_SESSION_ID = "sessionId";
 
@@ -66,12 +67,6 @@ public class SessionFragment extends Fragment {
         sessionRouteList.setAdapter(adapter);
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @OnClick(R.id.add_fab)

@@ -3,11 +3,9 @@ package de.ringleinknorr.boulderapp.routes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,11 +29,11 @@ import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.AndroidSupportInjection;
+import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 
-public class RouteSearchFragment extends Fragment {
+public class RouteSearchFragment extends InjectableFragment {
 
     public static final String KEY_SESSION_ID = "sessionId";
 
@@ -130,12 +128,6 @@ public class RouteSearchFragment extends Fragment {
     public void onAddButton() {
         viewModel.addRoutesToSession();
         NavHostFragment.findNavController(this).popBackStack();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     private void switchToSearchResults() {

@@ -24,11 +24,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
+import de.ringleinknorr.boulderapp.InjectableDialogBottomSheetFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymRepository;
 
-public class NewSessionFragment extends BottomSheetDialogFragment {
+public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
 
     @BindView(R.id.gym_text)
     AutoCompleteTextView gymText;
@@ -91,12 +92,6 @@ public class NewSessionFragment extends BottomSheetDialogFragment {
                 gymAdapter.addAll(names);
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @OnClick(R.id.search_button)

@@ -25,10 +25,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
+import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 
-public class TimelineFragment extends Fragment {
+public class TimelineFragment extends InjectableFragment {
 
     @BindView(R.id.session_list)
     RecyclerView sessionList;
@@ -59,12 +60,6 @@ public class TimelineFragment extends Fragment {
         sessionList.setAdapter(adapter);
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
     }
 
     @OnClick(R.id.add_fab)
