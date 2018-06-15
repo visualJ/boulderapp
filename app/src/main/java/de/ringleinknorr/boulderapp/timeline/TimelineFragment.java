@@ -67,7 +67,7 @@ public class TimelineFragment extends InjectableFragment {
     public void onAddFAB() {
         NewSessionFragment newSessionFragment = new NewSessionFragment();
         newSessionFragment.setOnResultListener((gym, date) -> {
-            Session session = new Session(new Date(2018, (int) (Math.random() * 11), (int) (Math.random() * 28)), gym);
+            Session session = new Session(date, gym);
             viewModel.addSession(session);
         });
         newSessionFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), newSessionFragment.getTag());

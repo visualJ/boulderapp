@@ -1,29 +1,35 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.InjectableDialogBottomSheetFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.routes.Gym;
@@ -40,12 +46,15 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     @BindView(R.id.search_button)
     Button addButton;
 
-    private OnResultListener onResultListener;
-    private ArrayAdapter<String> gymAdapter;
+    @BindView(R.id.calendar)
+    CalendarView calendar;
 
+    @BindInt(android.R.integer.config_shortAnimTime)
+    int mShortAnimationDuration;
     @Inject
     GymRepository gymRepository;
-
+    private OnResultListener onResultListener;
+    private ArrayAdapter<String> gymAdapter;
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -59,6 +68,8 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
         }
     };
+    private View contentView;
+    private Calendar selectedDate;
 
     public OnResultListener getOnResultListener() {
         return onResultListener;
@@ -72,7 +83,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     @Override
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
-        View contentView = View.inflate(getContext(), R.layout.fragment_new_session, null);
+        contentView = View.inflate(getContext(), R.layout.fragment_new_session, null);
         dialog.setContentView(contentView, null);
         ButterKnife.bind(this, contentView);
 
@@ -92,11 +103,59 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
                 gymAdapter.addAll(names);
             }
         });
+
+        ((BottomSheetBehavior<View>) behavior).setSkipCollapsed(true);
+
+        calendar.setVisibility(View.GONE);
+        calendar.setAlpha(0);
+        calendar.setScaleX(0.8f);
+        calendar.setScaleY(0.8f);
+        setDate(Calendar.getInstance());
+        calendar.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, year);
+            cal.set(Calendar.MONTH, month);
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setDate(cal);
+        });
+    }
+
+    private void setDate(Calendar cal) {
+        selectedDate = cal;
+        String date = DateUtils.formatDateTime(getContext(), cal.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE + DateUtils.FORMAT_SHOW_YEAR);
+        dateText.setText("Datum: " + date);
+    }
+
+    @OnClick(R.id.date_text)
+    public void onDateClicked() {
+        if (calendar.getVisibility() == View.VISIBLE) {
+            calendar.animate()
+                    .alpha(0)
+                    .scaleY(0.8f)
+                    .scaleX(0.8f)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            calendar.setVisibility(View.GONE);
+                        }
+                    });
+        } else {
+            calendar.setVisibility(View.VISIBLE);
+            calendar.animate()
+                    .alpha(1)
+                    .scaleY(1)
+                    .scaleX(1)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(null);
+        }
+        contentView.requestLayout();
     }
 
     @OnClick(R.id.search_button)
     public void onAddButton() {
-        onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), new Date());
+        onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), selectedDate.getTime());
         dismiss();
     }
 
