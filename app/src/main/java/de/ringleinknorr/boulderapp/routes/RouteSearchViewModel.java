@@ -60,7 +60,7 @@ public class RouteSearchViewModel extends ViewModel {
         sessionRepository.putSession(session.getValue());
     }
 
-    public Bitmap getGimSectorImage() {
+    public Bitmap getGymSectorImage() {
         return gimSectorImage;
     }
 

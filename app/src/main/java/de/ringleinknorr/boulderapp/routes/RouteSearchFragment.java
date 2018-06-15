@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -80,34 +79,18 @@ public class RouteSearchFragment extends InjectableFragment {
         ButterKnife.bind(this, view);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
 
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey(KEY_SESSION_ID)) {
-            addButton.setVisibility(View.VISIBLE);
-            forResult = true;
-            viewModel.setSessionId(bundle.getLong(KEY_SESSION_ID));
-            viewModel.getSession().observe(this, session -> {
-                autoCompleteTextView.setText(session.getGym().getTarget().getName());
-                autoCompleteTextView.setEnabled(false);
-            });
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
+            onCreateForResult(arguments);
         }
 
-        if (viewModel.getGimSectorImage() != null && viewModel.getSelectedGym() != null) {
-            gymSectorImage.setImageBitmap(viewModel.getGimSectorImage());
+        if (viewModel.getGymSectorImage() != null && viewModel.getSelectedGym() != null) {
+            gymSectorImage.setImageBitmap(viewModel.getGymSectorImage());
             gymSectorImage.setAdjustViewBounds(true);
             gymSectorImage.setGym(viewModel.getSelectedGym());
         }
 
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.raumskizze);
-                viewModel.setGimSectorImage(bmImg);
-                gymSectorImage.setImageBitmap(bmImg);
-                gymSectorImage.setAdjustViewBounds(true);
-                viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
-                gymSectorImage.setGym(viewModel.getSelectedGym());
-            }
-        });
+        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> updateGymSectorView());
 
         routeSearchResultView.setVisibility(View.GONE);
 
@@ -133,6 +116,27 @@ public class RouteSearchFragment extends InjectableFragment {
         setTitle(forResult ? "Routen hinzufügen" : "Routen Suche");
 
         return view;
+    }
+
+    protected void onCreateForResult(Bundle arguments) {
+        addButton.setVisibility(View.VISIBLE);
+        forResult = true;
+        viewModel.setSessionId(arguments.getLong(KEY_SESSION_ID));
+        viewModel.getSession().observe(this, session -> {
+            autoCompleteTextView.setText(session.getGym().getTarget().getName());
+            autoCompleteTextView.setEnabled(false);
+            viewModel.setSelectedGym(session.getGym().getTarget());
+            updateGymSectorView();
+        });
+    }
+
+    protected void updateGymSectorView() {
+        Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.raumskizze);
+        viewModel.setGimSectorImage(bmImg);
+        gymSectorImage.setImageBitmap(bmImg);
+        gymSectorImage.setAdjustViewBounds(true);
+        viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
+        gymSectorImage.setGym(viewModel.getSelectedGym());
     }
 
     @OnClick(R.id.search_button)
