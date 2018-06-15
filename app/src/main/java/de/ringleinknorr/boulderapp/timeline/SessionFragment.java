@@ -66,6 +66,8 @@ public class SessionFragment extends InjectableFragment {
         adapter = new SessionRouteListAdapter(new ArrayList<>());
         sessionRouteList.setAdapter(adapter);
 
+        setTitle("Session");
+
         return view;
     }
 

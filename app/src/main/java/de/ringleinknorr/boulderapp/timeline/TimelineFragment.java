@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,6 +60,8 @@ public class TimelineFragment extends InjectableFragment {
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), this::onSessionSelected);
         sessionList.setAdapter(adapter);
+
+        setTitle("Timeline");
 
         return view;
     }

@@ -64,6 +64,7 @@ public class RouteSearchFragment extends InjectableFragment {
     private RouteListAdapter routeListAdapter;
     private RouteSearchViewModel viewModel;
     private ArrayAdapter<String> gymAdapter;
+    private boolean forResult = false;
 
     public RouteSearchFragment() {
         // Required empty public constructor
@@ -80,6 +81,7 @@ public class RouteSearchFragment extends InjectableFragment {
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(KEY_SESSION_ID)) {
             addButton.setVisibility(View.VISIBLE);
+            forResult = true;
             viewModel.setSessionId(bundle.getLong(KEY_SESSION_ID));
             viewModel.getSession().observe(this, session -> {
                 autoCompleteTextView.setText(session.getGym().getTarget().getName());
@@ -107,6 +109,8 @@ public class RouteSearchFragment extends InjectableFragment {
                 gymAdapter.addAll(names);
             }
         });
+
+        setTitle(forResult ? "Routen hinzufügen" : "Routen Suche");
 
         return view;
     }
