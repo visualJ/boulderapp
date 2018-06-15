@@ -3,6 +3,7 @@ package de.ringleinknorr.boulderapp.routes;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class RouteSearchViewModel extends ViewModel {
     private SessionRepository sessionRepository;
     private long sessionId;
     private LiveData<Session> session;
+    private Bitmap gimSectorImage;
+    private Gym selectedGym;
 
     @Inject
     public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
@@ -55,5 +58,21 @@ public class RouteSearchViewModel extends ViewModel {
         }
         session.getValue().getRoutes().addAll(sessionRoutes);
         sessionRepository.putSession(session.getValue());
+    }
+
+    public Bitmap getGimSectorImage() {
+        return gimSectorImage;
+    }
+
+    public void setGimSectorImage(Bitmap gimSectorImage) {
+        this.gimSectorImage = gimSectorImage;
+    }
+
+    public Gym getSelectedGym() {
+        return selectedGym;
+    }
+
+    public void setSelectedGym(Gym selectedGym) {
+        this.selectedGym = selectedGym;
     }
 }

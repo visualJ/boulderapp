@@ -34,8 +34,7 @@
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/colorDarkGrey" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView

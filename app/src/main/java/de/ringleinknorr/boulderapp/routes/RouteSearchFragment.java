@@ -3,19 +3,20 @@ package de.ringleinknorr.boulderapp.routes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.appyvet.materialrangebar.RangeBar;
@@ -40,8 +41,6 @@ public class RouteSearchFragment extends InjectableFragment {
 
     @BindView(R.id.auto_complete_text_view)
     AutoCompleteTextView autoCompleteTextView;
-    @BindView(R.id.gym_sector_view)
-    ImageView gymSectorImageView;
     @BindView(R.id.rangeBar)
     RangeBar rangeBar;
     @BindView(R.id.route_list)
@@ -52,6 +51,8 @@ public class RouteSearchFragment extends InjectableFragment {
     ConstraintLayout routeSearchResultView;
     @BindView(R.id.add_button)
     Button addButton;
+    @BindView(R.id.gymSectorCanvasView2)
+    GymSectorImageView gymSectorImage;
 
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
@@ -74,6 +75,7 @@ public class RouteSearchFragment extends InjectableFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
@@ -88,6 +90,24 @@ public class RouteSearchFragment extends InjectableFragment {
                 autoCompleteTextView.setEnabled(false);
             });
         }
+
+        if (viewModel.getGimSectorImage() != null && viewModel.getSelectedGym() != null) {
+            gymSectorImage.setImageBitmap(viewModel.getGimSectorImage());
+            gymSectorImage.setAdjustViewBounds(true);
+            gymSectorImage.setGym(viewModel.getSelectedGym());
+        }
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.raumskizze);
+                viewModel.setGimSectorImage(bmImg);
+                gymSectorImage.setImageBitmap(bmImg);
+                gymSectorImage.setAdjustViewBounds(true);
+                viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
+                gymSectorImage.setGym(viewModel.getSelectedGym());
+            }
+        });
 
         routeSearchResultView.setVisibility(View.GONE);
 
@@ -172,8 +192,4 @@ public class RouteSearchFragment extends InjectableFragment {
                     }
                 });
     }
-
-    private static final Integer[][] COORDS = new Integer[][]{
-            {0, 0, 100, 100}
-    };
 }

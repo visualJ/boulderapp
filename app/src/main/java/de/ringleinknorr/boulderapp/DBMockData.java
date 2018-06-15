@@ -1,6 +1,8 @@
 package de.ringleinknorr.boulderapp;
 
 import de.ringleinknorr.boulderapp.routes.Gym;
+import de.ringleinknorr.boulderapp.routes.GymSector;
+import de.ringleinknorr.boulderapp.routes.GymSectorCoord;
 import de.ringleinknorr.boulderapp.routes.Route;
 import de.ringleinknorr.boulderapp.timeline.Session;
 import io.objectbox.Box;
@@ -12,6 +14,8 @@ public class DBMockData {
 
         Box<Session> sessionBox = boxStore.boxFor(Session.class);
         Box<Route> routeBox = boxStore.boxFor(Route.class);
+        Box<GymSectorCoord> gymSectorCoordsBox = boxStore.boxFor(GymSectorCoord.class);
+
 
         if (routeBox.count() <= 0) {
             Gym gym1 = new Gym("Wiesbadener Nordwand");
@@ -27,7 +31,29 @@ public class DBMockData {
                     new Route(Route.Level.MITTEL, gym3),
             };
 
+            GymSector gymSector1 = new GymSector(gym1);
+            GymSector gymSector2 = new GymSector(gym1);
+
+            GymSector gymSectors[] = {
+                    gymSector1,
+                    gymSector2,
+            };
+
+            GymSectorCoord coords[] = {
+                    new GymSectorCoord(0, 0, gymSector1),
+                    new GymSectorCoord(0, 200, gymSector1),
+                    new GymSectorCoord(200, 200, gymSector1),
+                    new GymSectorCoord(200, 0, gymSector1),
+
+                    new GymSectorCoord(200, 0, gymSector1),
+                    new GymSectorCoord(200, 200, gymSector1),
+                    new GymSectorCoord(400, 200, gymSector1),
+                    new GymSectorCoord(400, 0, gymSector1),
+            };
+
+
             routeBox.put(routes);
+            gymSectorCoordsBox.put(coords);
         }
 
     }

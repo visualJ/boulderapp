@@ -106,10 +106,52 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "7:4948500242175966623",
+      "lastPropertyId": "2:8345893524098451393",
+      "name": "GymSector",
+      "properties": [
+        {
+          "id": "1:680670866081559049",
+          "indexId": "5:8589082515888518034",
+          "name": "gymId"
+        },
+        {
+          "id": "2:8345893524098451393",
+          "name": "id"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:1195038183195028243",
+      "lastPropertyId": "4:7557459322536190932",
+      "name": "GymSectorCoord",
+      "properties": [
+        {
+          "id": "1:4648288585278455593",
+          "name": "x"
+        },
+        {
+          "id": "2:2626465859140106992",
+          "name": "y"
+        },
+        {
+          "id": "3:2313814217248295342",
+          "indexId": "6:2524190318166092343",
+          "name": "gymSectorId"
+        },
+        {
+          "id": "4:7557459322536190932",
+          "name": "id"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "6:3884213150038417823",
-  "lastIndexId": "4:7103347133278107651",
+  "lastEntityId": "8:1195038183195028243",
+  "lastIndexId": "6:2524190318166092343",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
