@@ -3,12 +3,11 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.os.Build;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.text.format.DateUtils;
@@ -36,6 +35,8 @@ import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymRepository;
 
 public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
+
+    private final String LAST_GYM_KEY = "last_gym";
 
     @BindView(R.id.gym_text)
     AutoCompleteTextView gymText;
@@ -70,6 +71,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     };
     private View contentView;
     private Calendar selectedDate;
+    private SharedPreferences preferences;
 
     public OnResultListener getOnResultListener() {
         return onResultListener;
@@ -87,6 +89,8 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
         dialog.setContentView(contentView, null);
         ButterKnife.bind(this, contentView);
 
+        preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
@@ -103,6 +107,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
                 gymAdapter.addAll(names);
             }
         });
+        gymText.setText(preferences.getString(LAST_GYM_KEY, ""));
 
         ((BottomSheetBehavior<View>) behavior).setSkipCollapsed(true);
 
@@ -155,6 +160,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
 
     @OnClick(R.id.search_button)
     public void onAddButton() {
+        preferences.edit().putString(LAST_GYM_KEY, String.valueOf(gymText.getText())).apply();
         onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), selectedDate.getTime());
         dismiss();
     }
