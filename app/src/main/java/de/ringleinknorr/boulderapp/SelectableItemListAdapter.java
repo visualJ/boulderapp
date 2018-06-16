@@ -1,5 +1,6 @@
 package de.ringleinknorr.boulderapp;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.List;
 public abstract class SelectableItemListAdapter<I, V extends View & SelectableItemListAdapter.Selectable> extends ItemListAdapter<I, V> {
 
     private List<Integer> selectedPositions = new ArrayList<>();
+    private OnSelectionChangedListener onSelectionChangedListener = selectedPositions1 -> {
+    };
     private boolean selectable = true;
 
     public SelectableItemListAdapter(List<I> items) {
@@ -28,6 +31,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
                 } else {
                     selectedPositions.remove((Integer) position);
                 }
+                onSelectionChangedListener.onSelectionChanged(selectedPositions);
             });
             v.setSelected(selectedPositions.contains(position));
         }
@@ -51,6 +55,14 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
         notifyDataSetChanged();
     }
 
+    public OnSelectionChangedListener getOnSelectionChangedListener() {
+        return onSelectionChangedListener;
+    }
+
+    public void setOnSelectionChangedListener(@NonNull OnSelectionChangedListener onSelectionChangedListener) {
+        this.onSelectionChangedListener = onSelectionChangedListener;
+    }
+
     public interface Selectable {
         void setOnSelectedListener(OnSelectedListener listener);
 
@@ -61,5 +73,9 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
 
     public interface OnSelectedListener {
         void onSelected(boolean selected);
+    }
+
+    public interface OnSelectionChangedListener {
+        void onSelectionChanged(List<Integer> selectedPositions);
     }
 }

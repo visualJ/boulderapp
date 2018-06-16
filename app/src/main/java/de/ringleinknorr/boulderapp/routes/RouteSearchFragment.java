@@ -126,6 +126,8 @@ public class RouteSearchFragment extends InjectableFragment {
             viewModel.setSelectedGym(session.getGym().getTarget());
             updateGymSectorView();
         });
+        addButton.setEnabled(false);
+        routeListAdapter.setOnSelectionChangedListener(selectedPositions -> addButton.setEnabled(selectedPositions.size() > 0));
     }
 
     protected void updateGymSectorView() {
