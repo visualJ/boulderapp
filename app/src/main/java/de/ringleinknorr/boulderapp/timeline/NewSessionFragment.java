@@ -132,7 +132,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     private void setDate(Calendar cal) {
         selectedDate = cal;
         String date = DateUtils.formatDateTime(getContext(), cal.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE + DateUtils.FORMAT_SHOW_YEAR);
-        dateText.setText("Datum: " + date);
+        dateText.setText(date);
     }
 
     @OnClick(R.id.date_text)
