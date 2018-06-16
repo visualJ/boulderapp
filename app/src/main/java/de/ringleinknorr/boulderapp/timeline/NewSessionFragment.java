@@ -12,6 +12,8 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -73,6 +75,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     private View contentView;
     private Calendar selectedDate;
     private SharedPreferences preferences;
+    private BottomSheetBehavior behavior;
 
     public OnResultListener getOnResultListener() {
         return onResultListener;
@@ -82,7 +85,8 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
         this.onResultListener = onResultListener;
     }
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint({"RestrictedApi"})
+    @SuppressWarnings("unchecked")
     @Override
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
@@ -90,13 +94,15 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
         dialog.setContentView(contentView, null);
         ButterKnife.bind(this, contentView);
 
-        preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
-        CoordinatorLayout.Behavior behavior = params.getBehavior();
+        behavior = (BottomSheetBehavior) params.getBehavior();
 
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
-            ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
+        if (behavior != null) {
+            behavior.setBottomSheetCallback(mBottomSheetBehaviorCallback);
+            behavior.setSkipCollapsed(true);
+            behavior.setPeekHeight(Integer.MAX_VALUE);
         }
 
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
@@ -110,12 +116,9 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
         });
         gymText.setText(preferences.getString(LAST_GYM_KEY, ""));
 
-        ((BottomSheetBehavior<View>) behavior).setSkipCollapsed(true);
-
         calendar.setVisibility(View.GONE);
         calendar.setAlpha(0);
-        calendar.setScaleX(0.8f);
-        calendar.setScaleY(0.8f);
+        calendar.setTranslationY(200);
         setDate(Calendar.getInstance());
         calendar.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             Calendar cal = Calendar.getInstance();
@@ -135,28 +138,28 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     @OnClick(R.id.date_text)
     public void onDateClicked() {
         if (calendar.getVisibility() == View.VISIBLE) {
-            showCalendar();
-        } else {
             hideCalendar();
+        } else {
+            showCalendar();
         }
         contentView.requestLayout();
     }
 
-    private void hideCalendar() {
+    private void showCalendar() {
         calendar.setVisibility(View.VISIBLE);
         calendar.animate()
                 .alpha(1)
-                .scaleY(1)
-                .scaleX(1)
+                .translationY(0)
+                .setInterpolator(new OvershootInterpolator(2))
                 .setDuration(mShortAnimationDuration)
                 .setListener(null);
     }
 
-    private void showCalendar() {
+    private void hideCalendar() {
         calendar.animate()
                 .alpha(0)
-                .scaleY(0.8f)
-                .scaleX(0.8f)
+                .translationY(200)
+                .setInterpolator(new AccelerateInterpolator(1))
                 .setDuration(mShortAnimationDuration)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
