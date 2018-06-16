@@ -6,5 +6,6 @@
     <string name="route_search_button_label">Suchen</string>
     <string name="navigation_drawer_close">close drawer</string>
     <string name="navigation_drawer_open">open drawer</string>
+    <string name="gym_must_be_selected_first">Bitte eine vorhandene Halle aus Vorschlagsliste auswählen</string>
 
 </resources>

@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -134,35 +135,48 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     @OnClick(R.id.date_text)
     public void onDateClicked() {
         if (calendar.getVisibility() == View.VISIBLE) {
-            calendar.animate()
-                    .alpha(0)
-                    .scaleY(0.8f)
-                    .scaleX(0.8f)
-                    .setDuration(mShortAnimationDuration)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            calendar.setVisibility(View.GONE);
-                        }
-                    });
+            showCalendar();
         } else {
-            calendar.setVisibility(View.VISIBLE);
-            calendar.animate()
-                    .alpha(1)
-                    .scaleY(1)
-                    .scaleX(1)
-                    .setDuration(mShortAnimationDuration)
-                    .setListener(null);
+            hideCalendar();
         }
         contentView.requestLayout();
     }
 
+    private void hideCalendar() {
+        calendar.setVisibility(View.VISIBLE);
+        calendar.animate()
+                .alpha(1)
+                .scaleY(1)
+                .scaleX(1)
+                .setDuration(mShortAnimationDuration)
+                .setListener(null);
+    }
+
+    private void showCalendar() {
+        calendar.animate()
+                .alpha(0)
+                .scaleY(0.8f)
+                .scaleX(0.8f)
+                .setDuration(mShortAnimationDuration)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        calendar.setVisibility(View.GONE);
+                    }
+                });
+    }
+
     @OnClick(R.id.search_button)
     public void onAddButton() {
-        preferences.edit().putString(LAST_GYM_KEY, String.valueOf(gymText.getText())).apply();
-        onResultListener.onResult(gymRepository.getGymWithName(String.valueOf(gymText.getText())), selectedDate.getTime());
-        dismiss();
+        Gym gym = gymRepository.getGymWithName(String.valueOf(gymText.getText()));
+        if (gym != null) {
+            preferences.edit().putString(LAST_GYM_KEY, String.valueOf(gymText.getText())).apply();
+            onResultListener.onResult(gym, selectedDate.getTime());
+            dismiss();
+        } else {
+            Toast.makeText(getContext(), R.string.gym_must_be_selected_first, Toast.LENGTH_SHORT).show();
+        }
     }
 
     interface OnResultListener {
