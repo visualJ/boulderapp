@@ -101,6 +101,7 @@ public class RouteSearchFragment extends InjectableFragment {
         routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new LinearLayoutManager(getContext()));
         routeList.setAdapter(routeListAdapter);
+        routeListAdapter.setPlaceholderText("Keine passenden Routen gefunden!");
 
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> updateGymSectorView());
         autoCompleteTextView.setAdapter(gymAdapter);

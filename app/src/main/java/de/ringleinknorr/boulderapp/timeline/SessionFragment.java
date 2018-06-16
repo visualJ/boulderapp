@@ -1,18 +1,14 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -24,7 +20,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.AndroidSupportInjection;
 import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
@@ -65,6 +60,7 @@ public class SessionFragment extends InjectableFragment {
         sessionRouteList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new SessionRouteListAdapter(new ArrayList<>());
         sessionRouteList.setAdapter(adapter);
+        adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");
 
         setTitle("Session");
 

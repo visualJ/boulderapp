@@ -41,7 +41,7 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.view_routecard, this);
         ButterKnife.bind(this);
-        setLayoutParams(new Constraints.LayoutParams(-1, -2));
+        setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
         selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
         selectedIcon.setScaleX(DESELECTED_ICON_SCALE);
         selectedIcon.setScaleY(DESELECTED_ICON_SCALE);

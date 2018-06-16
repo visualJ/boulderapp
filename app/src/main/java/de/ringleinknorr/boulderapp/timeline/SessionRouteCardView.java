@@ -23,7 +23,7 @@ public class SessionRouteCardView extends ConstraintLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.view_sessionroutecard, this);
         ButterKnife.bind(this);
-        setLayoutParams(new Constraints.LayoutParams(-1, -2));
+        setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
     }
 
     public void setRouteLevelText(String level) {

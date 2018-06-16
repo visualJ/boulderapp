@@ -61,7 +61,7 @@
             android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:hint="Halle"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:inputType="textNoSuggestions"
             android:singleLine="true"
             app:layout_constraintStart_toStartOf="parent"
