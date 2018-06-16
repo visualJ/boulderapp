@@ -8,6 +8,7 @@ import java.util.List;
 public abstract class SelectableItemListAdapter<I, V extends View & SelectableItemListAdapter.Selectable> extends ItemListAdapter<I, V> {
 
     private List<Integer> selectedPositions = new ArrayList<>();
+    private boolean selectable = true;
 
     public SelectableItemListAdapter(List<I> items) {
         super(items);
@@ -19,14 +20,17 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
 
     @Override
     public void onBindView(V v, int position, I item) {
-        v.setOnSelectedListener(selected -> {
-            if (selected) {
-                selectedPositions.add(position);
-            } else {
-                selectedPositions.remove((Integer) position);
-            }
-        });
-        v.setSelected(selectedPositions.contains(position));
+        v.setSelectable(selectable);
+        if (selectable) {
+            v.setOnSelectedListener(selected -> {
+                if (selected) {
+                    selectedPositions.add(position);
+                } else {
+                    selectedPositions.remove((Integer) position);
+                }
+            });
+            v.setSelected(selectedPositions.contains(position));
+        }
     }
 
     public List<Integer> getSelectedPositions() {
@@ -38,10 +42,21 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
         notifyDataSetChanged();
     }
 
+    public boolean isSelectable() {
+        return selectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
+        notifyDataSetChanged();
+    }
+
     public interface Selectable {
         void setOnSelectedListener(OnSelectedListener listener);
 
         void setItemSelected(boolean selected);
+
+        void setSelectable(boolean selectable);
     }
 
     public interface OnSelectedListener {

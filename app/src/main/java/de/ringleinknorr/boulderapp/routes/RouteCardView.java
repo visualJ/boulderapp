@@ -18,13 +18,18 @@ import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.SelectableItemListAdapter;
 
 public class RouteCardView extends ConstraintLayout implements SelectableItemListAdapter.Selectable {
+
+    public final float SELECTED_ICON_APLHA = 1;
+    public final float SELECTED_ICON_SCALE = 1;
+    public final float DESELECTED_ICON_APLHA = 0.2f;
+    public final float DESELECTED_ICON_SCALE = 0.8f;
+
     @BindView(R.id.route_level_text)
     TextView routeLevelText;
     @BindView(R.id.image)
     ImageView image;
     @BindView(R.id.selected_icon)
     ImageView selectedIcon;
-
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
 
@@ -37,9 +42,9 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         LayoutInflater.from(context).inflate(R.layout.view_routecard, this);
         ButterKnife.bind(this);
         setLayoutParams(new Constraints.LayoutParams(-1, -2));
-        selectedIcon.setAlpha(0.2f);
-        selectedIcon.setScaleX(0.8f);
-        selectedIcon.setScaleY(0.8f);
+        selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
+        selectedIcon.setScaleX(DESELECTED_ICON_SCALE);
+        selectedIcon.setScaleY(DESELECTED_ICON_SCALE);
         image.setOnClickListener(view -> setItemSelected(!itemSelected));
     }
 
@@ -65,29 +70,49 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         onSelectedListener = listener;
     }
 
+    public boolean isItemSelected() {
+        return itemSelected;
+    }
+
     @Override
     public void setItemSelected(boolean selected) {
         this.itemSelected = selected;
         onSelectedListener.onSelected(selected);
         if (selected) {
-            selectedIcon.animate()
-                    .setDuration(mShortAnimationDuration)
-                    .setInterpolator(new OvershootInterpolator(5))
-                    .alpha(1f)
-                    .scaleX(1f)
-                    .scaleY(1f);
+            animateSelected();
         } else {
-            selectedIcon.animate()
-                    .setDuration(mShortAnimationDuration)
-                    .setInterpolator(new AccelerateInterpolator(0.1f))
-                    .alpha(0.2f)
-                    .scaleX(0.8f)
-                    .scaleY(0.8f);
+            animateDeselected();
         }
     }
 
-    public boolean isItemSelected() {
-        return itemSelected;
+    private void animateDeselected() {
+        selectedIcon.animate()
+                .setDuration(mShortAnimationDuration)
+                .setInterpolator(new AccelerateInterpolator(0.1f))
+                .alpha(DESELECTED_ICON_APLHA)
+                .scaleX(DESELECTED_ICON_SCALE)
+                .scaleY(DESELECTED_ICON_SCALE);
+    }
+
+    private void animateSelected() {
+        selectedIcon.animate()
+                .setDuration(mShortAnimationDuration)
+                .setInterpolator(new OvershootInterpolator(5))
+                .alpha(SELECTED_ICON_APLHA)
+                .scaleX(SELECTED_ICON_SCALE)
+                .scaleY(SELECTED_ICON_SCALE);
+    }
+
+    @Override
+    public void setSelectable(boolean selectable) {
+        if (selectable) {
+            image.setOnClickListener(view -> setItemSelected(!itemSelected));
+            selectedIcon.setVisibility(VISIBLE);
+        } else {
+            image.setOnClickListener(view -> {
+            });
+            selectedIcon.setVisibility(GONE);
+        }
     }
 
 }
