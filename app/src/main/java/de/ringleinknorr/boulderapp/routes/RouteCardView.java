@@ -21,7 +21,7 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
 
     public final float SELECTED_ICON_APLHA = 1;
     public final float SELECTED_ICON_SCALE = 1;
-    public final float DESELECTED_ICON_APLHA = 0.2f;
+    public final float DESELECTED_ICON_APLHA = 0.3f;
     public final float DESELECTED_ICON_SCALE = 0.8f;
 
     @BindView(R.id.route_level_text)
