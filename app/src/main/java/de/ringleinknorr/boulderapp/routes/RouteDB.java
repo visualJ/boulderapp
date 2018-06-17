@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
 import java.util.List;
 
@@ -35,9 +36,10 @@ public class RouteDB {
         int minLevel = routeSearchParameter.getMinLevel();
         int maxLevel = routeSearchParameter.getMaxLevel();
         String gymName = routeSearchParameter.getGymName();
+        long gymSectorId = routeSearchParameter.getSectorId();
         MediatorLiveData<List<Route>> liveData = new MediatorLiveData<>();
         QueryBuilder<Route> builder = box.query();
-        builder.between(Route_.level, minLevel, maxLevel).filter((route) -> route.getGym().getTarget().getName().equals(gymName));
+        builder.between(Route_.level, minLevel, maxLevel).equal(Route_.gymSectorId,gymSectorId).filter((route) -> route.getGym().getTarget().getName().equals(gymName));
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(builder.build());
         liveData.addSource(query, liveData::postValue);
         return liveData;

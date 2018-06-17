@@ -22,21 +22,26 @@ public class DBMockData {
             Gym gym2 = new Gym("Kletterhalle Wiesbaden");
             Gym gym3 = new Gym("Blockwerk Mainz");
 
+
             Route routes[] = {
-                    new Route(Route.Level.LEICHT, gym1,"routeTest"),
-                    new Route(Route.Level.MITTEL, gym1,"routeTest"),
-                    new Route(Route.Level.SCHWER, gym1,"routeTest"),
-                    new Route(Route.Level.MITTEL, gym2,"routeTest"),
-                    new Route(Route.Level.SCHWER, gym2,"routeTest"),
-                    new Route(Route.Level.MITTEL, gym3,"routeTest"),
+                    new Route(Route.Level.LEICHT, gym1,"routeTest", 1),
+                    new Route(Route.Level.MITTEL, gym1,"routeTest", 1),
+                    new Route(Route.Level.SCHWER, gym1,"routeTest", 2),
+                    new Route(Route.Level.MITTEL, gym2,"routeTest",1),
+                    new Route(Route.Level.SCHWER, gym2,"routeTest",1),
+                    new Route(Route.Level.MITTEL, gym3,"routeTest",1),
             };
 
             GymSector gymSector1 = new GymSector(gym1);
             GymSector gymSector2 = new GymSector(gym1);
+            GymSector gymSector3 = new GymSector(gym2);
+            GymSector gymSector4 = new GymSector(gym3);
 
             GymSector gymSectors[] = {
                     gymSector1,
                     gymSector2,
+                    gymSector3,
+                    gymSector4,
             };
 
             GymSectorCoord coords[] = {
@@ -49,6 +54,17 @@ public class DBMockData {
                     new GymSectorCoord(200, 200, gymSector2),
                     new GymSectorCoord(400, 200, gymSector2),
                     new GymSectorCoord(400, 0, gymSector2),
+
+                    new GymSectorCoord(200, 0, gymSector3),
+                    new GymSectorCoord(200, 200, gymSector3),
+                    new GymSectorCoord(400, 200, gymSector3),
+                    new GymSectorCoord(400, 0, gymSector3),
+
+                    new GymSectorCoord(200, 0, gymSector4),
+                    new GymSectorCoord(200, 200, gymSector4),
+                    new GymSectorCoord(400, 200, gymSector4),
+                    new GymSectorCoord(400, 0, gymSector4),
+
             };
 
             routeBox.put(routes);

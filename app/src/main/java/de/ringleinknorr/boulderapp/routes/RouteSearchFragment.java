@@ -146,7 +146,7 @@ public class RouteSearchFragment extends InjectableFragment {
         int maxLevel = rangeBar.getRightIndex();
         switchToSearchResults();
         String gymName = String.valueOf(autoCompleteTextView.getText());
-        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName));
+        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName, gymSectorImage.getSelectedSector().getId()));
     }
 
     @OnClick(R.id.switch_to_route_search)

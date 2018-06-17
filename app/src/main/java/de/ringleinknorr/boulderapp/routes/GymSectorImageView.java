@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.snatik.polygon.Point;
@@ -19,7 +18,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     private Gym gym;
     private long currentGymId;
 
-    GymSector selectedSector;
+    private GymSector selectedSector;
 
     public GymSectorImageView(Context c, AttributeSet attrs) {
         super(c, attrs);
@@ -96,6 +95,14 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     public void setGym(Gym gym) {
         this.gym = gym;
+    }
+
+    public GymSector getSelectedSector() {
+        return selectedSector;
+    }
+
+    public void setSelectedSector(GymSector selectedSector) {
+        this.selectedSector = selectedSector;
     }
 }
 

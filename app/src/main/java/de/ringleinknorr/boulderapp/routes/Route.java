@@ -12,8 +12,8 @@ public class Route {
     private long id;
 
     private ToOne<Gym> gym;
-
     private String imageId;
+    private long gymSectorId;
 
     @Convert(converter = LevelConverter.class, dbType = Integer.class)
     private Level level;
@@ -28,10 +28,11 @@ public class Route {
         }
     }
 
-    public Route(Level level, Gym gym, String imageId) {
+    public Route(Level level, Gym gym, String imageId, long gymSectorId) {
         this.level = level;
         this.gym.setTarget(gym);
         this.imageId = imageId;
+        this.gymSectorId = gymSectorId;
     }
 
     public Route() {
@@ -79,5 +80,13 @@ public class Route {
 
     public void setImageId(String imageId) {
         this.imageId = imageId;
+    }
+
+    public long getGymSectorId() {
+        return gymSectorId;
+    }
+
+    public void setGymSectorId(long gymSectorId) {
+        this.gymSectorId = gymSectorId;
     }
 }

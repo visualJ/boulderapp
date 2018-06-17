@@ -4,12 +4,13 @@ public class RouteSearchParameter {
     private int minLevel;
     private int maxLevel;
     private String gymName;
-    private int sector;
+    private long sectorId;
 
-    public RouteSearchParameter(int minLevel, int maxLevel, String gymName) {
+    public RouteSearchParameter(int minLevel, int maxLevel, String gymName, long sectorId) {
         this.minLevel = minLevel;
         this.maxLevel = maxLevel;
         this.gymName = gymName;
+        this.sectorId = sectorId;
     }
 
     public int getMinLevel() {
@@ -24,7 +25,7 @@ public class RouteSearchParameter {
         return gymName;
     }
 
-    public int getSector() {
-        return sector;
+    public long getSectorId() {
+        return sectorId;
     }
 }
