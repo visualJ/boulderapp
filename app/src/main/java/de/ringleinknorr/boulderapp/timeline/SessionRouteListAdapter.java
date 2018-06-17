@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import de.ringleinknorr.boulderapp.ItemListAdapter;
-import de.ringleinknorr.boulderapp.routes.RouteCardView;
+import de.ringleinknorr.boulderapp.routes.ImageRepository;
 
 public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, SessionRouteCardView> {
 
@@ -23,5 +23,7 @@ public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, Sessi
     public void onBindView(@NonNull SessionRouteCardView view, int position, SessionRoute route) {
         String routeLevel = route.getRoute().getTarget().getLevel().name();
         view.getRouteLevelText().setText(routeLevel);
+        ImageRepository imageRepository = new ImageRepository();
+        view.getImage().setImageBitmap(imageRepository.getImageForId(route.getRoute().getTarget().getImageId()));
     }
 }

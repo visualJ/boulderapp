@@ -18,15 +18,17 @@ public class RouteSearchViewModel extends ViewModel {
     private MediatorLiveData<List<Route>> routes;
     private RouteRepository routeRepository;
     private SessionRepository sessionRepository;
+    private ImageRepository imageRepository;
     private long sessionId;
     private LiveData<Session> session;
     private Bitmap gimSectorImage;
     private Gym selectedGym;
 
     @Inject
-    public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
+    public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository, ImageRepository imageRepository) {
         this.routeRepository = routeRepository;
         this.sessionRepository = sessionRepository;
+        this.imageRepository = imageRepository;
         routes = new MediatorLiveData<>();
     }
 
@@ -36,6 +38,10 @@ public class RouteSearchViewModel extends ViewModel {
 
     public void queryRoutes(RouteSearchParameter routeSearchParameter) {
         routes.addSource(routeRepository.queryRoutes(routeSearchParameter), routeList -> routes.postValue(routeList));
+    }
+
+    public Bitmap getRouteImageForId(String routeImageId){
+        return imageRepository.getImageForId(routeImageId);
     }
 
     public long getSessionId() {

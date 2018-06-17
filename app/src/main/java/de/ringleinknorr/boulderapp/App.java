@@ -1,6 +1,7 @@
 package de.ringleinknorr.boulderapp;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ public class App extends Application implements HasSupportFragmentInjector {
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
     private BoxStore boxStore;
+    private static Context mContext;
 
     @Override
     public void onCreate() {
@@ -22,10 +24,15 @@ public class App extends Application implements HasSupportFragmentInjector {
         boxStore = MyObjectBox.builder().androidContext(App.this).build();
         DaggerAppDIComponent.builder().boxStore(boxStore).build().inject(this);
         DBMockData.createMockData(boxStore);
+        mContext = this;
     }
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
+    }
+
+    public static Context getContext(){
+        return mContext;
     }
 }

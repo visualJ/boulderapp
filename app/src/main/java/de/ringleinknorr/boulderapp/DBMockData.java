@@ -23,12 +23,12 @@ public class DBMockData {
             Gym gym3 = new Gym("Blockwerk Mainz");
 
             Route routes[] = {
-                    new Route(Route.Level.LEICHT, gym1),
-                    new Route(Route.Level.MITTEL, gym1),
-                    new Route(Route.Level.SCHWER, gym1),
-                    new Route(Route.Level.MITTEL, gym2),
-                    new Route(Route.Level.SCHWER, gym2),
-                    new Route(Route.Level.MITTEL, gym3),
+                    new Route(Route.Level.LEICHT, gym1,"routeTest"),
+                    new Route(Route.Level.MITTEL, gym1,"routeTest"),
+                    new Route(Route.Level.SCHWER, gym1,"routeTest"),
+                    new Route(Route.Level.MITTEL, gym2,"routeTest"),
+                    new Route(Route.Level.SCHWER, gym2,"routeTest"),
+                    new Route(Route.Level.MITTEL, gym3,"routeTest"),
             };
 
             GymSector gymSector1 = new GymSector(gym1);
