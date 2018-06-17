@@ -45,12 +45,11 @@ public class DBMockData {
                     new GymSectorCoord(200, 200, gymSector1),
                     new GymSectorCoord(200, 0, gymSector1),
 
-                    new GymSectorCoord(200, 0, gymSector1),
-                    new GymSectorCoord(200, 200, gymSector1),
-                    new GymSectorCoord(400, 200, gymSector1),
-                    new GymSectorCoord(400, 0, gymSector1),
+                    new GymSectorCoord(200, 0, gymSector2),
+                    new GymSectorCoord(200, 200, gymSector2),
+                    new GymSectorCoord(400, 200, gymSector2),
+                    new GymSectorCoord(400, 0, gymSector2),
             };
-
 
             routeBox.put(routes);
             gymSectorCoordsBox.put(coords);
