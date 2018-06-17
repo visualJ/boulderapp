@@ -16,4 +16,14 @@
         <item name="android:textColorHint">@color/colorLightGrey</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
+
+    <style name="MyToolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="drawerArrowStyle">@style/WhiteDrawerIconStyle</item>
+    </style>
+
+
+    <style name="WhiteDrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
 </resources>
