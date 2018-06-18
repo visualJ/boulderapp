@@ -75,11 +75,18 @@ public class RouteSearchFragment extends InjectableFragment {
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
 
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
+            onCreateForResult(arguments);
+        } else {
+            routeListAdapter.setSelectable(false);
+        }
+
+        gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
         if (viewModel.getGymSectorImage() != null && viewModel.getSelectedGym() != null) {
             gymSectorImage.setImageBitmap(viewModel.getGymSectorImage());
             gymSectorImage.setAdjustViewBounds(true);
             gymSectorImage.setGym(viewModel.getSelectedGym());
-            gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
         }
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
@@ -103,13 +110,6 @@ public class RouteSearchFragment extends InjectableFragment {
                 gymAdapter.addAll(names);
             }
         });
-
-        Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
-            onCreateForResult(arguments);
-        } else {
-            routeListAdapter.setSelectable(false);
-        }
 
         setTitle(forResult ? "Routen hinzufügen" : "Routen Suche");
 
