@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -125,7 +126,19 @@ public class RouteSearchFragment extends InjectableFragment {
             updateGymSectorView();
             onSearchButton();
         });
-        routeListAdapter.setOnSelectionChangedListener(selectedPositions -> addButton.setVisibility(selectedPositions.size() > 0 ? View.VISIBLE : View.GONE));
+        routeListAdapter.setOnSelectionChangedListener(selectedPositions -> {
+            if (selectedPositions.size() > 0) {
+                if (addButton.getVisibility() != View.VISIBLE) {
+                    addButton.setAlpha(0.5f);
+                    addButton.setScaleX(0.5f);
+                    addButton.setScaleY(0.5f);
+                    addButton.setVisibility(View.VISIBLE);
+                    addButton.animate().alpha(1).scaleX(1).scaleY(1).setInterpolator(new OvershootInterpolator(2)).setDuration(100);
+                }
+            } else {
+                addButton.setVisibility(View.GONE);
+            }
+        });
     }
 
     protected void updateGymSectorView() {
