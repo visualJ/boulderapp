@@ -74,17 +74,11 @@ public class RouteSearchFragment extends InjectableFragment {
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
 
-        Bundle arguments = getArguments();
-        if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
-            onCreateForResult(arguments);
-        } else {
-            routeListAdapter.setSelectable(false);
-        }
-
         if (viewModel.getGymSectorImage() != null && viewModel.getSelectedGym() != null) {
             gymSectorImage.setImageBitmap(viewModel.getGymSectorImage());
             gymSectorImage.setAdjustViewBounds(true);
             gymSectorImage.setGym(viewModel.getSelectedGym());
+            gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
         }
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
@@ -93,7 +87,14 @@ public class RouteSearchFragment extends InjectableFragment {
         routeList.setAdapter(routeListAdapter);
         routeListAdapter.setPlaceholderText("Keine passenden Routen gefunden!");
 
-        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> updateGymSectorView());
+        rangeBar.setOnRangeBarChangeListener((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
+            onSearchButton();
+        });
+
+        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
+            updateGymSectorView();
+            onSearchButton();
+        });
         autoCompleteTextView.setAdapter(gymAdapter);
         gymRepository.getAllGymNames().observe(this, names -> {
             gymAdapter.clear();
@@ -101,6 +102,13 @@ public class RouteSearchFragment extends InjectableFragment {
                 gymAdapter.addAll(names);
             }
         });
+
+        Bundle arguments = getArguments();
+        if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
+            onCreateForResult(arguments);
+        } else {
+            routeListAdapter.setSelectable(false);
+        }
 
         setTitle(forResult ? "Routen hinzufügen" : "Routen Suche");
 
@@ -115,6 +123,7 @@ public class RouteSearchFragment extends InjectableFragment {
             autoCompleteTextView.setEnabled(false);
             viewModel.setSelectedGym(session.getGym().getTarget());
             updateGymSectorView();
+            onSearchButton();
         });
         routeListAdapter.setOnSelectionChangedListener(selectedPositions -> addButton.setVisibility(selectedPositions.size() > 0 ? View.VISIBLE : View.GONE));
     }
@@ -128,12 +137,12 @@ public class RouteSearchFragment extends InjectableFragment {
         gymSectorImage.setGym(viewModel.getSelectedGym());
     }
 
-    @OnClick(R.id.search_button)
     public void onSearchButton() {
         int minLevel = rangeBar.getLeftIndex();
         int maxLevel = rangeBar.getRightIndex();
         String gymName = String.valueOf(autoCompleteTextView.getText());
-        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName, gymSectorImage.getSelectedSector().getId()));
+        GymSector selectedSector = gymSectorImage.getSelectedSector();
+        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName, selectedSector != null ? selectedSector.getId() : null));
     }
 
     @OnClick(R.id.add_button)
