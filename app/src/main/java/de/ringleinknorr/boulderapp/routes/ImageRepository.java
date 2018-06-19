@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 
 import javax.inject.Inject;
 
@@ -20,12 +21,13 @@ public class ImageRepository {
     }
 
     public LiveData<Bitmap> getImageForId(String imageId) {
-        MutableLiveData<Bitmap> image = new MutableLiveData<>();
-        image.postValue(decodeSampledBitmapFromResource(App.getContext().getResources(), R.drawable.route_test, 100, 100));
-        return image;
+        MutableLiveData<Bitmap> routeImageLiveData = new MutableLiveData<>();
+        ImageLoadTask loaderTask = new ImageLoadTask(routeImageLiveData);
+        loaderTask.execute();
+        return routeImageLiveData;
     }
 
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+    private static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -38,7 +40,7 @@ public class ImageRepository {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static int calculateInSampleSize(
+    private static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
@@ -56,5 +58,23 @@ public class ImageRepository {
             }
         }
         return inSampleSize;
+    }
+
+    public class ImageLoadTask extends AsyncTask<Void,Bitmap,Bitmap> {
+        MutableLiveData<Bitmap> routeImageLiveData;
+
+        ImageLoadTask( MutableLiveData<Bitmap> routeImageLiveData){
+            this.routeImageLiveData = routeImageLiveData;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            return decodeSampledBitmapFromResource(App.getContext().getResources(), R.drawable.route_test, 100, 100);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap imageBitmap) {
+            routeImageLiveData.postValue(imageBitmap);
+        }
     }
 }
