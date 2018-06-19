@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp;
 
+import android.arch.lifecycle.LiveData;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +19,7 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
     private OnItemClickListener<I> onItemClickListener = (position, item) -> {
     };
     private String placeholderText = "";
+    private ImageProvider imageProvider;
 
     public ItemListAdapter(List<I> items) {
         this.items = items;
@@ -150,6 +153,14 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
         this.placeholderText = placeholderText;
     }
 
+    public ImageProvider getImageProvider() {
+        return imageProvider;
+    }
+
+    public void setImageProvider(ImageProvider imageProvider) {
+        this.imageProvider = imageProvider;
+    }
+
     public interface OnItemClickListener<I> {
         void onItemClicked(int position, I item);
     }
@@ -161,5 +172,9 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
             super(v);
             view = v;
         }
+    }
+
+    public interface ImageProvider {
+        LiveData<Bitmap> getImage(String imageId);
     }
 }

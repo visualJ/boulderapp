@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
+import de.ringleinknorr.boulderapp.routes.ImageRepository;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 
 public class SessionFragment extends InjectableFragment {
@@ -35,6 +36,8 @@ public class SessionFragment extends InjectableFragment {
     @BindView(R.id.session_route_list)
     RecyclerView sessionRouteList;
 
+    @Inject
+    ImageRepository imageRepository;
     @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
 
@@ -58,7 +61,7 @@ public class SessionFragment extends InjectableFragment {
 
         sessionRouteList.setHasFixedSize(true);
         sessionRouteList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionRouteListAdapter(new ArrayList<>());
+        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::getImageForId);
         sessionRouteList.setAdapter(adapter);
         adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");
 

@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,8 +19,10 @@ public class ImageRepository {
 
     }
 
-    public Bitmap getImageForId(String imageId){
-        return  decodeSampledBitmapFromResource(App.getContext().getResources(), R.drawable.route_test, 100, 100);
+    public LiveData<Bitmap> getImageForId(String imageId) {
+        MutableLiveData<Bitmap> image = new MutableLiveData<>();
+        image.postValue(decodeSampledBitmapFromResource(App.getContext().getResources(), R.drawable.route_test, 100, 100));
+        return image;
     }
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,

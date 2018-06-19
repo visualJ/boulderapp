@@ -1,7 +1,10 @@
 package de.ringleinknorr.boulderapp.routes;
 
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -10,10 +13,10 @@ import java.util.List;
 import de.ringleinknorr.boulderapp.SelectableItemListAdapter;
 
 public class RouteListAdapter extends SelectableItemListAdapter<Route, RouteCardView> {
-    private RouteSearchViewModel viewModel;
-    public RouteListAdapter(List<Route> routeList, RouteSearchViewModel viewModel) {
+
+    public RouteListAdapter(List<Route> routeList, @NonNull ImageProvider imageProvider) {
         super(routeList);
-        this.viewModel = viewModel;
+        setImageProvider(imageProvider);
     }
 
     @Override
@@ -23,12 +26,22 @@ public class RouteListAdapter extends SelectableItemListAdapter<Route, RouteCard
         routeCardView.getRouteLevelText().setText(routeLevel);
 
         ImageView routeImageView = routeCardView.getImage();
-        routeImageView.setImageBitmap(viewModel.getRouteImageForId(route.getImageId()));
 
+        LiveData<Bitmap> liveDate = getImageProvider().getImage(route.getImageId());
+
+        Observer<Bitmap> observer = new Observer<Bitmap>() {
+            @Override
+            public void onChanged(@Nullable Bitmap bitmap) {
+                routeImageView.setImageBitmap(bitmap);
+                liveDate.removeObserver(this);
+            }
+        };
+        liveDate.observeForever(observer);
     }
 
     @Override
     public RouteCardView onCreateView(@NonNull ViewGroup parent, int viewType) {
         return new RouteCardView(parent.getContext());
     }
+
 }

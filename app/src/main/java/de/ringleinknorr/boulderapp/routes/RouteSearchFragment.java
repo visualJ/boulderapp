@@ -53,6 +53,8 @@ public class RouteSearchFragment extends InjectableFragment {
     ViewModelFactory<RouteSearchViewModel> viewModelFactory;
     @Inject
     GymRepository gymRepository;
+    @Inject
+    ImageRepository imageRepository;
 
     private RouteListAdapter routeListAdapter;
     private RouteSearchViewModel viewModel;
@@ -71,7 +73,7 @@ public class RouteSearchFragment extends InjectableFragment {
         View view = inflater.inflate(R.layout.fragment_route_search, container, false);
         ButterKnife.bind(this, view);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
-        routeListAdapter = new RouteListAdapter(new ArrayList<>(), viewModel);
+        routeListAdapter = new RouteListAdapter(new ArrayList<>(), imageRepository::getImageForId);
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
 

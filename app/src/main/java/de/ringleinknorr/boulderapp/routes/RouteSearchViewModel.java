@@ -40,10 +40,6 @@ public class RouteSearchViewModel extends ViewModel {
         routes.addSource(routeRepository.queryRoutes(routeSearchParameter), routeList -> routes.postValue(routeList));
     }
 
-    public Bitmap getRouteImageForId(String routeImageId){
-        return imageRepository.getImageForId(routeImageId);
-    }
-
     public long getSessionId() {
         return sessionId;
     }
