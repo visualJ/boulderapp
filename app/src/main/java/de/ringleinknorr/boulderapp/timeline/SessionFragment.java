@@ -61,7 +61,7 @@ public class SessionFragment extends InjectableFragment {
 
         sessionRouteList.setHasFixedSize(true);
         sessionRouteList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::getImageForId);
+        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadImage);
         sessionRouteList.setAdapter(adapter);
         adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");
 

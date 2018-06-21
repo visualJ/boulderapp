@@ -1,15 +1,11 @@
 package de.ringleinknorr.boulderapp.routes;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import de.ringleinknorr.boulderapp.App;
 import de.ringleinknorr.boulderapp.R;
 
 public class ImageRepository {
@@ -20,61 +16,7 @@ public class ImageRepository {
 
     }
 
-    public LiveData<Bitmap> getImageForId(String imageId) {
-        MutableLiveData<Bitmap> routeImageLiveData = new MutableLiveData<>();
-        ImageLoadTask loaderTask = new ImageLoadTask(routeImageLiveData);
-        loaderTask.execute();
-        return routeImageLiveData;
-    }
-
-    private static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(res, resId, options);
-    }
-
-    private static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) >= reqHeight
-                    && (halfWidth / inSampleSize) >= reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-        return inSampleSize;
-    }
-
-    public class ImageLoadTask extends AsyncTask<Void,Bitmap,Bitmap> {
-        MutableLiveData<Bitmap> routeImageLiveData;
-
-        ImageLoadTask( MutableLiveData<Bitmap> routeImageLiveData){
-            this.routeImageLiveData = routeImageLiveData;
-        }
-
-        @Override
-        protected Bitmap doInBackground(Void... voids) {
-            return decodeSampledBitmapFromResource(App.getContext().getResources(), R.drawable.route_test, 100, 100);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap imageBitmap) {
-            routeImageLiveData.postValue(imageBitmap);
-        }
+    public void loadImage(String imageId, ImageView view) {
+        Picasso.get().load(R.drawable.route_test).resize(100, 100).centerCrop().into(view);
     }
 }

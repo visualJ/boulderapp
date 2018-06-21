@@ -1,10 +1,6 @@
 package de.ringleinknorr.boulderapp.routes;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -24,19 +20,8 @@ public class RouteListAdapter extends SelectableItemListAdapter<Route, RouteCard
         super.onBindView(routeCardView, position, route);
         String routeLevel = route.getLevel().name();
         routeCardView.getRouteLevelText().setText(routeLevel);
-
         ImageView routeImageView = routeCardView.getImage();
-
-        LiveData<Bitmap> liveDate = getImageProvider().getImage(route.getImageId());
-
-        Observer<Bitmap> observer = new Observer<Bitmap>() {
-            @Override
-            public void onChanged(@Nullable Bitmap bitmap) {
-                routeImageView.setImageBitmap(bitmap);
-                liveDate.removeObserver(this);
-            }
-        };
-        liveDate.observeForever(observer);
+        getImageProvider().getImage(route.getImageId(), routeImageView);
     }
 
     @Override
