@@ -32,19 +32,47 @@ public class DBMockData {
                     new Route(Route.Level.MITTEL, gym3,"routeTest",1),
             };
 
-            GymSector gymSector1 = new GymSector(gym1);
-            GymSector gymSector2 = new GymSector(gym1);
+            GymSector gym1Sector1 = new GymSector(gym1);
+            GymSector gym1Sector2 = new GymSector(gym1);
+            GymSector gym1Sector3 = new GymSector(gym1);
+            GymSector gym1Sector4 = new GymSector(gym1);
+
             GymSector gymSector3 = new GymSector(gym2);
             GymSector gymSector4 = new GymSector(gym3);
 
             GymSector gymSectors[] = {
-                    gymSector1,
-                    gymSector2,
+                    gym1Sector1,
+                    gym1Sector2,
+                    gym1Sector3,
+                    gym1Sector4,
+
                     gymSector3,
                     gymSector4,
             };
 
             GymSectorCoord coords[] = {
+                    // Sector 1 Gym 1
+                    new GymSectorCoord(0, 0, gym1Sector1),
+                    new GymSectorCoord(0, 260, gym1Sector1),
+                    new GymSectorCoord(245, 170, gym1Sector1),
+                    new GymSectorCoord(245, 0, gym1Sector1),
+                    // Sector 2 Gym 1
+                    new GymSectorCoord(0, 260, gym1Sector2),
+                    new GymSectorCoord(0, 400, gym1Sector2),
+                    new GymSectorCoord(400, 400, gym1Sector2),
+                    new GymSectorCoord(245, 170, gym1Sector2),
+                    // Sector 3 Gym 1
+                    new GymSectorCoord(245, 0, gym1Sector3),
+                    new GymSectorCoord(245, 170, gym1Sector3),
+                    new GymSectorCoord(315, 275, gym1Sector3),
+                    new GymSectorCoord(640, 0, gym1Sector3),
+                    // Sector 4 Gym 1
+                    new GymSectorCoord(315, 275, gym1Sector4),
+                    new GymSectorCoord(400, 400, gym1Sector4),
+                    new GymSectorCoord(640, 400, gym1Sector4),
+                    new GymSectorCoord(640, 0, gym1Sector4),
+
+/*
                     new GymSectorCoord(0, 0, gymSector1),
                     new GymSectorCoord(0, 200, gymSector1),
                     new GymSectorCoord(200, 200, gymSector1),
@@ -54,7 +82,7 @@ public class DBMockData {
                     new GymSectorCoord(200, 200, gymSector2),
                     new GymSectorCoord(400, 200, gymSector2),
                     new GymSectorCoord(400, 0, gymSector2),
-
+*/
                     new GymSectorCoord(200, 0, gymSector3),
                     new GymSectorCoord(200, 200, gymSector3),
                     new GymSectorCoord(400, 200, gymSector3),

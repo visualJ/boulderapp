@@ -55,11 +55,14 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     public void drawSector(Canvas canvas, GymSector sector) {
         List<GymSectorCoord> coords = sector.getGymSectorCoords();
         GymSectorCoord tempCoord = coords.get(0);
+        float scaleFactorX = this.getMeasuredWidth() / 616f;
+        float scaleFactorY = this.getMeasuredHeight() / 320f;
+
         for (GymSectorCoord coord : coords.subList(1, coords.size())) {
-            canvas.drawLine(tempCoord.getX(), tempCoord.getY(), coord.getX(), coord.getY(), p);
+            canvas.drawLine(tempCoord.getX() * scaleFactorX, tempCoord.getY() * scaleFactorY, coord.getX() * scaleFactorX, coord.getY() * scaleFactorY, p);
             tempCoord = coord;
         }
-        canvas.drawLine(tempCoord.getX(), tempCoord.getY(), coords.get(0).getX(), coords.get(0).getY(), p);
+        canvas.drawLine(tempCoord.getX() * scaleFactorX, tempCoord.getY() * scaleFactorY, coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY, p);
     }
 
     @Override
@@ -90,8 +93,10 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     private Polygon buildPolygon(GymSector gymSector) {
         Polygon.Builder polygonBuilder = new Polygon.Builder();
+        float scaleFactorX = this.getMeasuredWidth() / 616f;
+        float scaleFactorY = this.getMeasuredHeight() / 320f;
         for (GymSectorCoord coord : gymSector.getGymSectorCoords()) {
-            polygonBuilder.addVertex(new Point(coord.getX(), coord.getY()));
+            polygonBuilder.addVertex(new Point(coord.getX() * scaleFactorX, coord.getY() * scaleFactorY));
         }
         return polygonBuilder.build();
     }
