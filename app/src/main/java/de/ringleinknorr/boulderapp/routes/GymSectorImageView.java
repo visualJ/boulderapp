@@ -55,8 +55,8 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     public void drawSector(Canvas canvas, GymSector sector) {
         List<GymSectorCoord> coords = sector.getGymSectorCoords();
         GymSectorCoord tempCoord = coords.get(0);
-        float scaleFactorX = this.getMeasuredWidth() / 616f;
-        float scaleFactorY = this.getMeasuredHeight() / 320f;
+        float scaleFactorX = this.getMeasuredWidth() / 640f;
+        float scaleFactorY = this.getMeasuredHeight() / 400f;
 
         for (GymSectorCoord coord : coords.subList(1, coords.size())) {
             canvas.drawLine(tempCoord.getX() * scaleFactorX, tempCoord.getY() * scaleFactorY, coord.getX() * scaleFactorX, coord.getY() * scaleFactorY, p);

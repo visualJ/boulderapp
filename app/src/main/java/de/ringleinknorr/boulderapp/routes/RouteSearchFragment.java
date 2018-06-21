@@ -86,11 +86,10 @@ public class RouteSearchFragment extends InjectableFragment {
         } else {
             routeListAdapter.setSelectable(false);
         }
-
+        gymSectorImage.setAdjustViewBounds(true);
         gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
         if (viewModel.getGymSectorImage() != null && viewModel.getSelectedGym() != null) {
             gymSectorImage.setImageBitmap(viewModel.getGymSectorImage());
-            gymSectorImage.setAdjustViewBounds(true);
             gymSectorImage.setGym(viewModel.getSelectedGym());
         }
 
@@ -153,10 +152,9 @@ public class RouteSearchFragment extends InjectableFragment {
     }
 
     protected void updateGymSectorView() {
-        Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.raumskizze);
+        Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.map_gym_1);
         viewModel.setGimSectorImage(bmImg);
         gymSectorImage.setImageBitmap(bmImg);
-        gymSectorImage.setAdjustViewBounds(true);
         viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
         gymSectorImage.setGym(viewModel.getSelectedGym());
     }
