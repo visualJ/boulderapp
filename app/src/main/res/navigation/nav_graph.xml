@@ -25,11 +25,15 @@
         <argument android:name="sessionId" />
         <action
             android:id="@+id/addRoute"
-            app:destination="@id/routeSearchFragment"
+            app:destination="@id/addRouteSearchFragment"
             app:enterAnim="@anim/anim_slide_in_up"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popExitAnim="@anim/anim_slide_out_down" />
     </fragment>
+    <fragment
+        android:id="@+id/addRouteSearchFragment"
+        android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
+        android:label="AddRoute" />
     <fragment
         android:id="@+id/routeSearchFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
