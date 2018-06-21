@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:startDestination="@id/timelineFragment">
@@ -8,7 +9,8 @@
     <fragment
         android:id="@+id/timelineFragment"
         android:name="de.ringleinknorr.boulderapp.timeline.TimelineFragment"
-        android:label="Timeline">
+        android:label="Timeline"
+        tools:layout="@layout/fragment_timeline">
         <action
             android:id="@+id/selectSession"
             app:destination="@id/sessionFragment"
@@ -21,7 +23,8 @@
     <fragment
         android:id="@+id/sessionFragment"
         android:name="de.ringleinknorr.boulderapp.timeline.SessionFragment"
-        android:label="Timeline">
+        android:label="Timeline"
+        tools:layout="@layout/fragment_session">
         <argument android:name="sessionId" />
         <action
             android:id="@+id/addRoute"
@@ -33,10 +36,12 @@
     <fragment
         android:id="@+id/addRouteSearchFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
-        android:label="AddRoute" />
+        android:label="AddRoute"
+        tools:layout="@layout/fragment_route_search" />
     <fragment
         android:id="@+id/routeSearchFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
-        android:label="RouteSearch" />
+        android:label="RouteSearch"
+        tools:layout="@layout/fragment_route_search" />
 
 </navigation>
