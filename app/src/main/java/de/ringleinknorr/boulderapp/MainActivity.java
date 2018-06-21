@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation_drawer_layout)
     DrawerLayout drawer;
     private NavController navController;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,39 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(appToolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, appToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.setDrawerSlideAnimationEnabled(false);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setToolbarNavigationClickListener(view -> onBackPressed());
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.addOnNavigatedListener((controller, destination) -> {
+            showBackArrow(false);
+            switch (destination.getId()) {
+                case R.id.sessionFragment:
+                case R.id.routeSearchFragment:
+                    showBackArrow(true);
+                    break;
+                default:
+                    showBackArrow(false);
+                    break;
+            }
+        });
         NavigationUI.setupWithNavController(navDrawer, navController);
     }
+
+    public void showBackArrow(boolean enable) {
+        toggle.setDrawerIndicatorEnabled(!enable);
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
