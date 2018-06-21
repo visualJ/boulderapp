@@ -12,10 +12,10 @@
         <action
             android:id="@+id/selectSession"
             app:destination="@id/sessionFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_left"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_right" />
 
     </fragment>
     <fragment
@@ -26,10 +26,9 @@
         <action
             android:id="@+id/addRoute"
             app:destination="@id/routeSearchFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
+            app:enterAnim="@anim/anim_slide_in_up"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/anim_slide_out_down" />
     </fragment>
     <fragment
         android:id="@+id/routeSearchFragment"
