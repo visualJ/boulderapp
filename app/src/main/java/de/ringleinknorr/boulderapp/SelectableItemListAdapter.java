@@ -33,7 +33,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
                 }
                 onSelectionChangedListener.onSelectionChanged(selectedPositions);
             });
-            v.setSelected(selectedPositions.contains(position));
+            v.setItemSelected(selectedPositions.contains(position));
         }
     }
 
@@ -48,6 +48,13 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
 
     public boolean isSelectable() {
         return selectable;
+    }
+
+    @Override
+    public void setItems(List<I> items) {
+        selectedPositions.clear();
+        onSelectionChangedListener.onSelectionChanged(selectedPositions);
+        super.setItems(items);
     }
 
     public void setSelectable(boolean selectable) {

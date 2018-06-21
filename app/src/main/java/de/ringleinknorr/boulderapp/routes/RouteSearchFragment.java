@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -135,10 +138,16 @@ public class RouteSearchFragment extends InjectableFragment {
                     addButton.setScaleX(0.5f);
                     addButton.setScaleY(0.5f);
                     addButton.setVisibility(View.VISIBLE);
-                    addButton.animate().alpha(1).scaleX(1).scaleY(1).setInterpolator(new OvershootInterpolator(2)).setDuration(100);
+                    addButton.animate().alpha(1).scaleX(1).scaleY(1).setInterpolator(new OvershootInterpolator(2)).setDuration(100).setListener(null);
                 }
             } else {
-                addButton.setVisibility(View.GONE);
+                addButton.animate().alpha(0).scaleX(0.5f).scaleY(0.5f).setInterpolator(new AccelerateInterpolator(2)).setDuration(100).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        addButton.setVisibility(View.GONE);
+                    }
+                });
             }
         });
     }

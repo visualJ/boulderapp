@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.SelectableItemListAdapter;
 
@@ -45,7 +46,17 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
         selectedIcon.setScaleX(DESELECTED_ICON_SCALE);
         selectedIcon.setScaleY(DESELECTED_ICON_SCALE);
-        image.setOnClickListener(view -> setItemSelected(!itemSelected));
+    }
+
+    @OnClick(R.id.image)
+    public void onImageClick() {
+        itemSelected = !itemSelected;
+        if (itemSelected) {
+            animateSelected();
+        } else {
+            animateDeselected();
+        }
+        onSelectedListener.onSelected(itemSelected);
     }
 
     public RouteCardView(Context context) {
@@ -77,11 +88,10 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     @Override
     public void setItemSelected(boolean selected) {
         this.itemSelected = selected;
-        onSelectedListener.onSelected(selected);
         if (selected) {
-            animateSelected();
+            selectedIcon.setAlpha(SELECTED_ICON_APLHA);
         } else {
-            animateDeselected();
+            selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
         }
     }
 
@@ -106,7 +116,6 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     @Override
     public void setSelectable(boolean selectable) {
         if (selectable) {
-            image.setOnClickListener(view -> setItemSelected(!itemSelected));
             selectedIcon.setVisibility(VISIBLE);
         } else {
             image.setOnClickListener(view -> {
