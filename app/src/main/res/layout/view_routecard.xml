@@ -14,12 +14,12 @@
             android:id="@+id/route_level_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:text="Wiesbadener Nordwand"
             app:layout_constraintStart_toEndOf="@+id/image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/data.json/route/difficulty" />
 
         <ImageView
             android:id="@+id/image"

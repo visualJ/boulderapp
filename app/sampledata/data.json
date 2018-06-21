@@ -1,0 +1,64 @@
+{
+  "session": [
+    {
+      "day": "20",
+      "month": "JUN",
+      "gym": "Wiesbadener Nordwand",
+      "routes": "17",
+      "workouts": "3"
+    },
+    {
+      "day": "11",
+      "month": "JUN",
+      "gym": "Wiesbadener Nordwand",
+      "routes": "9",
+      "workouts": "2"
+    },
+    {
+      "day": "23",
+      "month": "APR",
+      "gym": "Blockwerk Mainz",
+      "routes": "25",
+      "workouts": "0"
+    },
+    {
+      "day": "2",
+      "month": "APR",
+      "gym": "Blockwerk Mainz",
+      "routes": "12",
+      "workouts": "1"
+    },
+    {
+      "day": "15",
+      "month": "FEB",
+      "gym": "Kletterhalle Wiesbaden",
+      "routes": "14",
+      "workouts": "2"
+    },
+    {
+      "day": "3",
+      "month": "FEB",
+      "gym": "Kletterhalle Wiesbaden",
+      "routes": "18",
+      "workouts": "3"
+    },
+    {
+      "day": "29",
+      "month": "JAN",
+      "gym": "Wiesbadener Nordwand",
+      "routes": "16",
+      "workouts": "2"
+    }
+  ],
+  "route": [
+    {
+      "difficulty": "LEICHT"
+    },
+    {
+      "difficulty": "MITTEL"
+    },
+    {
+      "difficulty": "SCHWER"
+    }
+  ]
+}
