@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
 
@@ -18,18 +19,17 @@ public class RouteSearchViewModel extends ViewModel {
     private MediatorLiveData<List<Route>> routes;
     private RouteRepository routeRepository;
     private SessionRepository sessionRepository;
-    private ImageRepository imageRepository;
     private long sessionId;
     private LiveData<Session> session;
     private Bitmap gimSectorImage;
-    private Gym selectedGym;
+    private MutableLiveData<Gym> selectedGym;
 
     @Inject
-    public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository, ImageRepository imageRepository) {
+    public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
         this.routeRepository = routeRepository;
         this.sessionRepository = sessionRepository;
-        this.imageRepository = imageRepository;
         routes = new MediatorLiveData<>();
+        selectedGym = new MutableLiveData<>();
     }
 
     public LiveData<List<Route>> getRoutes() {
@@ -70,11 +70,11 @@ public class RouteSearchViewModel extends ViewModel {
         this.gimSectorImage = gimSectorImage;
     }
 
-    public Gym getSelectedGym() {
+    public LiveData<Gym> getSelectedGym() {
         return selectedGym;
     }
 
     public void setSelectedGym(Gym selectedGym) {
-        this.selectedGym = selectedGym;
+        this.selectedGym.postValue(selectedGym);
     }
 }

@@ -38,7 +38,7 @@ public class RouteDB {
         Long gymSectorId = routeSearchParameter.getSectorId();
         MediatorLiveData<List<Route>> liveData = new MediatorLiveData<>();
         QueryBuilder<Route> builder = box.query();
-        builder.between(Route_.level, minLevel, maxLevel);
+        //builder.between(Route_.level, minLevel, maxLevel);
         if (gymSectorId != null) {
             builder.equal(Route_.gymSectorId, gymSectorId);
         }

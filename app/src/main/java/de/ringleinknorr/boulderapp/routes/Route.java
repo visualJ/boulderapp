@@ -15,21 +15,13 @@ public class Route {
     private String imageId;
     private long gymSectorId;
 
+    private ToOne<RouteLevel> routeLevel;
+
     @Convert(converter = LevelConverter.class, dbType = Integer.class)
     private Level level;
 
-    public enum Level {
-        SCHWER(5), LEICHT(1), MITTEL(3);
-
-        final int id;
-
-        Level(int id) {
-            this.id = id;
-        }
-    }
-
-    public Route(Level level, Gym gym, String imageId, long gymSectorId) {
-        this.level = level;
+    public Route(Gym gym, String imageId, long gymSectorId, RouteLevel routeLevel) {
+        this.routeLevel.setTarget(routeLevel);
         this.gym.setTarget(gym);
         this.imageId = imageId;
         this.gymSectorId = gymSectorId;
@@ -39,23 +31,12 @@ public class Route {
 
     }
 
-    public static class LevelConverter implements PropertyConverter<Level, Integer> {
-        @Override
-        public Level convertToEntityProperty(Integer databaseValue) {
-            if (databaseValue != null) {
-                for (Level level : Level.values()) {
-                    if (level.id == databaseValue) {
-                        return level;
-                    }
-                }
-            }
-            return Level.LEICHT;
-        }
+    public ToOne<RouteLevel> getRouteLevel() {
+        return routeLevel;
+    }
 
-        @Override
-        public Integer convertToDatabaseValue(Level entityProperty) {
-            return entityProperty == null ? null : entityProperty.id;
-        }
+    public void setRouteLevel(ToOne<RouteLevel> routeLevel) {
+        this.routeLevel = routeLevel;
     }
 
     public long getId() {
@@ -88,5 +69,34 @@ public class Route {
 
     public void setGymSectorId(long gymSectorId) {
         this.gymSectorId = gymSectorId;
+    }
+
+    public enum Level {
+        SCHWER(5), LEICHT(1), MITTEL(3);
+
+        final int id;
+
+        Level(int id) {
+            this.id = id;
+        }
+    }
+
+    public static class LevelConverter implements PropertyConverter<Level, Integer> {
+        @Override
+        public Level convertToEntityProperty(Integer databaseValue) {
+            if (databaseValue != null) {
+                for (Level level : Level.values()) {
+                    if (level.id == databaseValue) {
+                        return level;
+                    }
+                }
+            }
+            return Level.LEICHT;
+        }
+
+        @Override
+        public Integer convertToDatabaseValue(Level entityProperty) {
+            return entityProperty == null ? null : entityProperty.id;
+        }
     }
 }

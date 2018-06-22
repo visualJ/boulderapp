@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-
-import com.appyvet.materialrangebar.RangeBar;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,14 +40,14 @@ public class RouteSearchFragment extends InjectableFragment {
 
     @BindView(R.id.auto_complete_text_view)
     AutoCompleteTextView autoCompleteTextView;
-    @BindView(R.id.rangeBar)
-    RangeBar rangeBar;
     @BindView(R.id.route_list)
     RecyclerView routeList;
     @BindView(R.id.add_button)
     FloatingActionButton addButton;
     @BindView(R.id.gymSectorCanvasView2)
     GymSectorImageView gymSectorImage;
+    @BindView(R.id.level_list)
+    RecyclerView levelList;
 
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
@@ -60,6 +60,7 @@ public class RouteSearchFragment extends InjectableFragment {
     ImageRepository imageRepository;
 
     private RouteListAdapter routeListAdapter;
+    private RouteLevelListAdapter routeLevelListAdapter;
     private RouteSearchViewModel viewModel;
     private ArrayAdapter<String> gymAdapter;
     private boolean forResult = false;
@@ -77,8 +78,17 @@ public class RouteSearchFragment extends InjectableFragment {
         ButterKnife.bind(this, view);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteSearchViewModel.class);
         routeListAdapter = new RouteListAdapter(new ArrayList<>(), imageRepository::loadImage);
+        routeLevelListAdapter = new RouteLevelListAdapter(new ArrayList<>());
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+
+        viewModel.getSelectedGym().observe(this, gym -> {
+            Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.map_gym_1);
+            viewModel.setGimSectorImage(bmImg);
+            gymSectorImage.setImageBitmap(bmImg);
+            gymSectorImage.setGym(gym);
+            routeLevelListAdapter.setItems(gym.getRouteLevels());
+        });
 
         Bundle arguments = getArguments();
         if (arguments != null && arguments.containsKey(KEY_SESSION_ID)) {
@@ -86,24 +96,25 @@ public class RouteSearchFragment extends InjectableFragment {
         } else {
             routeListAdapter.setSelectable(false);
         }
+
         gymSectorImage.setAdjustViewBounds(true);
         gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
-        if (viewModel.getGymSectorImage() != null && viewModel.getSelectedGym() != null) {
-            gymSectorImage.setImageBitmap(viewModel.getGymSectorImage());
-            gymSectorImage.setGym(viewModel.getSelectedGym());
-        }
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
         routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
+        levelList.setHasFixedSize(false);
+        levelList.setLayoutManager(new LinearLayoutManager(getContext()));
+        levelList.setAdapter(routeLevelListAdapter);
 
+        /*
         rangeBar.setOnRangeBarChangeListener((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
             onSearchButton();
-        });
+        });*/
 
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
-            updateGymSectorView();
+            viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
             onSearchButton();
         });
         autoCompleteTextView.setAdapter(gymAdapter);
@@ -126,7 +137,7 @@ public class RouteSearchFragment extends InjectableFragment {
             autoCompleteTextView.setText(session.getGym().getTarget().getName());
             autoCompleteTextView.setEnabled(false);
             viewModel.setSelectedGym(session.getGym().getTarget());
-            updateGymSectorView();
+            viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
             onSearchButton();
         });
         routeListAdapter.setOnSelectionChangedListener(selectedPositions -> {
@@ -150,20 +161,15 @@ public class RouteSearchFragment extends InjectableFragment {
         });
     }
 
-    protected void updateGymSectorView() {
-        Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.map_gym_1);
-        viewModel.setGimSectorImage(bmImg);
-        gymSectorImage.setImageBitmap(bmImg);
-        viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
-        gymSectorImage.setGym(viewModel.getSelectedGym());
-    }
-
     public void onSearchButton() {
-        int minLevel = rangeBar.getLeftIndex();
-        int maxLevel = rangeBar.getRightIndex();
+        //int minLevel = rangeBar.getLeftIndex();
+        //int maxLevel = rangeBar.getRightIndex();
+        int minLevel = 1;
+        int maxLevel = 6;
         String gymName = String.valueOf(autoCompleteTextView.getText());
         GymSector selectedSector = gymSectorImage.getSelectedSector();
         viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName, selectedSector != null ? selectedSector.getId() : null));
+        Log.i("afs", "onSearchButton: ");
     }
 
     @OnClick(R.id.add_button)

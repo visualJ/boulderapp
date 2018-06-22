@@ -15,6 +15,8 @@ public class Gym {
     private ToMany<Route> routes;
     @Backlink
     private ToMany<GymSector> gymSectors;
+    @Backlink
+    private ToMany<RouteLevel> routeLevels;
 
     public Gym() {
 
@@ -50,5 +52,9 @@ public class Gym {
 
     public void setGymSectors(ToMany<GymSector> gymSectors) {
         this.gymSectors = gymSectors;
+    }
+
+    public ToMany<RouteLevel> getRouteLevels() {
+        return routeLevels;
     }
 }

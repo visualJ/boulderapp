@@ -1,9 +1,12 @@
 package de.ringleinknorr.boulderapp;
 
+import android.graphics.Color;
+
 import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymSector;
 import de.ringleinknorr.boulderapp.routes.GymSectorCoord;
 import de.ringleinknorr.boulderapp.routes.Route;
+import de.ringleinknorr.boulderapp.routes.RouteLevel;
 import de.ringleinknorr.boulderapp.timeline.Session;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
@@ -22,14 +25,19 @@ public class DBMockData {
             Gym gym2 = new Gym("Kletterhalle Wiesbaden");
             Gym gym3 = new Gym("Blockwerk Mainz");
 
+            RouteLevel level1 = new RouteLevel("Brutal", Color.argb(1, 0, 0, 0), gym1);
+            RouteLevel level2 = new RouteLevel("Anspruchsvoll", Color.argb(1, 255, 0, 0), gym2);
+            RouteLevel level3 = new RouteLevel("Sportlich", Color.argb(1, 255, 255, 255), gym3);
+            RouteLevel level4 = new RouteLevel("Sportlich", Color.argb(1, 255, 255, 255), gym1);
+
 
             Route routes[] = {
-                    new Route(Route.Level.LEICHT, gym1,"routeTest", 1),
-                    new Route(Route.Level.MITTEL, gym1,"routeTest", 1),
-                    new Route(Route.Level.SCHWER, gym1,"routeTest", 2),
-                    new Route(Route.Level.MITTEL, gym2,"routeTest",1),
-                    new Route(Route.Level.SCHWER, gym2,"routeTest",1),
-                    new Route(Route.Level.MITTEL, gym3,"routeTest",1),
+                    new Route(gym1, "routeTest", 1, level1),
+                    new Route(gym1, "routeTest", 1, level1),
+                    new Route(gym1, "routeTest", 2, level4),
+                    new Route(gym2, "routeTest", 1, level2),
+                    new Route(gym2, "routeTest", 1, level2),
+                    new Route(gym3, "routeTest", 1, level3),
             };
 
             GymSector gym1Sector1 = new GymSector(gym1);

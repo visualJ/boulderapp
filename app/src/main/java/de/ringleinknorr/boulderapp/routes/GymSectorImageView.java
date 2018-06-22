@@ -31,7 +31,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
         ButterKnife.bind(this);
         p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setStyle(Paint.Style.STROKE);
-        p.setStrokeWidth(8);
+        p.setStrokeWidth(3);
         p.setColor(deselectedColor);
     }
 
@@ -93,8 +93,8 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     private Polygon buildPolygon(GymSector gymSector) {
         Polygon.Builder polygonBuilder = new Polygon.Builder();
-        float scaleFactorX = this.getMeasuredWidth() / 616f;
-        float scaleFactorY = this.getMeasuredHeight() / 320f;
+        float scaleFactorX = this.getMeasuredWidth() / 640f;
+        float scaleFactorY = this.getMeasuredHeight() / 400f;
         for (GymSectorCoord coord : gymSector.getGymSectorCoords()) {
             polygonBuilder.addVertex(new Point(coord.getX() * scaleFactorX, coord.getY() * scaleFactorY));
         }
