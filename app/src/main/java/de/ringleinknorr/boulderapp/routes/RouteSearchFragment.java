@@ -97,7 +97,6 @@ public class RouteSearchFragment extends InjectableFragment {
         routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
-        routeListAdapter.setPlaceholderText("Keine passenden Routen gefunden!");
 
         rangeBar.setOnRangeBarChangeListener((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
             onSearchButton();
