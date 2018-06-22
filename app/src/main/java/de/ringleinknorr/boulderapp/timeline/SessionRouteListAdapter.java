@@ -22,7 +22,7 @@ public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, Sessi
 
     @Override
     public void onBindView(@NonNull SessionRouteCardView view, int position, SessionRoute route) {
-        String routeLevel = route.getRoute().getTarget().getLevel().name();
+        String routeLevel = route.getRoute().getTarget().getRouteLevel().getTarget().getLevelName();
         view.getRouteLevelText().setText(routeLevel);
         ImageView routeImageView = view.getImage();
         getImageProvider().getImage(route.getRoute().getTarget().getImageId(), routeImageView);

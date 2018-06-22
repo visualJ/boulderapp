@@ -105,7 +105,7 @@ public class RouteSearchFragment extends InjectableFragment {
         routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
         levelList.setHasFixedSize(false);
-        levelList.setLayoutManager(new LinearLayoutManager(getContext()));
+        levelList.setLayoutManager(new GridLayoutManager(getContext(),4));
         levelList.setAdapter(routeLevelListAdapter);
 
         /*

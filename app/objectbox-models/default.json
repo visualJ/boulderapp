@@ -41,10 +41,6 @@
           "name": "id"
         },
         {
-          "id": "2:2565296634231265729",
-          "name": "level"
-        },
-        {
           "id": "3:1750555575987883096",
           "indexId": "4:7103347133278107651",
           "name": "gymId"
@@ -200,7 +196,9 @@
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    2565296634231265729
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

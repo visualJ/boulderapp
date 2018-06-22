@@ -17,9 +17,6 @@ public class Route {
 
     private ToOne<RouteLevel> routeLevel;
 
-    @Convert(converter = LevelConverter.class, dbType = Integer.class)
-    private Level level;
-
     public Route(Gym gym, String imageId, long gymSectorId, RouteLevel routeLevel) {
         this.routeLevel.setTarget(routeLevel);
         this.gym.setTarget(gym);
@@ -47,10 +44,6 @@ public class Route {
         this.id = id;
     }
 
-    public Level getLevel() {
-        return level;
-    }
-
     public ToOne<Gym> getGym() {
         return gym;
     }
@@ -71,32 +64,4 @@ public class Route {
         this.gymSectorId = gymSectorId;
     }
 
-    public enum Level {
-        SCHWER(5), LEICHT(1), MITTEL(3);
-
-        final int id;
-
-        Level(int id) {
-            this.id = id;
-        }
-    }
-
-    public static class LevelConverter implements PropertyConverter<Level, Integer> {
-        @Override
-        public Level convertToEntityProperty(Integer databaseValue) {
-            if (databaseValue != null) {
-                for (Level level : Level.values()) {
-                    if (level.id == databaseValue) {
-                        return level;
-                    }
-                }
-            }
-            return Level.LEICHT;
-        }
-
-        @Override
-        public Integer convertToDatabaseValue(Level entityProperty) {
-            return entityProperty == null ? null : entityProperty.id;
-        }
-    }
 }

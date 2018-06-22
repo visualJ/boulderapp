@@ -17,7 +17,7 @@ public class RouteListAdapter extends SelectableItemListAdapter<Route, RouteCard
 
     @Override
     public void onBindView(RouteCardView routeCardView, int position, Route route) {
-        String routeLevel = route.getLevel().name();
+        String routeLevel = route.getRouteLevel().getTarget().getLevelName();
         routeCardView.getRouteLevelText().setText(routeLevel);
         ImageView routeImageView = routeCardView.getImage();
         getImageProvider().getImage(route.getImageId(), routeImageView);
