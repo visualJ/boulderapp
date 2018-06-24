@@ -50,7 +50,9 @@ public class TimelineFragment extends InjectableFragment {
 
         sessionList.setHasFixedSize(true);
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item) -> navigateToSession(item));
+        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> {
+            navigateToSession(item);
+        });
         sessionList.setAdapter(adapter);
         adapter.setPlaceholderText("Tippe auf +, um eine neue Session anzulegen!");
 

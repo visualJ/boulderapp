@@ -15,7 +15,7 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
     private final int VIEW_TYPE_SECTION_ITEM = 2;
 
     private List<I> items;
-    private OnItemClickListener<I> onItemClickListener = (position, item) -> {
+    private OnItemClickListener<I, V> onItemClickListener = (position, item, view) -> {
     };
     private String placeholderText = "";
     private ImageProvider imageProvider;
@@ -24,7 +24,7 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
         this.items = items;
     }
 
-    public ItemListAdapter(List<I> items, OnItemClickListener<I> onItemClickListener) {
+    public ItemListAdapter(List<I> items, OnItemClickListener<I, V> onItemClickListener) {
         this(items);
         this.onItemClickListener = onItemClickListener;
     }
@@ -47,13 +47,13 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
                 break;
             case VIEW_TYPE_SECTION_ITEM:
                 SectionTitle<V> sectionTitle = ((ViewHolder<SectionTitle<V>>) holder).view;
-                sectionTitle.getView().setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position))));
+                sectionTitle.getView().setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position), sectionTitle.getView())));
                 sectionTitle.setTitle(provideSectionTitle(position));
                 onBindView(sectionTitle.getView(), position, items.get(position));
                 break;
             case VIEW_TYPE_ITEM:
             default:
-                holder.view.setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position))));
+                holder.view.setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position), ((ViewHolder<V>) holder).view)));
                 onBindView(((ViewHolder<V>) holder).view, position, items.get(position));
         }
     }
@@ -136,11 +136,11 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
         return items.isEmpty() && !placeholderText.isEmpty();
     }
 
-    public OnItemClickListener<I> getOnItemClickListener() {
+    public OnItemClickListener<I, V> getOnItemClickListener() {
         return onItemClickListener;
     }
 
-    public void setOnItemClickListener(OnItemClickListener<I> onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener<I, V> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -160,8 +160,8 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
         this.imageProvider = imageProvider;
     }
 
-    public interface OnItemClickListener<I> {
-        void onItemClicked(int position, I item);
+    public interface OnItemClickListener<I, V> {
+        void onItemClicked(int position, I item, V view);
     }
 
     public static class ViewHolder<V extends View> extends RecyclerView.ViewHolder {

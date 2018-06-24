@@ -17,7 +17,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
         super(items);
     }
 
-    public SelectableItemListAdapter(List<I> items, OnItemClickListener<I> onItemClickListener) {
+    public SelectableItemListAdapter(List<I> items, OnItemClickListener<I, V> onItemClickListener) {
         super(items, onItemClickListener);
     }
 

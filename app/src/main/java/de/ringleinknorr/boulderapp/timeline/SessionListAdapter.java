@@ -16,7 +16,7 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
 
     private Locale locale;
 
-    public SessionListAdapter(List<Session> sessions, Locale locale, OnItemClickListener<Session> onItemClickListener) {
+    public SessionListAdapter(List<Session> sessions, Locale locale, OnItemClickListener<Session, SessionCardView> onItemClickListener) {
         super(sessions, onItemClickListener);
         this.locale = locale;
     }
