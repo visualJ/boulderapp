@@ -56,4 +56,5 @@ public class RouteLevel {
     public ToOne<Gym> getGym() {
         return gym;
     }
+
 }

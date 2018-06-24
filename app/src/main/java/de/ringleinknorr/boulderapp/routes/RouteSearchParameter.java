@@ -1,24 +1,16 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import java.util.List;
+
 public class RouteSearchParameter {
-    private int minLevel;
-    private int maxLevel;
     private String gymName;
     private Long sectorId;
+    private List<RouteLevel> routeLevels;
 
-    public RouteSearchParameter(int minLevel, int maxLevel, String gymName, Long sectorId) {
-        this.minLevel = minLevel;
-        this.maxLevel = maxLevel;
+    public RouteSearchParameter(String gymName, Long sectorId, List<RouteLevel> routeLevels) {
         this.gymName = gymName;
         this.sectorId = sectorId;
-    }
-
-    public int getMinLevel() {
-        return minLevel;
-    }
-
-    public int getMaxLevel() {
-        return maxLevel;
+        this.routeLevels = routeLevels;
     }
 
     public String getGymName() {
@@ -27,5 +19,9 @@ public class RouteSearchParameter {
 
     public Long getSectorId() {
         return sectorId;
+    }
+
+    public List<RouteLevel> getRouteLevels() {
+        return routeLevels;
     }
 }

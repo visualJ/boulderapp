@@ -2,9 +2,11 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -105,13 +108,18 @@ public class RouteSearchFragment extends InjectableFragment {
         routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
         levelList.setHasFixedSize(false);
-        levelList.setLayoutManager(new GridLayoutManager(getContext(),4));
+        levelList.setLayoutManager(new GridLayoutManager(getContext(),8));
         levelList.setAdapter(routeLevelListAdapter);
 
-        /*
-        rangeBar.setOnRangeBarChangeListener((rangeBar, leftPinIndex, rightPinIndex, leftPinValue, rightPinValue) -> {
+        routeLevelListAdapter.setOnSelectionChangedListener(selectedPositions -> {
+
+            List<RouteLevel> routeLevels = new ArrayList<>();
+            for (int pos : selectedPositions) {
+                routeLevels.add(routeLevelListAdapter.getItems().get(pos));
+            }
+            viewModel.setSelectedRouteLevels(routeLevels);
             onSearchButton();
-        });*/
+        });
 
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
             viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
@@ -162,14 +170,10 @@ public class RouteSearchFragment extends InjectableFragment {
     }
 
     public void onSearchButton() {
-        //int minLevel = rangeBar.getLeftIndex();
-        //int maxLevel = rangeBar.getRightIndex();
-        int minLevel = 1;
-        int maxLevel = 6;
         String gymName = String.valueOf(autoCompleteTextView.getText());
         GymSector selectedSector = gymSectorImage.getSelectedSector();
-        viewModel.queryRoutes(new RouteSearchParameter(minLevel, maxLevel, gymName, selectedSector != null ? selectedSector.getId() : null));
-        Log.i("afs", "onSearchButton: ");
+
+        viewModel.queryRoutes(new RouteSearchParameter(gymName, selectedSector != null ? selectedSector.getId() : null, viewModel.getSelectedRouteLevels()));
     }
 
     @OnClick(R.id.add_button)

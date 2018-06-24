@@ -2,7 +2,9 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,17 +34,25 @@ public class RouteDB {
     }
 
     public LiveData<List<Route>> queryRoutes(RouteSearchParameter routeSearchParameter) {
-        int minLevel = routeSearchParameter.getMinLevel();
-        int maxLevel = routeSearchParameter.getMaxLevel();
         String gymName = routeSearchParameter.getGymName();
         Long gymSectorId = routeSearchParameter.getSectorId();
         MediatorLiveData<List<Route>> liveData = new MediatorLiveData<>();
         QueryBuilder<Route> builder = box.query();
-        //builder.between(Route_.level, minLevel, maxLevel);
+        List<RouteLevel> routeLevels = routeSearchParameter.getRouteLevels();
+
         if (gymSectorId != null) {
             builder.equal(Route_.gymSectorId, gymSectorId);
         }
-        builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName));
+
+        List<String> routeLevelNames = new ArrayList<>();
+        if(routeSearchParameter.getRouteLevels() != null) {
+            for (RouteLevel level : routeSearchParameter.getRouteLevels()) {
+                routeLevelNames.add(level.getLevelName());
+
+            }
+        }
+
+        builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName) && routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(builder.build());
         liveData.addSource(query, liveData::postValue);
         return liveData;

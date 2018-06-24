@@ -23,6 +23,7 @@ public class RouteSearchViewModel extends ViewModel {
     private LiveData<Session> session;
     private Bitmap gimSectorImage;
     private MutableLiveData<Gym> selectedGym;
+    private List<RouteLevel> selectedRouteLevels;
 
     @Inject
     public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
@@ -76,5 +77,13 @@ public class RouteSearchViewModel extends ViewModel {
 
     public void setSelectedGym(Gym selectedGym) {
         this.selectedGym.postValue(selectedGym);
+    }
+
+    public List<RouteLevel> getSelectedRouteLevels() {
+        return selectedRouteLevels;
+    }
+
+    public void setSelectedRouteLevels(List<RouteLevel> selectedRouteLevels) {
+        this.selectedRouteLevels = selectedRouteLevels;
     }
 }

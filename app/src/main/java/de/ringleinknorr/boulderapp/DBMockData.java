@@ -25,18 +25,30 @@ public class DBMockData {
             Gym gym2 = new Gym("Kletterhalle Wiesbaden");
             Gym gym3 = new Gym("Blockwerk Mainz");
 
-            RouteLevel level1 = new RouteLevel("Brutal", Color.argb(1, 0, 0, 0), gym1);
-            RouteLevel level2 = new RouteLevel("Anspruchsvoll", Color.argb(1, 255, 0, 0), gym2);
-            RouteLevel level3 = new RouteLevel("Sportlich", Color.argb(1, 255, 255, 255), gym3);
-            RouteLevel level4 = new RouteLevel("Sportlich", Color.argb(1, 255, 255, 255), gym1);
+            RouteLevel gym1level1 = new RouteLevel("Brutal", Color.BLACK, gym1);
+            RouteLevel gym1level2 = new RouteLevel("Sportlich", Color.BLUE, gym1);
+            RouteLevel gym1level3 = new RouteLevel("Leicht", Color.YELLOW, gym1);
+            RouteLevel gym1level4 = new RouteLevel("Schwer", Color.WHITE, gym1);
+            RouteLevel gym1level5 = new RouteLevel("Mittel", Color.GREEN, gym1);
+            RouteLevel gym1level6 = new RouteLevel("Anspruchsvoll", Color.RED, gym1);
 
+
+            RouteLevel level2 = new RouteLevel("Anspruchsvoll", Color.argb(1, 255, 0, 0), gym2);
+            RouteLevel level3 = new RouteLevel("Sportlich", Color.BLUE, gym3);
 
             Route routes[] = {
-                    new Route(gym1, "routeTest", 1, level1),
-                    new Route(gym1, "routeTest", 1, level1),
-                    new Route(gym1, "routeTest", 2, level4),
+                    new Route(gym1, "routeTest", 1, gym1level1),
+                    new Route(gym1, "routeTest", 1, gym1level1),
+                    new Route(gym1, "routeTest", 2, gym1level2),
+                    new Route(gym1, "routeTest", 4, gym1level3),
+                    new Route(gym1, "routeTest", 3, gym1level4),
+                    new Route(gym1, "routeTest", 2, gym1level5),
+                    new Route(gym1, "routeTest", 4, gym1level6),
+
+
                     new Route(gym2, "routeTest", 1, level2),
                     new Route(gym2, "routeTest", 1, level2),
+
                     new Route(gym3, "routeTest", 1, level3),
             };
 
