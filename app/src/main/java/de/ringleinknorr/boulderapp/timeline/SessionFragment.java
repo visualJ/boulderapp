@@ -39,6 +39,8 @@ public class SessionFragment extends InjectableFragment {
     @Inject
     ImageRepository imageRepository;
     @Inject
+    SessionRouteRepository sessionRouteRepository;
+    @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
 
     private SessionViewModel viewModel;
@@ -61,7 +63,10 @@ public class SessionFragment extends InjectableFragment {
 
         sessionRouteList.setHasFixedSize(true);
         sessionRouteList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadImage);
+        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadImage, (result, route) -> {
+            route.setResult(result);
+            sessionRouteRepository.putSessionRoute(route);
+        });
         sessionRouteList.setAdapter(adapter);
         adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");
 

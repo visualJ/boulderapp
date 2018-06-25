@@ -19,7 +19,7 @@ public class SessionRoute {
     private ToOne<Session> session;
 
     public SessionRoute() {
-        result = Result.UNKNOWN;
+        result = Result.FAILURE;
     }
 
     public SessionRoute(long routeId, long sessionId) {
@@ -67,7 +67,7 @@ public class SessionRoute {
     }
 
     public enum Result {
-        SUCCESS(0), FAILURE(1), UNKNOWN(2);
+        SUCCESS(0), FAILURE(1);
 
         final int id;
 
@@ -86,7 +86,7 @@ public class SessionRoute {
                     }
                 }
             }
-            return Result.UNKNOWN;
+            return Result.FAILURE;
         }
 
         @Override

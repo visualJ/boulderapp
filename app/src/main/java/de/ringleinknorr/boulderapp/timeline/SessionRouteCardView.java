@@ -18,6 +18,8 @@ public class SessionRouteCardView extends ConstraintLayout {
     TextView routeLevelText;
     @BindView(R.id.image)
     ImageView image;
+    @BindView(R.id.result)
+    RouteResultView result;
 
     public SessionRouteCardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -26,12 +28,12 @@ public class SessionRouteCardView extends ConstraintLayout {
         setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
     }
 
-    public void setRouteLevelText(String level) {
-        this.routeLevelText.setText(level);
-    }
-
     public SessionRouteCardView(Context context) {
         this(context, null);
+    }
+
+    public RouteResultView getResult() {
+        return result;
     }
 
     public TextView getRouteLevelText() {
