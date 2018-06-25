@@ -10,6 +10,8 @@ import de.ringleinknorr.boulderapp.ItemListAdapter;
 
 public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, SessionRouteCardView> {
 
+    private static final int EXTRA_BOTTOM_PADDING = 240;
+
     public SessionRouteListAdapter(List<SessionRoute> routeList, @NonNull ImageProvider imageProvider) {
         super(routeList);
         setImageProvider(imageProvider);
@@ -26,5 +28,10 @@ public class SessionRouteListAdapter extends ItemListAdapter<SessionRoute, Sessi
         view.getRouteLevelText().setText(routeLevel);
         ImageView routeImageView = view.getImage();
         getImageProvider().getImage(route.getRoute().getTarget().getImageId(), routeImageView);
+        if (position == getItemCount() - 1) {
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), EXTRA_BOTTOM_PADDING);
+        } else {
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), 0);
+        }
     }
 }
