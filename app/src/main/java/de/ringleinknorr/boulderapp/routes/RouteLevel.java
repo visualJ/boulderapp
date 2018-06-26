@@ -12,13 +12,15 @@ public class RouteLevel {
     private long id;
     private String levelName;
     private int levelColor;
+    private int levelNumber;
     @Backlink
     private ToMany<Route> routes;
     private ToOne<Gym> gym;
 
-    public RouteLevel(String levelName, int levelColor, Gym gym) {
+    public RouteLevel(String levelName, int levelColor, int levelNumber,Gym gym) {
         this.levelName = levelName;
         this.levelColor = levelColor;
+        this.levelNumber = levelNumber;
         this.gym.setTarget(gym);
     }
 
@@ -57,4 +59,7 @@ public class RouteLevel {
         return gym;
     }
 
+    public int getLevelNumber() {
+        return levelNumber;
+    }
 }

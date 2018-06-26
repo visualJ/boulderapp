@@ -1,7 +1,9 @@
 package de.ringleinknorr.boulderapp;
 
+import android.content.Context;
 import android.graphics.Color;
 
+import butterknife.BindColor;
 import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymSector;
 import de.ringleinknorr.boulderapp.routes.GymSectorCoord;
@@ -13,7 +15,9 @@ import io.objectbox.BoxStore;
 
 public class DBMockData {
 
-    public static void createMockData(BoxStore boxStore) {
+
+    public static void createMockData(Context context, BoxStore boxStore) {
+
 
         Box<Session> sessionBox = boxStore.boxFor(Session.class);
         Box<Route> routeBox = boxStore.boxFor(Route.class);
@@ -25,16 +29,16 @@ public class DBMockData {
             Gym gym2 = new Gym("Kletterhalle Wiesbaden");
             Gym gym3 = new Gym("Blockwerk Mainz");
 
-            RouteLevel gym1level1 = new RouteLevel("Brutal", Color.BLACK, gym1);
-            RouteLevel gym1level2 = new RouteLevel("Sportlich", Color.BLUE, gym1);
-            RouteLevel gym1level3 = new RouteLevel("Leicht", Color.YELLOW, gym1);
-            RouteLevel gym1level4 = new RouteLevel("Schwer", Color.WHITE, gym1);
-            RouteLevel gym1level5 = new RouteLevel("Mittel", Color.GREEN, gym1);
-            RouteLevel gym1level6 = new RouteLevel("Anspruchsvoll", Color.RED, gym1);
+            RouteLevel gym1level1 = new RouteLevel("Brutal",6, context.getResources().getColor(R.color.colorLevelBlack) , gym1);
+            RouteLevel gym1level2 = new RouteLevel("Sportlich", 3,context.getResources().getColor(R.color.colorLevelBlue), gym1);
+            RouteLevel gym1level3 = new RouteLevel("Leicht", 1,context.getResources().getColor(R.color.colorLevelYellow), gym1);
+            RouteLevel gym1level4 = new RouteLevel("Schwer",5, context.getResources().getColor(R.color.colorLevelWhite), gym1);
+            RouteLevel gym1level5 = new RouteLevel("Mittel", 2,context.getResources().getColor(R.color.colorLevelGreen), gym1);
+            RouteLevel gym1level6 = new RouteLevel("Anspruchsvoll",4,context.getResources().getColor(R.color.colorRed), gym1);
 
 
-            RouteLevel level2 = new RouteLevel("Anspruchsvoll", Color.argb(1, 255, 0, 0), gym2);
-            RouteLevel level3 = new RouteLevel("Sportlich", Color.BLUE, gym3);
+            RouteLevel level2 = new RouteLevel("Anspruchsvoll", 1,Color.argb(1, 255, 0, 0), gym2);
+            RouteLevel level3 = new RouteLevel("Sportlich", 2,Color.BLUE, gym3);
 
             Route routes[] = {
                     new Route(gym1, "routeTest", 1, gym1level1),

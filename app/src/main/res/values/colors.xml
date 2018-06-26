@@ -7,4 +7,11 @@
     <color name="colorLightGrey">#a7aeba</color>
     <color name="colorBackground">#eee</color>
     <color name="colorRed">#b71c1c</color>
+    <color name="colorLevelBlue">#FF304FFE</color>
+    <color name="colorLevelWhite">#f5f5f5</color>
+    <color name="colorLevelYellow">#ffeb3b</color>
+    <color name="colorLevelGreen">#00c853</color>
+    <color name="colorLevelBlack">#212121</color>
+    <color name="colorLevelOrange">#ffa726</color>
+    <color name="colorSuperLightGrey">#DFE0E0E0</color>
 </resources>
