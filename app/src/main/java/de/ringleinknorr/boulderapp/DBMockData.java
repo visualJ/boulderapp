@@ -3,7 +3,6 @@ package de.ringleinknorr.boulderapp;
 import android.content.Context;
 import android.graphics.Color;
 
-import butterknife.BindColor;
 import de.ringleinknorr.boulderapp.routes.Gym;
 import de.ringleinknorr.boulderapp.routes.GymSector;
 import de.ringleinknorr.boulderapp.routes.GymSectorCoord;
@@ -41,13 +40,15 @@ public class DBMockData {
             RouteLevel level3 = new RouteLevel("Sportlich", 2,Color.BLUE, gym3);
 
             Route routes[] = {
-                    new Route(gym1, "routeTest", 1, gym1level1),
-                    new Route(gym1, "routeTest", 1, gym1level1),
-                    new Route(gym1, "routeTest", 2, gym1level2),
-                    new Route(gym1, "routeTest", 4, gym1level3),
+                    new Route(gym1, "black1.jpg", 1, gym1level1),
+                    new Route(gym1, "blue1.jpg", 2, gym1level2),
+                    new Route(gym1, "yellow1.jpg", 4, gym1level3),
+                    new Route(gym1, "yellow2.jpg", 2, gym1level3),
+                    new Route(gym1, "yellow3.jpg", 1, gym1level3),
                     new Route(gym1, "routeTest", 3, gym1level4),
-                    new Route(gym1, "routeTest", 2, gym1level5),
-                    new Route(gym1, "routeTest", 4, gym1level6),
+                    new Route(gym1, "green1.jpg", 2, gym1level5),
+                    new Route(gym1, "red1.jpg", 4, gym1level6),
+                    new Route(gym1, "red2.jpg", 1, gym1level6),
 
 
                     new Route(gym2, "routeTest", 1, level2),

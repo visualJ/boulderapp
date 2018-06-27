@@ -10,6 +10,7 @@ import de.ringleinknorr.boulderapp.R;
 
 public class ImageRepository {
 
+    private static String url = "http://www.mi.hs-rm.de/~bring002/bolder/images/";
 
     @Inject
     public ImageRepository() {
@@ -17,6 +18,6 @@ public class ImageRepository {
     }
 
     public void loadImage(String imageId, ImageView view) {
-        Picasso.get().load(R.drawable.route_test).resize(100, 100).centerCrop().into(view);
+        Picasso.get().load(url + imageId).placeholder(R.drawable.ic_load).error(R.drawable.ic_empty).into(view);
     }
 }
