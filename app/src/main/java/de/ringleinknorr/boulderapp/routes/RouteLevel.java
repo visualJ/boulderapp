@@ -17,7 +17,7 @@ public class RouteLevel {
     private ToMany<Route> routes;
     private ToOne<Gym> gym;
 
-    public RouteLevel(String levelName, int levelColor, int levelNumber,Gym gym) {
+    public RouteLevel(String levelName, int levelNumber, int levelColor, Gym gym) {
         this.levelName = levelName;
         this.levelColor = levelColor;
         this.levelNumber = levelNumber;
