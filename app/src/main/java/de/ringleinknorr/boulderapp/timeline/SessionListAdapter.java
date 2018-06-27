@@ -32,6 +32,7 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
         sessionCardView.monthText.setText(String.valueOf(month.toUpperCase()));
         sessionCardView.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
         sessionCardView.setRoutes(session.getRoutes().size());
+        sessionCardView.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
     }
 
     @Override

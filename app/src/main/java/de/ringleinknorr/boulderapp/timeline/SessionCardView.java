@@ -28,6 +28,8 @@ public class SessionCardView extends ConstraintLayout {
     TextView gymText;
     @BindView(R.id.routesText)
     TextView routesText;
+    @BindView(R.id.successful_routes)
+    TextView successfulRoutes;
     @BindView(R.id.workoutsText)
     TextView workoutsText;
     @BindView(R.id.card_view)
@@ -68,6 +70,10 @@ public class SessionCardView extends ConstraintLayout {
 
     public void setRoutes(int routes) {
         routesText.setText(String.valueOf(routes));
+    }
+
+    public void setSuccessfulRoutes(int routes) {
+        successfulRoutes.setText(String.valueOf(routes));
     }
 
     public void setWorkouts(int workouts) {

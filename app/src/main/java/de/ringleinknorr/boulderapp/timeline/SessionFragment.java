@@ -41,6 +41,8 @@ public class SessionFragment extends InjectableFragment {
     @Inject
     SessionRouteRepository sessionRouteRepository;
     @Inject
+    SessionRepository sessionRepository;
+    @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
 
     private SessionViewModel viewModel;
@@ -58,6 +60,7 @@ public class SessionFragment extends InjectableFragment {
             sessionCard.setDate(session.getDate(), Locale.getDefault());
             sessionCard.setGym(session.getGym().getTarget().getName());
             sessionCard.setRoutes(session.getRoutes().size());
+            sessionCard.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
             adapter.setItems(session.getRoutes());
         });
 
@@ -66,6 +69,7 @@ public class SessionFragment extends InjectableFragment {
         adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadImage, (result, route) -> {
             route.setResult(result);
             sessionRouteRepository.putSessionRoute(route);
+            sessionRepository.putSession(route.getSession().getTarget());
         });
         sessionRouteList.setAdapter(adapter);
         adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");

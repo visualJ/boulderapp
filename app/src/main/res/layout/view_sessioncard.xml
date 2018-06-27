@@ -15,10 +15,10 @@
             android:id="@+id/divider"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="70dp"
             android:layout_marginStart="70dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="?android:attr/listDivider"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,13 +73,12 @@
             android:id="@+id/routesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:minWidth="20dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/routeIcon"
-            app:layout_constraintStart_toEndOf="@+id/routeIcon"
-            app:layout_constraintTop_toTopOf="@+id/routeIcon"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
             tools:text="@sample/data.json/session/routes" />
 
         <TextView
@@ -90,6 +89,7 @@
             android:layout_marginLeft="8dp"
             android:text="0"
             android:textSize="12sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/workoutIcon"
             app:layout_constraintStart_toEndOf="@+id/workoutIcon"
             app:layout_constraintTop_toTopOf="@+id/workoutIcon"
@@ -102,6 +102,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/routesText"
             app:layout_constraintTop_toBottomOf="@+id/gym_text"
             app:srcCompat="@drawable/ic_workout" />
@@ -110,11 +111,35 @@
             android:id="@+id/routeIcon"
             android:layout_width="15dp"
             android:layout_height="20dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/gym_text"
             app:srcCompat="@drawable/ic_route" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:text="/"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/successful_routes"
+            app:layout_constraintStart_toEndOf="@+id/successful_routes"
+            app:layout_constraintTop_toTopOf="@+id/successful_routes" />
+
+        <TextView
+            android:id="@+id/successful_routes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/routeIcon"
+            app:layout_constraintStart_toEndOf="@+id/routeIcon"
+            app:layout_constraintTop_toTopOf="@+id/routeIcon"
+            tools:text="12" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -1,6 +1,8 @@
 package de.ringleinknorr.boulderapp.timeline;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.ringleinknorr.boulderapp.routes.Gym;
 import io.objectbox.annotation.Backlink;
@@ -52,6 +54,16 @@ public class Session {
     }
 
     public ToMany<SessionRoute> getRoutes() {
+        return routes;
+    }
+
+    public List<SessionRoute> getSuccessfulSessionRoutes() {
+        List<SessionRoute> routes = new ArrayList<>();
+        for (SessionRoute route : getRoutes()) {
+            if (route.getResult() == SessionRoute.Result.SUCCESS) {
+                routes.add(route);
+            }
+        }
         return routes;
     }
 }
