@@ -73,6 +73,11 @@ public class SessionFragment extends InjectableFragment {
         });
         sessionRouteList.setAdapter(adapter);
         adapter.setPlaceholderText("In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!");
+        SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
+            viewModel.getSession().getValue().getRoutes().remove(adapter.getItems().get(position));
+            sessionRepository.putSession(viewModel.getSession().getValue());
+        });
+        swypeItemTouchHelper.attachToRecyclerView(sessionRouteList);
 
         setTitle("Session");
 
