@@ -1,9 +1,11 @@
 package de.ringleinknorr.boulderapp.routes;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.animation.AccelerateInterpolator;
@@ -15,6 +17,7 @@ import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.ringleinknorr.boulderapp.ColorUtil;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.SelectableItemListAdapter;
 
@@ -31,6 +34,8 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     ImageView image;
     @BindView(R.id.selected_icon)
     ImageView selectedIcon;
+    @BindView(R.id.card)
+    CardView card;
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
 
@@ -93,6 +98,11 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         } else {
             selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
         }
+    }
+
+    public void setColor(int color) {
+        routeLevelText.setBackground(new ColorDrawable(color));
+        routeLevelText.setTextColor(ColorUtil.getReadableTextColor(color));
     }
 
     private void animateDeselected() {

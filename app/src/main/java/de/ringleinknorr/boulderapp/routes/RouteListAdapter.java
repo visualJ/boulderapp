@@ -21,6 +21,7 @@ public class RouteListAdapter extends SelectableItemListAdapter<Route, RouteCard
         routeCardView.getRouteLevelText().setText(routeLevel);
         ImageView routeImageView = routeCardView.getImage();
         getImageProvider().getImage(route.getImageId(), routeImageView);
+        routeCardView.setColor(route.getRouteLevel().getTarget().getLevelColor());
         super.onBindView(routeCardView, position, route);
     }
 
