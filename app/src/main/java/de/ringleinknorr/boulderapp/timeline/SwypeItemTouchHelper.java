@@ -28,6 +28,7 @@ public class SwypeItemTouchHelper extends ItemTouchHelper {
 
         @Override
         public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            viewHolder.itemView.setAlpha(Math.max(1f + (dX / 300), 0.2f));
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     }

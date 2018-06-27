@@ -28,6 +28,7 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
         String day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, locale);
 
+        sessionCardView.setAlpha(1f);
         sessionCardView.dayText.setText(day);
         sessionCardView.monthText.setText(String.valueOf(month.toUpperCase()));
         sessionCardView.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
