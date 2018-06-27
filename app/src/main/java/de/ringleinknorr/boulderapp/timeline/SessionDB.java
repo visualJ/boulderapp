@@ -39,4 +39,8 @@ public class SessionDB {
     public void removeAllSessions() {
         box.removeAll();
     }
+
+    public void removeSession(Session session) {
+        box.remove(session);
+    }
 }

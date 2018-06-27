@@ -31,4 +31,7 @@ public class SessionRepository {
         db.removeAllSessions();
     }
 
+    public void removeSession(Session session) {
+        db.removeSession(session);
+    }
 }

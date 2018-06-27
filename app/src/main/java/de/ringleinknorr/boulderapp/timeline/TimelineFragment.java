@@ -31,6 +31,9 @@ public class TimelineFragment extends InjectableFragment {
     @Inject
     ViewModelFactory<TimelineViewModel> viewModelFactory;
 
+    @Inject
+    SessionRepository sessionRepository;
+
     private TimelineViewModel viewModel;
     private SessionListAdapter adapter;
 
@@ -55,6 +58,10 @@ public class TimelineFragment extends InjectableFragment {
         });
         sessionList.setAdapter(adapter);
         adapter.setPlaceholderText("Tippe auf +, um eine neue Session anzulegen!");
+        SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
+            sessionRepository.removeSession(adapter.getItems().get(position));
+        });
+        swypeItemTouchHelper.attachToRecyclerView(sessionList);
 
         setTitle("Timeline");
 
