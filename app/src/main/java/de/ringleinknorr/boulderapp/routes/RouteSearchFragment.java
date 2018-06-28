@@ -23,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -90,7 +92,11 @@ public class RouteSearchFragment extends InjectableFragment {
             viewModel.setGimSectorImage(bmImg);
             gymSectorImage.setImageBitmap(bmImg);
             gymSectorImage.setGym(gym);
-            routeLevelListAdapter.setItems(gym.getRouteLevels());
+
+            List<RouteLevel> routeLevels = gym.getRouteLevels();
+            Collections.sort(routeLevels, (routeLevel1, routeLevel2) -> routeLevel1.getLevelNumber() - routeLevel2.getLevelNumber());
+
+            routeLevelListAdapter.setItems(routeLevels);
         });
 
         Bundle arguments = getArguments();
