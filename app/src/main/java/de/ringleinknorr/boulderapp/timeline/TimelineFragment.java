@@ -3,6 +3,7 @@ package de.ringleinknorr.boulderapp.timeline;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,6 +35,9 @@ public class TimelineFragment extends InjectableFragment {
     @Inject
     SessionRepository sessionRepository;
 
+    @Inject
+    SessionRouteRepository sessionRouteRepository;
+
     private TimelineViewModel viewModel;
     private SessionListAdapter adapter;
 
@@ -53,15 +57,20 @@ public class TimelineFragment extends InjectableFragment {
 
         sessionList.setHasFixedSize(true);
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> {
-            navigateToSession(item);
-        });
+        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> navigateToSession(item));
         sessionList.setAdapter(adapter);
-        adapter.setPlaceholderText("Tippe auf +, um eine neue Session anzulegen!");
-        SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> sessionRepository.removeSession(adapter.getItems().get(position)));
+        adapter.setPlaceholderText(getString(R.string.session_list_placeholder));
+        SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
+            Session session = adapter.getItems().get(position);
+            sessionRepository.removeSession(session);
+            Snackbar.make(Objects.requireNonNull(getView()), R.string.session_removed_snackbar, Snackbar.LENGTH_LONG).setAction(R.string.session_removed_snackbar_undo, view1 -> {
+                sessionRouteRepository.putSessionRoutes(session.getRoutes());
+                sessionRepository.putSession(session);
+            }).show();
+        });
         swypeItemTouchHelper.attachToRecyclerView(sessionList);
 
-        setTitle("Timeline");
+        setTitle(getString(R.string.timeline_title));
 
         return view;
     }

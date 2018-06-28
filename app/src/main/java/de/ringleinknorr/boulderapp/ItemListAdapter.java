@@ -49,11 +49,13 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
                 SectionTitle<V> sectionTitle = ((ViewHolder<SectionTitle<V>>) holder).view;
                 sectionTitle.getView().setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position), sectionTitle.getView())));
                 sectionTitle.setTitle(provideSectionTitle(position));
+                sectionTitle.setAlpha(1f);
                 onBindView(sectionTitle.getView(), position, items.get(position));
                 break;
             case VIEW_TYPE_ITEM:
             default:
                 holder.view.setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position), ((ViewHolder<V>) holder).view)));
+                holder.view.setAlpha(1f);
                 onBindView(((ViewHolder<V>) holder).view, position, items.get(position));
         }
     }

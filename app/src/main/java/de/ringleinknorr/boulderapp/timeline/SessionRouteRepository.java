@@ -2,6 +2,8 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import javax.inject.Inject;
 
+import io.objectbox.relation.ToMany;
+
 public class SessionRouteRepository {
 
     private SessionRouteDB sessionRouteDB;
@@ -13,5 +15,9 @@ public class SessionRouteRepository {
 
     public long putSessionRoute(SessionRoute sessionRoute) {
         return sessionRouteDB.putSessionRoute(sessionRoute);
+    }
+
+    public void putSessionRoutes(ToMany<SessionRoute> routes) {
+        sessionRouteDB.putSessionRoutes(routes);
     }
 }

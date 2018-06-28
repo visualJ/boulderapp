@@ -7,5 +7,13 @@
     <string name="navigation_drawer_close">close drawer</string>
     <string name="navigation_drawer_open">open drawer</string>
     <string name="gym_must_be_selected_first">Bitte eine vorhandene Halle aus Vorschlagsliste auswählen</string>
+    <string name="session_list_placeholder">Tippe auf +, um eine neue Session anzulegen!</string>
+    <string name="session_removed_snackbar">Session gelöscht.</string>
+    <string name="session_removed_snackbar_undo">Wiederherstellen</string>
+    <string name="timeline_title">Timeline</string>
+    <string name="session_route_list_placeholder">In dieser Session ist noch nichts los. Füge mit dem + Routen hinzu!</string>
+    <string name="session_title">Session</string>
+    <string name="remove_route_snackbar">Route entfernt.</string>
+    <string name="remove_route_snackbar_undo">Wiederherstellen</string>
 
 </resources>

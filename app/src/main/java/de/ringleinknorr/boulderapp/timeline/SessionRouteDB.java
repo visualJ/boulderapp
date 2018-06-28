@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
+import io.objectbox.relation.ToMany;
 
 public class SessionRouteDB {
 
@@ -18,4 +19,7 @@ public class SessionRouteDB {
         return box.put(sessionRoute);
     }
 
+    public void putSessionRoutes(ToMany<SessionRoute> routes) {
+        box.put(routes);
+    }
 }
