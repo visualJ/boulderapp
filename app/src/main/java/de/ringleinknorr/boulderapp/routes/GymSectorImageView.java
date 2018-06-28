@@ -46,6 +46,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
         if (gym != null) {
             for (GymSector sector : gym.getGymSectors()) {
+                p.setColor(deselectedColor);
                 drawSector(canvas, sector);
             }
             if (selectedSector != null) {
