@@ -2,16 +2,13 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +21,6 @@ import android.widget.AutoCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,7 +85,7 @@ public class RouteSearchFragment extends InjectableFragment {
 
         viewModel.getSelectedGym().observe(this, gym -> {
             Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.map_gym_1);
-            viewModel.setGimSectorImage(bmImg);
+            viewModel.setGymSectorImage(bmImg);
             gymSectorImage.setImageBitmap(bmImg);
             gymSectorImage.setGym(gym);
 
@@ -106,8 +102,14 @@ public class RouteSearchFragment extends InjectableFragment {
             routeListAdapter.setSelectable(false);
         }
 
+
         gymSectorImage.setAdjustViewBounds(true);
-        gymSectorImage.setOnSectorSelectedListener(sector -> onSearchButton());
+        gymSectorImage.setOnSectorSelectedListener(sector -> {viewModel.setSelectedGymSector(sector); onSearchButton();
+          });
+
+        if(viewModel.getSelectedGymSector() != null){
+            gymSectorImage.setSelectedSector(viewModel.getSelectedGymSector());
+        }
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
         routeList.setHasFixedSize(false);
@@ -118,7 +120,6 @@ public class RouteSearchFragment extends InjectableFragment {
         levelList.setAdapter(routeLevelListAdapter);
 
         routeLevelListAdapter.setOnSelectionChangedListener(selectedPositions -> {
-
             List<RouteLevel> routeLevels = new ArrayList<>();
             for (int pos : selectedPositions) {
                 routeLevels.add(routeLevelListAdapter.getItems().get(pos));
@@ -177,7 +178,7 @@ public class RouteSearchFragment extends InjectableFragment {
 
     public void onSearchButton() {
         String gymName = String.valueOf(autoCompleteTextView.getText());
-        GymSector selectedSector = gymSectorImage.getSelectedSector();
+        GymSector selectedSector = viewModel.getSelectedGymSector();
 
         viewModel.queryRoutes(new RouteSearchParameter(gymName, selectedSector != null ? selectedSector.getId() : null, viewModel.getSelectedRouteLevels()));
     }

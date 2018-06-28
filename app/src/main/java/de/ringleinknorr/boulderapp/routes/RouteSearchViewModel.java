@@ -21,9 +21,10 @@ public class RouteSearchViewModel extends ViewModel {
     private SessionRepository sessionRepository;
     private long sessionId;
     private LiveData<Session> session;
-    private Bitmap gimSectorImage;
+    private Bitmap gymSectorImage;
     private MutableLiveData<Gym> selectedGym;
     private List<RouteLevel> selectedRouteLevels;
+    private GymSector selectedGymSector;
 
     @Inject
     public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
@@ -64,11 +65,11 @@ public class RouteSearchViewModel extends ViewModel {
     }
 
     public Bitmap getGymSectorImage() {
-        return gimSectorImage;
+        return gymSectorImage;
     }
 
-    public void setGimSectorImage(Bitmap gimSectorImage) {
-        this.gimSectorImage = gimSectorImage;
+    public void setGymSectorImage(Bitmap gymSectorImage) {
+        this.gymSectorImage = gymSectorImage;
     }
 
     public LiveData<Gym> getSelectedGym() {
@@ -85,5 +86,13 @@ public class RouteSearchViewModel extends ViewModel {
 
     public void setSelectedRouteLevels(List<RouteLevel> selectedRouteLevels) {
         this.selectedRouteLevels = selectedRouteLevels;
+    }
+
+    public GymSector getSelectedGymSector() {
+        return selectedGymSector;
+    }
+
+    public void setSelectedGymSector(GymSector selectedGymSector) {
+        this.selectedGymSector = selectedGymSector;
     }
 }

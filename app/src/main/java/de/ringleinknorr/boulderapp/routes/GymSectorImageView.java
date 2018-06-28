@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.snatik.polygon.Point;
@@ -85,7 +86,6 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
        }
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -127,8 +127,11 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     }
 
     public void setGym(Gym gym) {
+        Gym lastGym = this.gym;
         this.gym = gym;
-        this.selectedSector = null;
+        if(lastGym != null && !gym.equals(lastGym)){
+            selectedSector = null;
+        }
     }
 
     public GymSector getSelectedSector() {
