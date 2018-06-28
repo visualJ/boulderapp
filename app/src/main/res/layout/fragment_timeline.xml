@@ -25,4 +25,10 @@
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_add" />
 
+    <de.ringleinknorr.boulderapp.timeline.SessionCardView
+        android:id="@+id/transition_session_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
 </android.support.design.widget.CoordinatorLayout>

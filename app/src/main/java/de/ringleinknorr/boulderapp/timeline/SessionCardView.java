@@ -32,7 +32,37 @@ public class SessionCardView extends ConstraintLayout {
     TextView successfulRoutes;
     @BindView(R.id.workoutsText)
     TextView workoutsText;
+
+    public TextView getDayText() {
+        return dayText;
+    }
+
+    public TextView getMonthText() {
+        return monthText;
+    }
+
+    public TextView getGymText() {
+        return gymText;
+    }
+
+    public TextView getRoutesText() {
+        return routesText;
+    }
+
+    public TextView getSuccessfulRoutes() {
+        return successfulRoutes;
+    }
+
+    public TextView getWorkoutsText() {
+        return workoutsText;
+    }
+
+    public CardView getCardView() {
+        return cardView;
+    }
+
     @BindView(R.id.card_view)
+
     CardView cardView;
 
     public SessionCardView(Context context, @Nullable AttributeSet attrs) {
@@ -82,5 +112,13 @@ public class SessionCardView extends ConstraintLayout {
 
     public SessionCardView(Context context) {
         this(context, null);
+    }
+
+    public void setData(SessionCardView other) {
+        dayText.setText(other.dayText.getText());
+        monthText.setText(other.monthText.getText());
+        routesText.setText(other.routesText.getText());
+        successfulRoutes.setText(other.successfulRoutes.getText());
+        gymText.setText(other.gymText.getText());
     }
 }
