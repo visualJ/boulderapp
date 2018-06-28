@@ -3,6 +3,9 @@ package de.ringleinknorr.boulderapp.routes;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -23,6 +26,8 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     @BindColor(R.color.colorPrimary)
     int selectedColor;
+    @BindColor(R.color.colorLightGreyTransparent)
+    int selectedColorTransparent;
     @BindColor(R.color.colorLightGrey)
     int deselectedColor;
 
@@ -31,7 +36,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
         ButterKnife.bind(this);
         p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setStyle(Paint.Style.STROKE);
-        p.setStrokeWidth(3);
+        p.setStrokeWidth(4);
         p.setColor(deselectedColor);
     }
 
@@ -54,16 +59,31 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     public void drawSector(Canvas canvas, GymSector sector) {
         List<GymSectorCoord> coords = sector.getGymSectorCoords();
-        GymSectorCoord tempCoord = coords.get(0);
         float scaleFactorX = this.getMeasuredWidth() / 640f;
         float scaleFactorY = this.getMeasuredHeight() / 400f;
 
-        for (GymSectorCoord coord : coords.subList(1, coords.size())) {
-            canvas.drawLine(tempCoord.getX() * scaleFactorX, tempCoord.getY() * scaleFactorY, coord.getX() * scaleFactorX, coord.getY() * scaleFactorY, p);
-            tempCoord = coord;
+        Path sectorPath = new Path();
+
+
+        for (GymSectorCoord coord : coords.subList(0, coords.size())) {
+               if (coords.indexOf(coord) == 0){
+                sectorPath.moveTo(coord.getX()*scaleFactorX, coord.getY() * scaleFactorY);
+            }else {
+                sectorPath.lineTo(coord.getX()*scaleFactorX, coord.getY() * scaleFactorY);
+            }
         }
-        canvas.drawLine(tempCoord.getX() * scaleFactorX, tempCoord.getY() * scaleFactorY, coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY, p);
+       sectorPath.lineTo( coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY);
+       canvas.drawPath(sectorPath,p);
+
+       if (sector.equals(selectedSector)){
+           p.setStyle(Paint.Style.FILL);
+           p.setColor(selectedColorTransparent);
+           canvas.drawPath(sectorPath,p);
+           p.setStyle(Paint.Style.STROKE);
+
+       }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
