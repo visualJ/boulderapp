@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +87,9 @@ public class RouteSearchFragment extends InjectableFragment {
             viewModel.setGymSectorImage(bmImg);
             gymSectorImage.setImageBitmap(bmImg);
             gymSectorImage.setGym(gym);
+            if (viewModel.getSelectedGymSector() != null) {
+                gymSectorImage.setSelectedSector(viewModel.getSelectedGymSector());
+            }
 
             List<RouteLevel> routeLevels = gym.getRouteLevels();
             Collections.sort(routeLevels, (routeLevel1, routeLevel2) -> routeLevel1.getLevelNumber() - routeLevel2.getLevelNumber());
@@ -106,10 +108,6 @@ public class RouteSearchFragment extends InjectableFragment {
         gymSectorImage.setAdjustViewBounds(true);
         gymSectorImage.setOnSectorSelectedListener(sector -> {viewModel.setSelectedGymSector(sector); onSearchButton();
           });
-
-        if(viewModel.getSelectedGymSector() != null){
-            gymSectorImage.setSelectedSector(viewModel.getSelectedGymSector());
-        }
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
         routeList.setHasFixedSize(false);
@@ -152,7 +150,6 @@ public class RouteSearchFragment extends InjectableFragment {
             autoCompleteTextView.setText(session.getGym().getTarget().getName());
             autoCompleteTextView.setEnabled(false);
             viewModel.setSelectedGym(session.getGym().getTarget());
-            viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
             onSearchButton();
         });
         routeListAdapter.setOnSelectionChangedListener(selectedPositions -> {

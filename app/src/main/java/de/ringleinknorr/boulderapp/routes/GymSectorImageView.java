@@ -4,10 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.snatik.polygon.Point;
@@ -50,12 +47,6 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
                 p.setColor(deselectedColor);
                 drawSector(canvas, sector);
             }
-            if (selectedSector != null) {
-                // draw selected sector over other sectors
-                p.setColor(selectedColor);
-                drawSector(canvas, selectedSector);
-                p.setColor(deselectedColor);
-            }
         }
     }
 
@@ -77,12 +68,11 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
        sectorPath.lineTo( coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY);
        canvas.drawPath(sectorPath,p);
 
-       if (sector.equals(selectedSector)){
+        if (selectedSector != null && sector.getId() == selectedSector.getId()) {
            p.setStyle(Paint.Style.FILL);
            p.setColor(selectedColorTransparent);
            canvas.drawPath(sectorPath,p);
            p.setStyle(Paint.Style.STROKE);
-
        }
     }
 
@@ -129,7 +119,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     public void setGym(Gym gym) {
         Gym lastGym = this.gym;
         this.gym = gym;
-        if(lastGym != null && !gym.equals(lastGym)){
+        if (lastGym != null && gym.getId() == (lastGym.getId())) {
             selectedSector = null;
         }
     }
