@@ -1,18 +1,13 @@
 package de.ringleinknorr.boulderapp.routes;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import butterknife.BindColor;
-import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,13 +39,17 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
     @OnClick(R.id.level_text)
     public void onLevelSelection() {
         isSelected = !isSelected;
+        updateUI();
+        onSelectedListener.onSelected(isSelected);
+    }
+
+    private void updateUI() {
         if(isSelected){
             roundedBorder.setBackgroundResource(R.drawable.background_layout_dark);
         }else {
             roundedBorder.setBackgroundResource(R.drawable.background_layout_light);
         }
         invalidate();
-        onSelectedListener.onSelected(isSelected);
     }
 
     public RouteLevelView(Context context) {
@@ -68,7 +67,8 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
 
     @Override
     public void setItemSelected(boolean selected) {
-
+        this.isSelected = selected;
+        updateUI();
     }
 
 

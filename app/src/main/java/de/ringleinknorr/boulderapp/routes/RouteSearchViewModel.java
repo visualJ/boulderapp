@@ -23,7 +23,7 @@ public class RouteSearchViewModel extends ViewModel {
     private LiveData<Session> session;
     private Bitmap gymSectorImage;
     private MutableLiveData<Gym> selectedGym;
-    private List<RouteLevel> selectedRouteLevels;
+    private List<Integer> selectedRouteLevelPositions;
     private GymSector selectedGymSector;
 
     @Inject
@@ -80,19 +80,19 @@ public class RouteSearchViewModel extends ViewModel {
         this.selectedGym.postValue(selectedGym);
     }
 
-    public List<RouteLevel> getSelectedRouteLevels() {
-        return selectedRouteLevels;
-    }
-
-    public void setSelectedRouteLevels(List<RouteLevel> selectedRouteLevels) {
-        this.selectedRouteLevels = selectedRouteLevels;
-    }
-
     public GymSector getSelectedGymSector() {
         return selectedGymSector;
     }
 
     public void setSelectedGymSector(GymSector selectedGymSector) {
         this.selectedGymSector = selectedGymSector;
+    }
+
+    public List<Integer> getSelectedRouteLevelPositions() {
+        return selectedRouteLevelPositions;
+    }
+
+    public void setSelectedRouteLevelPositions(List<Integer> selectedRouteLevelPositions) {
+        this.selectedRouteLevelPositions = selectedRouteLevelPositions;
     }
 }

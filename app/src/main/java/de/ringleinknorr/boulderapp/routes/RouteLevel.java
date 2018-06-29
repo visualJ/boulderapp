@@ -27,6 +27,19 @@ public class RouteLevel {
     public RouteLevel() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RouteLevel that = (RouteLevel) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) id;
+    }
+
     public String getLevelName() {
         return levelName;
     }

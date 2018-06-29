@@ -2,7 +2,6 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +44,16 @@ public class RouteDB {
         }
 
         List<String> routeLevelNames = new ArrayList<>();
-        if(routeSearchParameter.getRouteLevels() != null) {
+        if (routeSearchParameter.getRouteLevels() != null && !routeSearchParameter.getRouteLevels().isEmpty()) {
             for (RouteLevel level : routeSearchParameter.getRouteLevels()) {
                 routeLevelNames.add(level.getLevelName());
 
             }
+            builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName) && routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
+        } else {
+            builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName));
         }
 
-        builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName) && routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(builder.build());
         liveData.addSource(query, liveData::postValue);
         return liveData;

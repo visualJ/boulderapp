@@ -37,6 +37,14 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
         }
     }
 
+    public List<I> getSelectedItems() {
+        List<I> selectedItems = new ArrayList<>();
+        for (int pos : selectedPositions) {
+            selectedItems.add(this.getItems().get(pos));
+        }
+        return selectedItems;
+    }
+
     public List<Integer> getSelectedPositions() {
         return selectedPositions;
     }
@@ -52,7 +60,10 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
 
     @Override
     public void setItems(List<I> items) {
-        selectedPositions.clear();
+        if (items.equals(getItems())) {
+            selectedPositions.clear();
+        }
+
         onSelectionChangedListener.onSelectionChanged(selectedPositions);
         super.setItems(items);
     }

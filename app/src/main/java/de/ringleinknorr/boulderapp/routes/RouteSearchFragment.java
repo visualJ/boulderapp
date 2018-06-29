@@ -95,6 +95,9 @@ public class RouteSearchFragment extends InjectableFragment {
             Collections.sort(routeLevels, (routeLevel1, routeLevel2) -> routeLevel1.getLevelNumber() - routeLevel2.getLevelNumber());
 
             routeLevelListAdapter.setItems(routeLevels);
+            if (viewModel.getSelectedRouteLevelPositions() != null) {
+                routeLevelListAdapter.setSelectedPositions(viewModel.getSelectedRouteLevelPositions());
+            }
         });
 
         Bundle arguments = getArguments();
@@ -118,11 +121,7 @@ public class RouteSearchFragment extends InjectableFragment {
         levelList.setAdapter(routeLevelListAdapter);
 
         routeLevelListAdapter.setOnSelectionChangedListener(selectedPositions -> {
-            List<RouteLevel> routeLevels = new ArrayList<>();
-            for (int pos : selectedPositions) {
-                routeLevels.add(routeLevelListAdapter.getItems().get(pos));
-            }
-            viewModel.setSelectedRouteLevels(routeLevels);
+            viewModel.setSelectedRouteLevelPositions(selectedPositions);
             onSearchButton();
         });
 
@@ -176,8 +175,7 @@ public class RouteSearchFragment extends InjectableFragment {
     public void onSearchButton() {
         String gymName = String.valueOf(autoCompleteTextView.getText());
         GymSector selectedSector = viewModel.getSelectedGymSector();
-
-        viewModel.queryRoutes(new RouteSearchParameter(gymName, selectedSector != null ? selectedSector.getId() : null, viewModel.getSelectedRouteLevels()));
+        viewModel.queryRoutes(new RouteSearchParameter(gymName, selectedSector != null ? selectedSector.getId() : null, routeLevelListAdapter.getSelectedItems()));
     }
 
     @OnClick(R.id.add_button)
