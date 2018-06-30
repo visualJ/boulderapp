@@ -109,20 +109,24 @@ public class RouteSearchFragment extends InjectableFragment {
 
 
         gymSectorImage.setAdjustViewBounds(true);
-        gymSectorImage.setOnSectorSelectedListener(sector -> {viewModel.setSelectedGymSector(sector); onSearchButton();
-          });
+        gymSectorImage.setOnSectorSelectedListener(sector -> {
+            viewModel.setSelectedGymSector(sector);
+            onSearchButton();
+        });
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
         routeList.setHasFixedSize(false);
         routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
         levelList.setHasFixedSize(false);
-        levelList.setLayoutManager(new GridLayoutManager(getContext(),8));
+        levelList.setLayoutManager(new GridLayoutManager(getContext(), 8));
         levelList.setAdapter(routeLevelListAdapter);
 
-        routeLevelListAdapter.setOnSelectionChangedListener(selectedPositions -> {
-            viewModel.setSelectedRouteLevelPositions(selectedPositions);
-            onSearchButton();
+        routeLevelListAdapter.setOnSelectionChangedListener((selectedPositions, itemsChanged) -> {
+            if (!itemsChanged) {
+                viewModel.setSelectedRouteLevelPositions(selectedPositions);
+                onSearchButton();
+            }
         });
 
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
@@ -151,7 +155,7 @@ public class RouteSearchFragment extends InjectableFragment {
             viewModel.setSelectedGym(session.getGym().getTarget());
             onSearchButton();
         });
-        routeListAdapter.setOnSelectionChangedListener(selectedPositions -> {
+        routeListAdapter.setOnSelectionChangedListener((selectedPositions, itemsChanged) -> {
             if (selectedPositions.size() > 0) {
                 if (addButton.getVisibility() != View.VISIBLE) {
                     addButton.setAlpha(0.5f);

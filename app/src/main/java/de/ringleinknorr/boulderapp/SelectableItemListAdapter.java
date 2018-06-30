@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class SelectableItemListAdapter<I, V extends View & SelectableItemListAdapter.Selectable> extends ItemListAdapter<I, V> {
 
     private List<Integer> selectedPositions = new ArrayList<>();
-    private OnSelectionChangedListener onSelectionChangedListener = selectedPositions1 -> {
+    private OnSelectionChangedListener onSelectionChangedListener = (selectedPositions1, itemsChanged) -> {
     };
     private boolean selectable = true;
 
@@ -31,7 +31,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
                 } else {
                     selectedPositions.remove((Integer) position);
                 }
-                onSelectionChangedListener.onSelectionChanged(selectedPositions);
+                onSelectionChangedListener.onSelectionChanged(selectedPositions, false);
             });
             v.setItemSelected(selectedPositions.contains(position));
         }
@@ -64,7 +64,7 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
             selectedPositions.clear();
         }
 
-        onSelectionChangedListener.onSelectionChanged(selectedPositions);
+        onSelectionChangedListener.onSelectionChanged(selectedPositions, true);
         super.setItems(items);
     }
 
@@ -94,6 +94,6 @@ public abstract class SelectableItemListAdapter<I, V extends View & SelectableIt
     }
 
     public interface OnSelectionChangedListener {
-        void onSelectionChanged(List<Integer> selectedPositions);
+        void onSelectionChanged(List<Integer> selectedPositions, boolean itemsChanged);
     }
 }
