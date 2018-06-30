@@ -15,5 +15,11 @@
     <string name="session_title">Session</string>
     <string name="remove_route_snackbar">Route entfernt.</string>
     <string name="remove_route_snackbar_undo">Wiederherstellen</string>
+    <string name="route_search_title_add">Routen hinzufügen</string>
+    <string name="route_search_title">Routen Suche</string>
+    <string name="new_session_title">Neue Session</string>
+    <string name="new_session_add_button">Hinzufügen</string>
+    <string name="new_session_gym_hint">Halle</string>
+    <string name="route_search_gym_hint">Halle</string>
 
 </resources>

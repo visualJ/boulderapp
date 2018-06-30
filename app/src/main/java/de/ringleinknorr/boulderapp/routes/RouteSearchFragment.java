@@ -141,7 +141,7 @@ public class RouteSearchFragment extends InjectableFragment {
             }
         });
 
-        setTitle(forResult ? "Routen hinzufügen" : "Routen Suche");
+        setTitle(forResult ? getString(R.string.route_search_title_add) : getString(R.string.route_search_title));
 
         return view;
     }
