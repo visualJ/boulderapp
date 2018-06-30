@@ -1,6 +1,7 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.ringleinknorr.boulderapp.ColorUtil;
 import de.ringleinknorr.boulderapp.R;
 
 public class SessionRouteCardView extends ConstraintLayout {
@@ -30,6 +32,11 @@ public class SessionRouteCardView extends ConstraintLayout {
 
     public SessionRouteCardView(Context context) {
         this(context, null);
+    }
+
+    public void setColor(int color) {
+        routeLevelText.setBackground(new ColorDrawable(color));
+        routeLevelText.setTextColor(ColorUtil.getReadableTextColor(color));
     }
 
     public RouteResultView getResult() {

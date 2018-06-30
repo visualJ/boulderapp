@@ -37,6 +37,8 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:padding="8dp"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/view_sessionroutecard" />
 
