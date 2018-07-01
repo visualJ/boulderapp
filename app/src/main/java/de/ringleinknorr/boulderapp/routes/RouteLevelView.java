@@ -44,10 +44,9 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
     }
 
     private void updateUI() {
+        roundedBorder.setBackgroundResource(R.drawable.background_layout_light);
         if(isSelected){
             roundedBorder.setBackgroundResource(R.drawable.background_layout_dark);
-        }else {
-            roundedBorder.setBackgroundResource(R.drawable.background_layout_light);
         }
         invalidate();
     }

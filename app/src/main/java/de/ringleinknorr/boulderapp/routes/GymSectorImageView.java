@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.snatik.polygon.Point;
@@ -44,36 +45,42 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
         if (gym != null) {
             for (GymSector sector : gym.getGymSectors()) {
+                Path sectorPath = buildSectorPath(sector);
                 p.setColor(deselectedColor);
-                drawSector(canvas, sector);
+                p.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(sectorPath,p);
+            }
+            if (selectedSector != null) {
+                // draw selected sector over other sectors
+                Path sectorPath = buildSectorPath(selectedSector);
+                p.setStyle(Paint.Style.FILL);
+                p.setColor(selectedColorTransparent);
+                canvas.drawPath(sectorPath,p);
+                p.setStyle(Paint.Style.STROKE);
+                p.setColor(selectedColor);
+                canvas.drawPath(sectorPath,p);
             }
         }
     }
 
-    public void drawSector(Canvas canvas, GymSector sector) {
+
+    private Path buildSectorPath(GymSector sector){
         List<GymSectorCoord> coords = sector.getGymSectorCoords();
         float scaleFactorX = this.getMeasuredWidth() / 640f;
         float scaleFactorY = this.getMeasuredHeight() / 400f;
 
         Path sectorPath = new Path();
 
-
         for (GymSectorCoord coord : coords.subList(0, coords.size())) {
-               if (coords.indexOf(coord) == 0){
+            if (coords.indexOf(coord) == 0){
                 sectorPath.moveTo(coord.getX()*scaleFactorX, coord.getY() * scaleFactorY);
             }else {
                 sectorPath.lineTo(coord.getX()*scaleFactorX, coord.getY() * scaleFactorY);
             }
         }
-       sectorPath.lineTo( coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY);
-       canvas.drawPath(sectorPath,p);
+        sectorPath.lineTo( coords.get(0).getX() * scaleFactorX, coords.get(0).getY() * scaleFactorY);
 
-        if (selectedSector != null && sector.getId() == selectedSector.getId()) {
-           p.setStyle(Paint.Style.FILL);
-           p.setColor(selectedColorTransparent);
-           canvas.drawPath(sectorPath,p);
-           p.setStyle(Paint.Style.STROKE);
-       }
+        return sectorPath;
     }
 
     @Override
@@ -85,7 +92,12 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
             for (GymSector sector : gym.getGymSectors()) {
                 Polygon sectorPolygon = buildPolygon(sector);
                 if (sectorPolygon.contains(touchPoint)) {
-                    this.selectedSector = sector == this.selectedSector ? null : sector;
+                    if (this.selectedSector == null){
+                        this.selectedSector = sector;
+                    } else {
+                        this.selectedSector = sector.equals(this.selectedSector) ? null : sector;
+                    }
+
                     invalidate();
                     if (onSectorSelectedListener != null) {
                         onSectorSelectedListener.onSectorSelected(this.selectedSector);
