@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,10 +115,8 @@ public class RouteSearchFragment extends InjectableFragment {
 
         viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
         routeList.setHasFixedSize(false);
-        routeList.setLayoutManager(new GridLayoutManager(getContext(), 3));
         routeList.setAdapter(routeListAdapter);
         levelList.setHasFixedSize(false);
-        levelList.setLayoutManager(new GridLayoutManager(getContext(), 8));
         levelList.setAdapter(routeLevelListAdapter);
 
         routeLevelListAdapter.setOnSelectionChangedListener((selectedPositions, itemsChanged) -> {
