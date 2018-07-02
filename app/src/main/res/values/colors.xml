@@ -16,4 +16,9 @@
     <color name="colorLevelBlack">#212121</color>
     <color name="colorLevelOrange">#ffa726</color>
     <color name="colorSuperLightGrey">#DFE0E0E0</color>
+    <color name="colorGymSectorBackground">@color/colorDarkGrey</color>
+    <color name="colorGymSectorForeground">@color/colorPrimary</color>
+    <color name="colorGymSectorOutline">@android:color/black</color>
+    <color name="colorGymSectorOutlineSelected">@color/colorPrimary</color>
+    <color name="colorGymSectorFillSelected">@color/colorLightGreyTransparent</color>
 </resources>

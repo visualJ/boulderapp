@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.snatik.polygon.Point;
@@ -23,11 +22,11 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
     private GymSector selectedSector;
     private OnSectorSelectedListener onSectorSelectedListener;
 
-    @BindColor(R.color.colorPrimary)
+    @BindColor(R.color.colorGymSectorOutlineSelected)
     int selectedColor;
-    @BindColor(R.color.colorLightGreyTransparent)
+    @BindColor(R.color.colorGymSectorFillSelected)
     int selectedColorTransparent;
-    @BindColor(R.color.colorLightGrey)
+    @BindColor(R.color.colorGymSectorOutline)
     int deselectedColor;
 
     public GymSectorImageView(Context c, AttributeSet attrs) {
