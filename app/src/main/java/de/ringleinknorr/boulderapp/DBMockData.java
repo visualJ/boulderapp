@@ -25,8 +25,8 @@ public class DBMockData {
 
         if (routeBox.count() <= 0) {
             Gym gym1 = new Gym("Wiesbadener Nordwand", "map_gym_1.png");
-            Gym gym2 = new Gym("Kletterhalle Wiesbaden", "map_gym_1.png");
-            Gym gym3 = new Gym("Blockwerk Mainz", "");
+            Gym gym2 = new Gym("Kletterhalle Wiesbaden", "map_gym_2.png");
+            Gym gym3 = new Gym("Blockwerk Mainz", "map_gym_1.png");
 
             RouteLevel gym1level1 = new RouteLevel("Brutal",6, context.getResources().getColor(R.color.colorLevelBlack) , gym1);
             RouteLevel gym1level2 = new RouteLevel("Sportlich", 3,context.getResources().getColor(R.color.colorLevelBlue), gym1);
@@ -51,8 +51,8 @@ public class DBMockData {
                     new Route(gym1, "red2.jpg", 1, gym1level6),
 
 
-                    new Route(gym2, "routeTest", 1, level2),
-                    new Route(gym2, "routeTest", 1, level2),
+                    new Route(gym2, "routeTest", 5, level2),
+                    new Route(gym2, "routeTest", 6, level2),
 
                     new Route(gym3, "routeTest", 1, level3),
             };
@@ -62,7 +62,12 @@ public class DBMockData {
             GymSector gym1Sector3 = new GymSector(gym1);
             GymSector gym1Sector4 = new GymSector(gym1);
 
-            GymSector gymSector3 = new GymSector(gym2);
+            GymSector gym2Sector1 = new GymSector(gym2);
+            GymSector gym2Sector2 = new GymSector(gym2);
+            GymSector gym2Sector3 = new GymSector(gym2);
+            GymSector gym2Sector4 = new GymSector(gym2);
+            GymSector gym2Sector5 = new GymSector(gym2);
+
             GymSector gymSector4 = new GymSector(gym3);
 
             GymSector gymSectors[] = {
@@ -71,7 +76,12 @@ public class DBMockData {
                     gym1Sector3,
                     gym1Sector4,
 
-                    gymSector3,
+                    gym2Sector1,
+                    gym2Sector2,
+                    gym2Sector3,
+                    gym2Sector4,
+                    gym2Sector5,
+
                     gymSector4,
             };
 
@@ -97,26 +107,35 @@ public class DBMockData {
                     new GymSectorCoord(640, 400, gym1Sector4),
                     new GymSectorCoord(640, 0, gym1Sector4),
 
-/*
-                    new GymSectorCoord(0, 0, gymSector1),
-                    new GymSectorCoord(0, 200, gymSector1),
-                    new GymSectorCoord(200, 200, gymSector1),
-                    new GymSectorCoord(200, 0, gymSector1),
+                    // Sector 1 Gym 2
+                    new GymSectorCoord(0, 0, gym2Sector1),
+                    new GymSectorCoord(0, 240, gym2Sector1),
+                    new GymSectorCoord(495, 0, gym2Sector1),
+                    // Sector 2 Gym 2
+                    new GymSectorCoord(0, 240, gym2Sector2),
+                    new GymSectorCoord(0, 400, gym2Sector2),
+                    new GymSectorCoord(360, 400, gym2Sector2),
+                    new GymSectorCoord(360, 280, gym2Sector2),
+                    new GymSectorCoord(195, 145, gym2Sector2),
+                    // Sector 3 Gym 2
+                    new GymSectorCoord(360, 400, gym2Sector3),
+                    new GymSectorCoord(640, 400, gym2Sector3),
+                    new GymSectorCoord(640, 290, gym2Sector3),
+                    new GymSectorCoord(495, 220, gym2Sector3),
+                    new GymSectorCoord(360, 280, gym2Sector3),
+                    // Sector 4 Gym 2
+                    new GymSectorCoord(495, 220, gym2Sector4),
+                    new GymSectorCoord(495, 0, gym2Sector4),
+                    new GymSectorCoord(495, 0, gym2Sector4),
+                    new GymSectorCoord(195, 145, gym2Sector4),
+                    new GymSectorCoord(360, 280, gym2Sector4),
+                    // Sector 5 Gym 2
+                    new GymSectorCoord(640, 290, gym2Sector5),
+                    new GymSectorCoord(495, 220, gym2Sector5),
+                    new GymSectorCoord(495, 0, gym2Sector5),
+                    new GymSectorCoord(640, 0, gym2Sector5),
 
-                    new GymSectorCoord(200, 0, gymSector2),
-                    new GymSectorCoord(200, 200, gymSector2),
-                    new GymSectorCoord(400, 200, gymSector2),
-                    new GymSectorCoord(400, 0, gymSector2),
-*/
-                    new GymSectorCoord(200, 0, gymSector3),
-                    new GymSectorCoord(200, 200, gymSector3),
-                    new GymSectorCoord(400, 200, gymSector3),
-                    new GymSectorCoord(400, 0, gymSector3),
 
-                    new GymSectorCoord(200, 0, gymSector4),
-                    new GymSectorCoord(200, 200, gymSector4),
-                    new GymSectorCoord(400, 200, gymSector4),
-                    new GymSectorCoord(400, 0, gymSector4),
 
             };
 
