@@ -10,6 +10,7 @@ public class Gym {
     @Id
     private long id;
     private String name;
+    private String imageId;
 
     @Backlink
     private ToMany<Route> routes;
@@ -22,8 +23,9 @@ public class Gym {
 
     }
 
-    public Gym(String name) {
+    public Gym(String name, String imageId) {
         this.name = name;
+        this.imageId = imageId;
     }
 
     public long getId() {
@@ -56,5 +58,13 @@ public class Gym {
 
     public ToMany<RouteLevel> getRouteLevels() {
         return routeLevels;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 }

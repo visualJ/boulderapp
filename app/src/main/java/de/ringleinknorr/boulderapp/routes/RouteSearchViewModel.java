@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,6 @@ public class RouteSearchViewModel extends ViewModel {
     private SessionRepository sessionRepository;
     private long sessionId;
     private LiveData<Session> session;
-    private Bitmap gymSectorImage;
     private MutableLiveData<Gym> selectedGym;
     private List<Integer> selectedRouteLevelPositions;
     private GymSector selectedGymSector;
@@ -62,14 +60,6 @@ public class RouteSearchViewModel extends ViewModel {
         }
         session.getValue().getRoutes().addAll(sessionRoutes);
         sessionRepository.putSession(session.getValue());
-    }
-
-    public Bitmap getGymSectorImage() {
-        return gymSectorImage;
-    }
-
-    public void setGymSectorImage(Bitmap gymSectorImage) {
-        this.gymSectorImage = gymSectorImage;
     }
 
     public LiveData<Gym> getSelectedGym() {

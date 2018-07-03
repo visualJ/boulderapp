@@ -3,8 +3,6 @@ package de.ringleinknorr.boulderapp.routes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -82,9 +80,7 @@ public class RouteSearchFragment extends InjectableFragment {
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
 
         viewModel.getSelectedGym().observe(this, gym -> {
-            Bitmap bmImg = BitmapFactory.decodeResource(getResources(), R.drawable.map_gym_1);
-            viewModel.setGymSectorImage(bmImg);
-            gymSectorImage.setImageBitmap(bmImg);
+            imageRepository.loadImage(gym.getImageId(), gymSectorImage);
             gymSectorImage.setGym(gym);
             if (viewModel.getSelectedGymSector() != null) {
                 gymSectorImage.setSelectedSector(viewModel.getSelectedGymSector());

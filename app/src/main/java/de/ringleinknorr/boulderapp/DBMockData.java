@@ -24,9 +24,9 @@ public class DBMockData {
 
 
         if (routeBox.count() <= 0) {
-            Gym gym1 = new Gym("Wiesbadener Nordwand");
-            Gym gym2 = new Gym("Kletterhalle Wiesbaden");
-            Gym gym3 = new Gym("Blockwerk Mainz");
+            Gym gym1 = new Gym("Wiesbadener Nordwand", "map_gym_1.png");
+            Gym gym2 = new Gym("Kletterhalle Wiesbaden", "map_gym_1.png");
+            Gym gym3 = new Gym("Blockwerk Mainz", "");
 
             RouteLevel gym1level1 = new RouteLevel("Brutal",6, context.getResources().getColor(R.color.colorLevelBlack) , gym1);
             RouteLevel gym1level2 = new RouteLevel("Sportlich", 3,context.getResources().getColor(R.color.colorLevelBlue), gym1);
