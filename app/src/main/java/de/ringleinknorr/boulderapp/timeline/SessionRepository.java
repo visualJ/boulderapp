@@ -5,7 +5,9 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class SessionRepository {
 
     private SessionDB db;

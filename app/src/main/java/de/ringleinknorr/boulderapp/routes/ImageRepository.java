@@ -5,7 +5,9 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class ImageRepository {
 
     private static String url = "http://www.mi.hs-rm.de/~bring002/bolder/images/";

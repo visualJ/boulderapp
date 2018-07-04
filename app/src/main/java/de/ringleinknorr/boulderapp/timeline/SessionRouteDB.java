@@ -1,11 +1,13 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import io.objectbox.relation.ToMany;
 
+@Singleton
 public class SessionRouteDB {
 
     private Box<SessionRoute> box;

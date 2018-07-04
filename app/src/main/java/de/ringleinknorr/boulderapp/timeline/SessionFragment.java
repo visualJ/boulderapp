@@ -71,7 +71,6 @@ public class SessionFragment extends InjectableFragment {
             sessionRepository.putSession(route.getSession().getTarget());
         });
         sessionRouteList.setAdapter(adapter);
-        adapter.setPlaceholderText(getString(R.string.session_route_list_placeholder));
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
             SessionRoute route = adapter.getItems().get(position);
             viewModel.getSession().getValue().getRoutes().remove(route);

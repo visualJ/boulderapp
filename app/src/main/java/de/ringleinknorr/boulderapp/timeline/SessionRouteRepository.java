@@ -1,9 +1,11 @@
 package de.ringleinknorr.boulderapp.timeline;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.objectbox.relation.ToMany;
 
+@Singleton
 public class SessionRouteRepository {
 
     private SessionRouteDB sessionRouteDB;
