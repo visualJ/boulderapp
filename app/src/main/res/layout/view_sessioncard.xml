@@ -76,9 +76,9 @@
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/route_level"
+            app:layout_constraintStart_toEndOf="@+id/route_level"
+            app:layout_constraintTop_toTopOf="@+id/route_level"
             tools:text="@sample/data.json/session/routes" />
 
         <TextView
@@ -119,7 +119,7 @@
             app:srcCompat="@drawable/ic_route" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/route_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"

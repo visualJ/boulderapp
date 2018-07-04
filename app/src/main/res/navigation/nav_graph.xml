@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/navigation"
     app:startDestination="@id/timelineFragment">
 
     <fragment
@@ -23,7 +24,7 @@
     <fragment
         android:id="@+id/sessionFragment"
         android:name="de.ringleinknorr.boulderapp.timeline.SessionFragment"
-        android:label="Timeline"
+        android:label="Session"
         tools:layout="@layout/fragment_session">
         <argument android:name="sessionId" />
         <action
@@ -43,5 +44,16 @@
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
         android:label="RouteSearch"
         tools:layout="@layout/fragment_route_search" />
+    <fragment
+        android:id="@+id/routeFragment"
+        android:name="de.ringleinknorr.boulderapp.routes.RouteFragment"
+        android:label="Route"
+        tools:layout="@layout/fragment_route" />
+    <action
+        android:id="@+id/showRoute"
+        app:destination="@id/routeFragment"
+        app:enterAnim="@anim/anim_slide_in_up"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popExitAnim="@anim/anim_slide_out_down" />
 
 </navigation>

@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import de.ringleinknorr.boulderapp.routes.RouteFragment;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 import de.ringleinknorr.boulderapp.timeline.NewSessionFragment;
 import de.ringleinknorr.boulderapp.timeline.SessionFragment;
@@ -26,4 +27,8 @@ public abstract class AppDIModule {
     @ContributesAndroidInjector
     @Singleton
     abstract RouteSearchFragment routeSearchFragment();
+
+    @ContributesAndroidInjector
+    @Singleton
+    abstract RouteFragment routeFragment();
 }

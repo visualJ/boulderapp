@@ -24,6 +24,8 @@ import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 import de.ringleinknorr.boulderapp.routes.ImageRepository;
+import de.ringleinknorr.boulderapp.routes.Route;
+import de.ringleinknorr.boulderapp.routes.RouteFragment;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 
 public class SessionFragment extends InjectableFragment {
@@ -71,6 +73,7 @@ public class SessionFragment extends InjectableFragment {
             sessionRepository.putSession(route.getSession().getTarget());
         });
         sessionRouteList.setAdapter(adapter);
+        adapter.setOnItemClickListener((position, item, view1) -> navigateToRoute(item.getRoute().getTarget()));
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
             SessionRoute route = adapter.getItems().get(position);
             viewModel.getSession().getValue().getRoutes().remove(route);
@@ -86,6 +89,12 @@ public class SessionFragment extends InjectableFragment {
         setTitle(getString(R.string.session_title));
 
         return view;
+    }
+
+    private void navigateToRoute(Route route) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(RouteFragment.ARG_ROUTE_ID, route.getId());
+        NavHostFragment.findNavController(this).navigate(R.id.showRoute, bundle);
     }
 
     @OnClick(R.id.add_fab)

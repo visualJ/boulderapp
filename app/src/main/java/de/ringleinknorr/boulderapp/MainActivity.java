@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             switch (destination.getId()) {
                 case R.id.sessionFragment:
                 case R.id.addRouteSearchFragment:
+                case R.id.routeFragment:
                     showBackArrow(true);
                     break;
                 default:
