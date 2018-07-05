@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 public class ImageRepository {
 
     private static String url = "http://www.mi.hs-rm.de/~bring002/bolder/images/";
+    private static String thumbUrl = "http://www.mi.hs-rm.de/~bring002/bolder/images/thumbnails/";
 
     @Inject
     public ImageRepository() {
@@ -19,5 +20,9 @@ public class ImageRepository {
 
     public void loadImage(String imageId, ImageView view) {
         Picasso.get().load(url + imageId).into(view);
+    }
+
+    public void loadThumbnail(String imageId, ImageView view) {
+        Picasso.get().load(thumbUrl + imageId).into(view);
     }
 }

@@ -67,7 +67,7 @@ public class SessionFragment extends InjectableFragment {
         });
 
         sessionRouteList.setHasFixedSize(true);
-        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadImage, (result, route) -> {
+        adapter = new SessionRouteListAdapter(new ArrayList<>(), imageRepository::loadThumbnail, (result, route) -> {
             route.setResult(result);
             sessionRouteRepository.putSessionRoute(route);
             sessionRepository.putSession(route.getSession().getTarget());
