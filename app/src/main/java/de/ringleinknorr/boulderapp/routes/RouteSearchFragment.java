@@ -104,7 +104,6 @@ public class RouteSearchFragment extends InjectableFragment {
 
         routeListAdapter.setOnItemClickListener((position, route, view1) -> navigateToRoute(route));
 
-        gymSectorImage.setAdjustViewBounds(true);
         gymSectorImage.setOnSectorSelectedListener(sector -> {
             viewModel.setSelectedGymSector(sector);
             onSearchButton();

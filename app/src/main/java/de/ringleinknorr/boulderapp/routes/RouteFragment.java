@@ -34,6 +34,9 @@ public class RouteFragment extends InjectableFragment {
     @BindView(R.id.gym_name)
     TextView gymName;
 
+    @BindView(R.id.gymSectorCanvasView2)
+    GymSectorImageView gymSectorImageView;
+
     @Inject
     ViewModelFactory<RouteViewModel> viewModelFactory;
 
@@ -51,14 +54,20 @@ public class RouteFragment extends InjectableFragment {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteViewModel.class);
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_ROUTE_ID));
+        gymSectorImageView.setClickable(false);
 
         viewModel.getRoute().observe(this, route -> {
             RouteLevel level = route.getRouteLevel().getTarget();
+            Gym gym = route.getGym().getTarget();
+
             routeLevel.setText(String.valueOf(level.getLevelName()));
             routeLevel.setBackgroundColor(level.getLevelColor());
             routeLevel.setTextColor(ColorUtil.getReadableTextColor(level.getLevelColor()));
-            gymName.setText(route.getGym().getTarget().getName());
+            gymName.setText(gym.getName());
             imageRepository.loadImage(route.getImageId(), routeImage);
+            imageRepository.loadImage(gym.getImageId(), gymSectorImageView);
+            gymSectorImageView.setGym(gym);
+            gymSectorImageView.setSelectedSector(route.getGymSector().getTarget());
         });
 
         setTitle(getString(R.string.route_title));

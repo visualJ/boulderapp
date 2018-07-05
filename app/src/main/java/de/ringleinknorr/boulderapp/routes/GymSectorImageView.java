@@ -84,7 +84,7 @@ public class GymSectorImageView extends android.support.v7.widget.AppCompatImage
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
+        if (event.getAction() == MotionEvent.ACTION_UP && isClickable()) {
             float x = event.getX();
             float y = event.getY();
             Point touchPoint = new Point(x, y);

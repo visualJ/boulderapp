@@ -11,19 +11,22 @@ public class Route {
 
     private ToOne<Gym> gym;
     private String imageId;
-    private long gymSectorId;
-
+    private ToOne<GymSector> gymSector;
     private ToOne<RouteLevel> routeLevel;
 
     public Route(Gym gym, String imageId, long gymSectorId, RouteLevel routeLevel) {
         this.routeLevel.setTarget(routeLevel);
         this.gym.setTarget(gym);
         this.imageId = imageId;
-        this.gymSectorId = gymSectorId;
+        this.gymSector.setTargetId(gymSectorId);
     }
 
     public Route() {
 
+    }
+
+    public ToOne<GymSector> getGymSector() {
+        return gymSector;
     }
 
     public ToOne<RouteLevel> getRouteLevel() {
@@ -52,14 +55,6 @@ public class Route {
 
     public void setImageId(String imageId) {
         this.imageId = imageId;
-    }
-
-    public long getGymSectorId() {
-        return gymSectorId;
-    }
-
-    public void setGymSectorId(long gymSectorId) {
-        this.gymSectorId = gymSectorId;
     }
 
 }
