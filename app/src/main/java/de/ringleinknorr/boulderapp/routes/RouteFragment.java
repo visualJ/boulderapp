@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.ringleinknorr.boulderapp.ColorUtil;
 import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
@@ -29,6 +30,9 @@ public class RouteFragment extends InjectableFragment {
 
     @BindView(R.id.route_image)
     ImageView routeImage;
+
+    @BindView(R.id.gym_name)
+    TextView gymName;
 
     @Inject
     ViewModelFactory<RouteViewModel> viewModelFactory;
@@ -49,11 +53,15 @@ public class RouteFragment extends InjectableFragment {
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_ROUTE_ID));
 
         viewModel.getRoute().observe(this, route -> {
-            routeLevel.setText(String.valueOf(route.getRouteLevel().getTarget().getLevelName()));
+            RouteLevel level = route.getRouteLevel().getTarget();
+            routeLevel.setText(String.valueOf(level.getLevelName()));
+            routeLevel.setBackgroundColor(level.getLevelColor());
+            routeLevel.setTextColor(ColorUtil.getReadableTextColor(level.getLevelColor()));
+            gymName.setText(route.getGym().getTarget().getName());
             imageRepository.loadImage(route.getImageId(), routeImage);
         });
 
-        setTitle("Route");
+        setTitle(getString(R.string.route_title));
 
         return view;
     }

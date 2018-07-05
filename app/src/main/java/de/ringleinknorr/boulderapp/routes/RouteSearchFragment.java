@@ -102,6 +102,7 @@ public class RouteSearchFragment extends InjectableFragment {
             routeListAdapter.setSelectable(false);
         }
 
+        routeListAdapter.setOnItemClickListener((position, route, view1) -> navigateToRoute(route));
 
         gymSectorImage.setAdjustViewBounds(true);
         gymSectorImage.setOnSectorSelectedListener(sector -> {
@@ -137,6 +138,14 @@ public class RouteSearchFragment extends InjectableFragment {
         setTitle(forResult ? getString(R.string.route_search_title_add) : getString(R.string.route_search_title));
 
         return view;
+    }
+
+    private void navigateToRoute(Route route) {
+        // fetch and cache the full size image in the background while showing the transition
+        imageRepository.fetchImage(route.getImageId());
+        Bundle bundle = new Bundle();
+        bundle.putLong(RouteFragment.ARG_ROUTE_ID, route.getId());
+        NavHostFragment.findNavController(this).navigate(R.id.showRoute, bundle);
     }
 
     protected void onCreateForResult(Bundle arguments) {

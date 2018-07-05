@@ -92,6 +92,8 @@ public class SessionFragment extends InjectableFragment {
     }
 
     private void navigateToRoute(Route route) {
+        // fetch and cache the full size image in the background while showing the transition
+        imageRepository.fetchImage(route.getImageId());
         Bundle bundle = new Bundle();
         bundle.putLong(RouteFragment.ARG_ROUTE_ID, route.getId());
         NavHostFragment.findNavController(this).navigate(R.id.showRoute, bundle);

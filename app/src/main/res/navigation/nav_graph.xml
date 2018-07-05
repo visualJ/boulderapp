@@ -16,7 +16,7 @@
             android:id="@+id/selectSession"
             app:destination="@id/sessionFragment"
             app:enterAnim="@anim/anim_fade_in"
-            app:exitAnim="@anim/anim_fade_out"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/anim_fade_in"
             app:popExitAnim="@anim/anim_fade_out" />
 

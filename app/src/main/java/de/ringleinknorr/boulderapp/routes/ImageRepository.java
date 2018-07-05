@@ -22,6 +22,10 @@ public class ImageRepository {
         Picasso.get().load(url + imageId).into(view);
     }
 
+    public void fetchImage(String imageId) {
+        Picasso.get().load(url + imageId).fetch();
+    }
+
     public void loadThumbnail(String imageId, ImageView view) {
         Picasso.get().load(thumbUrl + imageId).into(view);
     }
