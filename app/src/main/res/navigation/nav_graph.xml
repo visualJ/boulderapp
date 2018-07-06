@@ -2,9 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/navigation"
     app:startDestination="@id/timelineFragment">
 
     <fragment
@@ -33,17 +33,37 @@
             app:enterAnim="@anim/anim_slide_in_up"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popExitAnim="@anim/anim_slide_out_down" />
+        <action
+            android:id="@+id/showRoute"
+            app:destination="@id/routeFragment"
+            app:enterAnim="@anim/anim_slide_in_up"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/anim_slide_out_down" />
     </fragment>
     <fragment
         android:id="@+id/addRouteSearchFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
         android:label="AddRoute"
-        tools:layout="@layout/fragment_route_search" />
+        tools:layout="@layout/fragment_route_search">
+        <action
+            android:id="@+id/showRoute"
+            app:destination="@id/routeFragment"
+            app:enterAnim="@anim/anim_slide_in_up"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/anim_slide_out_down" />
+    </fragment>
     <fragment
         android:id="@+id/routeSearchFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
         android:label="RouteSearch"
-        tools:layout="@layout/fragment_route_search" />
+        tools:layout="@layout/fragment_route_search">
+        <action
+            android:id="@+id/showRoute"
+            app:destination="@id/routeFragment"
+            app:enterAnim="@anim/anim_slide_in_up"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/anim_slide_out_down" />
+    </fragment>
     <fragment
         android:id="@+id/routeFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteFragment"
@@ -55,14 +75,10 @@
             app:enterAnim="@anim/anim_fade_in"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/anim_fade_in"
-            app:popExitAnim="@anim/anim_fade_out" />
+            app:popExitAnim="@anim/anim_fade_out"
+            app:popUpTo="@+id/timelineFragment"
+            app:popUpToInclusive="false" />
     </fragment>
-    <action
-        android:id="@+id/showRoute"
-        app:destination="@id/routeFragment"
-        app:enterAnim="@anim/anim_slide_in_up"
-        app:exitAnim="@anim/nav_default_exit_anim"
-        app:popExitAnim="@anim/anim_slide_out_down" />
 
     <fragment
         android:id="@+id/statistics"
