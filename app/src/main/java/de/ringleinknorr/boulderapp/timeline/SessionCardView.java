@@ -8,6 +8,7 @@ import android.support.constraint.Constraints;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -32,6 +33,8 @@ public class SessionCardView extends ConstraintLayout {
     TextView successfulRoutes;
     @BindView(R.id.workoutsText)
     TextView workoutsText;
+    @BindView(R.id.sessionTrendIcon)
+    ImageView trendIcon;
 
     public TextView getDayText() {
         return dayText;
@@ -104,6 +107,14 @@ public class SessionCardView extends ConstraintLayout {
 
     public void setSuccessfulRoutes(int routes) {
         successfulRoutes.setText(String.valueOf(routes));
+    }
+
+    public void setSessionTrend(double trend) {
+        if (trend < 0) {
+            trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_black_24dp));
+        } else {
+            trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
+        }
     }
 
     public void setWorkouts(int workouts) {

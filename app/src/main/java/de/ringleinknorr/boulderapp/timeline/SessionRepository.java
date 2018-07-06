@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.timeline;
 
 import android.arch.lifecycle.LiveData;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +28,10 @@ public class SessionRepository {
 
     public long putSession(Session session) {
         return db.addSession(session);
+    }
+
+    public LiveData<List<Session>> getSessionsInMonth(Date date) {
+        return db.getSessionsInMonth(date);
     }
 
     public void removeAllSessions() {

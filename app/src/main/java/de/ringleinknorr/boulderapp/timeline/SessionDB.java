@@ -3,6 +3,8 @@ package de.ringleinknorr.boulderapp.timeline;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +35,26 @@ public class SessionDB {
         liveData.addSource(query, list -> liveData.postValue(list.get(0)) );
         return liveData;
     }
+
+    public LiveData<List<Session>> getSessionsInMonth(Date date) {
+        QueryBuilder<Session> builder = box.query();
+
+        builder.filter((session) -> {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(session.getDate());
+            int monthTemp = cal.get(Calendar.MONTH);
+            int yearTemp = cal.get(Calendar.YEAR);
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+            return monthTemp == month && yearTemp == year;
+        });
+
+        return new ObjectBoxLiveData<>(builder.build());
+
+    }
+
+
 
     public long addSession(Session session) {
         return box.put(session);

@@ -64,4 +64,10 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popExitAnim="@anim/anim_slide_out_down" />
 
+    <fragment
+        android:id="@+id/statistics"
+        android:name="de.ringleinknorr.boulderapp.statistics.StatisticsFragment"
+        android:label="Statistics"
+        tools:layout="@layout/fragment_statistics" />
+
 </navigation>

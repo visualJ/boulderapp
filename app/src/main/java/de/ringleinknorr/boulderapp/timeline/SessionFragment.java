@@ -27,6 +27,7 @@ import de.ringleinknorr.boulderapp.routes.ImageRepository;
 import de.ringleinknorr.boulderapp.routes.Route;
 import de.ringleinknorr.boulderapp.routes.RouteFragment;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
+import de.ringleinknorr.boulderapp.statistics.StatisticsService;
 
 public class SessionFragment extends InjectableFragment {
 
@@ -46,6 +47,8 @@ public class SessionFragment extends InjectableFragment {
     SessionRepository sessionRepository;
     @Inject
     ViewModelFactory<SessionViewModel> viewModelFactory;
+    @Inject
+    StatisticsService statisticsService;
 
     private SessionViewModel viewModel;
     private SessionRouteListAdapter adapter;
@@ -63,6 +66,7 @@ public class SessionFragment extends InjectableFragment {
             sessionCard.setGym(session.getGym().getTarget().getName());
             sessionCard.setRoutes(session.getRoutes().size());
             sessionCard.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
+            statisticsService.getMonthlyTrendForSession(session).observe(this, sessionCard::setSessionTrend);
             adapter.setItems(session.getRoutes());
         });
 
