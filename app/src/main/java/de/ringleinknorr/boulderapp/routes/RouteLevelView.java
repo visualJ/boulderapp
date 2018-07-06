@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
@@ -16,27 +18,29 @@ import de.ringleinknorr.boulderapp.SelectableItemListAdapter;
 
 public class RouteLevelView extends ConstraintLayout implements SelectableItemListAdapter.Selectable {
 
-    @BindView(R.id.level_text)
-    TextView routeLevelText;
-    @BindView(R.id.border_layout)
-    ConstraintLayout roundedBorder;
-
+    @BindView(R.id.level_selection_view)
+    CardView levelSelectionCardView;
     private boolean isSelected = false;
     private SelectableItemListAdapter.OnSelectedListener onSelectedListener = selected -> {
     };
-    private Paint p;
 
     public RouteLevelView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.view_route_level, this);
         ButterKnife.bind(this);
         setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
-        //this.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorLightGrey)));
-        p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setStyle(Paint.Style.STROKE);
+
     }
 
-    @OnClick(R.id.level_text)
+    public RouteLevelView(Context context) {
+        this(context, null);
+    }
+
+    public CardView getLevelSelectionCardView() {
+        return levelSelectionCardView;
+    }
+
+    @OnClick(R.id.level_selection_view)
     public void onLevelSelection() {
         isSelected = !isSelected;
         updateUI();
@@ -44,19 +48,12 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
     }
 
     private void updateUI() {
-        roundedBorder.setBackgroundResource(R.drawable.background_layout_light);
-        if(isSelected){
-            roundedBorder.setBackgroundResource(R.drawable.background_layout_dark);
+        if (isSelected) {
+            levelSelectionCardView.setCardElevation(12);
+        } else {
+            levelSelectionCardView.setCardElevation(4);
         }
         invalidate();
-    }
-
-    public RouteLevelView(Context context) {
-        this(context, null);
-    }
-
-    public TextView getRouteLevelSelectionButton() {
-        return routeLevelText;
     }
 
     @Override

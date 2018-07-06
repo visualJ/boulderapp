@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.routes;
 
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class RouteLevelListAdapter extends SelectableItemListAdapter<RouteLevel,
     @Override
     public void onBindView(RouteLevelView routeLevelView, int position, RouteLevel item) {
         super.onBindView(routeLevelView, position, item);
-        TextView routeLevelSelectionButton = routeLevelView.getRouteLevelSelectionButton();
-        routeLevelSelectionButton.setBackground(new ColorDrawable(item.getLevelColor()));
+        CardView levelSelectionCardView = routeLevelView.getLevelSelectionCardView();
+        levelSelectionCardView.setCardBackgroundColor((item.getLevelColor()));
     }
 }
