@@ -64,7 +64,7 @@ public class RouteFragment extends InjectableFragment {
             routeLevel.setBackgroundColor(level.getLevelColor());
             routeLevel.setTextColor(ColorUtil.getReadableTextColor(level.getLevelColor()));
             gymName.setText(gym.getName());
-            imageRepository.loadImage(route.getImageId(), routeImage);
+            imageRepository.loadImageWithThumbnailPlaceholder(route.getImageId(), routeImage);
             imageRepository.loadImage(gym.getImageId(), gymSectorImageView);
             gymSectorImageView.setGym(gym);
             gymSectorImageView.setSelectedSector(route.getGymSector().getTarget());
