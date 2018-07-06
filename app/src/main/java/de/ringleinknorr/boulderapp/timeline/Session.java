@@ -25,6 +25,19 @@ public class Session {
         this.gym.setTarget(gym);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Session session = (Session) o;
+        return id == session.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) id;
+    }
+
     public Session() {
         // empty constructor for serialization
     }

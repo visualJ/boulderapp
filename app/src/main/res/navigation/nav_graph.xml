@@ -48,7 +48,15 @@
         android:id="@+id/routeFragment"
         android:name="de.ringleinknorr.boulderapp.routes.RouteFragment"
         android:label="Route"
-        tools:layout="@layout/fragment_route" />
+        tools:layout="@layout/fragment_route">
+        <action
+            android:id="@+id/selectSession"
+            app:destination="@id/sessionFragment"
+            app:enterAnim="@anim/anim_fade_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
+    </fragment>
     <action
         android:id="@+id/showRoute"
         app:destination="@id/routeFragment"

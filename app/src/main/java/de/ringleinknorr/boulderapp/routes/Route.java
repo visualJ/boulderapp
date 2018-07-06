@@ -1,7 +1,10 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import de.ringleinknorr.boulderapp.timeline.SessionRoute;
+import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
 import io.objectbox.relation.ToOne;
 
 @Entity
@@ -13,6 +16,8 @@ public class Route {
     private String imageId;
     private ToOne<GymSector> gymSector;
     private ToOne<RouteLevel> routeLevel;
+    @Backlink
+    private ToMany<SessionRoute> sessionRoutes;
 
     public Route(Gym gym, String imageId, long gymSectorId, RouteLevel routeLevel) {
         this.routeLevel.setTarget(routeLevel);
@@ -57,4 +62,7 @@ public class Route {
         this.imageId = imageId;
     }
 
+    public ToMany<SessionRoute> getSessionRoutes() {
+        return sessionRoutes;
+    }
 }
