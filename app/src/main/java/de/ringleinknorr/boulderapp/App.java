@@ -22,7 +22,11 @@ public class App extends Application implements HasSupportFragmentInjector {
     public void onCreate() {
         super.onCreate();
         boxStore = MyObjectBox.builder().androidContext(App.this).build();
-        DaggerAppDIComponent.builder().boxStore(boxStore).build().inject(this);
+        DaggerAppDIComponent.builder()
+                .boxStore(boxStore)
+                .imageUrl(getResources().getString(R.string.url_images))
+                .thumbnailUrl(getResources().getString(R.string.url_thumbnail))
+                .build().inject(this);
         DBMockData.createMockData(this, boxStore);
         mContext = this;
     }

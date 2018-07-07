@@ -8,23 +8,27 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import de.ringleinknorr.boulderapp.ImageUrl;
+import de.ringleinknorr.boulderapp.ThumbnailUrl;
+
 @Singleton
 public class ImageRepository {
 
-    private static String IMAGE_URL = "http://www.mi.hs-rm.de/~bring002/bolder/images/";
-    private static String THUMB_URL = "http://www.mi.hs-rm.de/~bring002/bolder/images/thumbnails/";
+    private String imageUrl;
+    private String thumbUrl;
 
-    public static String imageUrl(String imageId) {
-        return IMAGE_URL + imageId;
+    public String imageUrl(String imageId) {
+        return imageUrl + imageId;
     }
 
-    public static String thumbnailUrl(String imageId) {
-        return THUMB_URL + imageId;
+    public String thumbnailUrl(String imageId) {
+        return thumbUrl + imageId;
     }
 
     @Inject
-    public ImageRepository() {
-
+    public ImageRepository(@ImageUrl String imageUrl, @ThumbnailUrl String thumbUrl) {
+        this.imageUrl = imageUrl;
+        this.thumbUrl = thumbUrl;
     }
 
     public void loadImageWithThumbnailPlaceholder(String imageId, ImageView view) {

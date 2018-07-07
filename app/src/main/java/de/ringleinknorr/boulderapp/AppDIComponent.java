@@ -12,6 +12,13 @@ public interface AppDIComponent extends AndroidInjector<App> {
     interface Builder {
         @BindsInstance
         Builder boxStore(BoxStore boxStore);
+
+        @BindsInstance
+        Builder imageUrl(@ImageUrl String imageUrl);
+
+        @BindsInstance
+        Builder thumbnailUrl(@ThumbnailUrl String thumbnailUrl);
+
         AppDIComponent build();
     }
 }
