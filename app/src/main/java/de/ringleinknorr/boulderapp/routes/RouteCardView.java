@@ -127,8 +127,6 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         if (selectable) {
             selectedIcon.setVisibility(VISIBLE);
         } else {
-            image.setOnClickListener(view -> {
-            });
             selectedIcon.setVisibility(GONE);
         }
     }

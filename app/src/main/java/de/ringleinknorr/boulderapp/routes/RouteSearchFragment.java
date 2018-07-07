@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class RouteSearchFragment extends InjectableFragment {
     RecyclerView levelList;
     @BindView(R.id.route_transition_image)
     ImageView routeTransitionImage;
+    @BindView(R.id.appbar)
+    AppBarLayout appBarLayout;
 
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
@@ -105,7 +108,7 @@ public class RouteSearchFragment extends InjectableFragment {
             routeListAdapter.setSelectable(false);
         }
 
-        routeListAdapter.setOnItemClickListener((position, route, view1) -> new RouteCardViewTransition(view1, routeTransitionImage, () -> navigateToRoute(route), routeList).start());
+        routeListAdapter.setOnItemClickListener((position, route, view1) -> new RouteCardViewTransition(view1, routeTransitionImage, () -> navigateToRoute(route), routeList, appBarLayout).start());
 
         gymSectorImage.setOnSectorSelectedListener(sector -> {
             viewModel.setSelectedGymSector(sector);

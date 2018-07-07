@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import de.ringleinknorr.boulderapp.ViewTransition;
 import de.ringleinknorr.boulderapp.timeline.SessionRouteCardView;
 
-public class SessionRouteCardViewTransition extends ViewTransition<SessionRouteCardView, ImageView, View> {
+public class SessionRouteCardViewTransition extends ViewTransition<SessionRouteCardView, ImageView> {
 
-    public SessionRouteCardViewTransition(SessionRouteCardView source, ImageView destination, OnTransitionFinishedListener onTransitionFinishedListener, View fade) {
+    public SessionRouteCardViewTransition(SessionRouteCardView source, ImageView destination, OnTransitionFinishedListener onTransitionFinishedListener, View... fade) {
         super(onTransitionFinishedListener, source, destination, fade);
     }
 

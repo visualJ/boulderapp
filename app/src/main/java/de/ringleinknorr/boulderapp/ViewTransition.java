@@ -8,17 +8,20 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-public abstract class ViewTransition<S extends View, D extends View, F extends View> {
+import java.util.Arrays;
+import java.util.List;
+
+public abstract class ViewTransition<S extends View, D extends View> {
     protected S source;
     protected D destination;
     protected OnTransitionFinishedListener onTransitionFinishedListener;
-    protected F fade;
+    protected List<View> fade;
 
-    public ViewTransition(OnTransitionFinishedListener onTransitionFinishedListener, S source, D destination, F fade) {
+    public ViewTransition(OnTransitionFinishedListener onTransitionFinishedListener, S source, D destination, View... fade) {
         this.onTransitionFinishedListener = onTransitionFinishedListener;
         this.source = source;
         this.destination = destination;
-        this.fade = fade;
+        this.fade = Arrays.asList(fade);
     }
 
     protected abstract void prepareAnimation(Rect dest, Rect src);
@@ -38,11 +41,13 @@ public abstract class ViewTransition<S extends View, D extends View, F extends V
         destination.setVisibility(View.VISIBLE);
 
         AnimatorSet set = new AnimatorSet();
-        set.play(ObjectAnimator.ofFloat(destination, View.X, src.left, dest.left))
+        AnimatorSet.Builder builder = set.play(ObjectAnimator.ofFloat(destination, View.X, src.left, dest.left))
                 .with(ObjectAnimator.ofFloat(destination, View.Y, src.top, dest.top))
                 .with(ObjectAnimator.ofFloat(destination, View.SCALE_X, scaleX, 1f))
-                .with(ObjectAnimator.ofFloat(destination, View.SCALE_Y, scaleY, 1f))
-                .with(ObjectAnimator.ofFloat(fade, View.ALPHA, 1f, 0f));
+                .with(ObjectAnimator.ofFloat(destination, View.SCALE_Y, scaleY, 1f));
+        for (View fadeView : fade) {
+            builder.with(ObjectAnimator.ofFloat(fadeView, View.ALPHA, 1f, 0f));
+        }
         set.setDuration(400).setInterpolator(new DecelerateInterpolator(3f));
         set.addListener(new AnimatorListenerAdapter() {
             @Override
