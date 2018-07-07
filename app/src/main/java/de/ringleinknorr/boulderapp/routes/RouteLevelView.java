@@ -1,14 +1,11 @@
 package de.ringleinknorr.boulderapp.routes;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,8 +47,14 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
     private void updateUI() {
         if (isSelected) {
             levelSelectionCardView.setCardElevation(12);
+            levelSelectionCardView.setScaleX(1.2f);
+            levelSelectionCardView.setScaleY(1.2f);
+            levelSelectionCardView.setAlpha(1f);
         } else {
             levelSelectionCardView.setCardElevation(4);
+            levelSelectionCardView.setScaleX(1f);
+            levelSelectionCardView.setScaleY(1f);
+            levelSelectionCardView.setAlpha(0.6f);
         }
         invalidate();
     }
