@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.InjectableFragment;
 import de.ringleinknorr.boulderapp.R;
-import de.ringleinknorr.boulderapp.SessionCardViewTransition;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 
 public class TimelineFragment extends InjectableFragment {
@@ -61,9 +60,7 @@ public class TimelineFragment extends InjectableFragment {
 
         sessionList.setHasFixedSize(true);
         sessionList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> {
-            new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start();
-        });
+        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start());
         sessionList.setAdapter(adapter);
         adapter.setPlaceholderText(getString(R.string.session_list_placeholder));
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {

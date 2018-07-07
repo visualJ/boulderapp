@@ -38,7 +38,6 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
     CardView card;
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
-
     private boolean itemSelected = false;
     private SelectableItemListAdapter.OnSelectedListener onSelectedListener = selected -> {
     };
@@ -53,7 +52,11 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         selectedIcon.setScaleY(DESELECTED_ICON_SCALE);
     }
 
-    @OnClick(R.id.image)
+    public RouteCardView(Context context) {
+        this(context, null);
+    }
+
+    @OnClick(R.id.selected_icon)
     public void onImageClick() {
         itemSelected = !itemSelected;
         if (itemSelected) {
@@ -62,10 +65,6 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
             animateDeselected();
         }
         onSelectedListener.onSelected(itemSelected);
-    }
-
-    public RouteCardView(Context context) {
-        this(context, null);
     }
 
     public TextView getRouteLevelText() {

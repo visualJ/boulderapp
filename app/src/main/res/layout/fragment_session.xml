@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
         android:background="@color/colorWhite"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Light">
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -38,12 +38,12 @@
         android:id="@+id/session_route_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:clipToPadding="false"
         android:padding="8dp"
-        android:background="@color/colorWhite"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:spanCount="2"
         tools:listitem="@layout/view_sessionroutecard" />
 
     <android.support.design.widget.FloatingActionButton
@@ -56,5 +56,13 @@
         app:layout_anchor="@id/session_route_list"
         app:layout_anchorGravity="bottom|right|end"
         app:srcCompat="@drawable/ic_add" />
+
+    <ImageView
+        android:id="@+id/route_transition_image"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="270dp"
+        android:adjustViewBounds="true"
+        android:visibility="invisible" />
 
 </android.support.design.widget.CoordinatorLayout>

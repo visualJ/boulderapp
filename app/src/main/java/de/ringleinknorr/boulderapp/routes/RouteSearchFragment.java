@@ -14,6 +14,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +46,8 @@ public class RouteSearchFragment extends InjectableFragment {
     GymSectorImageView gymSectorImage;
     @BindView(R.id.level_list)
     RecyclerView levelList;
+    @BindView(R.id.route_transition_image)
+    ImageView routeTransitionImage;
 
     @BindInt(android.R.integer.config_shortAnimTime)
     int mShortAnimationDuration;
@@ -102,7 +105,7 @@ public class RouteSearchFragment extends InjectableFragment {
             routeListAdapter.setSelectable(false);
         }
 
-        routeListAdapter.setOnItemClickListener((position, route, view1) -> navigateToRoute(route));
+        routeListAdapter.setOnItemClickListener((position, route, view1) -> new RouteCardViewTransition(view1, routeTransitionImage, () -> navigateToRoute(route), routeList).start());
 
         gymSectorImage.setOnSectorSelectedListener(sector -> {
             viewModel.setSelectedGymSector(sector);

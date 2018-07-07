@@ -36,9 +36,10 @@
         <action
             android:id="@+id/showRoute"
             app:destination="@id/routeFragment"
-            app:enterAnim="@anim/anim_slide_in_up"
+            app:enterAnim="@anim/anim_fade_in"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popExitAnim="@anim/anim_slide_out_down" />
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
     </fragment>
     <fragment
         android:id="@+id/addRouteSearchFragment"
@@ -48,9 +49,10 @@
         <action
             android:id="@+id/showRoute"
             app:destination="@id/routeFragment"
-            app:enterAnim="@anim/anim_slide_in_up"
+            app:enterAnim="@anim/anim_fade_in"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popExitAnim="@anim/anim_slide_out_down" />
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
     </fragment>
     <fragment
         android:id="@+id/routeSearchFragment"
@@ -60,9 +62,10 @@
         <action
             android:id="@+id/showRoute"
             app:destination="@id/routeFragment"
-            app:enterAnim="@anim/anim_slide_in_up"
+            app:enterAnim="@anim/anim_fade_in"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popExitAnim="@anim/anim_slide_out_down" />
+            app:popEnterAnim="@anim/anim_fade_in"
+            app:popExitAnim="@anim/anim_fade_out" />
     </fragment>
     <fragment
         android:id="@+id/routeFragment"

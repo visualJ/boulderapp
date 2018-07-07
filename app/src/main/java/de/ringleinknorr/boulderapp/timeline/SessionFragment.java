@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -27,6 +28,7 @@ import de.ringleinknorr.boulderapp.routes.ImageRepository;
 import de.ringleinknorr.boulderapp.routes.Route;
 import de.ringleinknorr.boulderapp.routes.RouteFragment;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
+import de.ringleinknorr.boulderapp.routes.SessionRouteCardViewTransition;
 import de.ringleinknorr.boulderapp.statistics.StatisticsService;
 
 public class SessionFragment extends InjectableFragment {
@@ -38,6 +40,9 @@ public class SessionFragment extends InjectableFragment {
 
     @BindView(R.id.session_route_list)
     RecyclerView sessionRouteList;
+
+    @BindView(R.id.route_transition_image)
+    ImageView routeTransitionImage;
 
     @Inject
     ImageRepository imageRepository;
@@ -77,7 +82,7 @@ public class SessionFragment extends InjectableFragment {
             sessionRepository.putSession(route.getSession().getTarget());
         });
         sessionRouteList.setAdapter(adapter);
-        adapter.setOnItemClickListener((position, item, view1) -> navigateToRoute(item.getRoute().getTarget()));
+        adapter.setOnItemClickListener((position, item, view1) -> new SessionRouteCardViewTransition(view1, routeTransitionImage, () -> navigateToRoute(item.getRoute().getTarget()), sessionRouteList).start());
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
             SessionRoute route = adapter.getItems().get(position);
             viewModel.getSession().getValue().getRoutes().remove(route);
