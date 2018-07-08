@@ -6,14 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".timeline.TimelineFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
         android:id="@+id/session_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        tools:listitem="@layout/view_sessioncard"
         android:background="@color/colorBackgroundGrey"
-        android:padding="8dp" />
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:placeholder="@+id/session_list_placeholder"
+        tools:listitem="@layout/view_sessioncard" />
+
+    <TextView
+        android:id="@+id/session_list_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/session_list_placeholder" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"

@@ -3,4 +3,7 @@
     <declare-styleable name="SessionCardView">
         <attr name="docked" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="PlaceholderRecyclerView">
+        <attr name="placeholder" format="reference" />
+    </declare-styleable>
 </resources>

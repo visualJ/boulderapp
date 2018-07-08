@@ -30,7 +30,7 @@
                 android:background="@color/colorWhite"
                 android:fitsSystemWindows="true">
 
-                <android.support.v7.widget.RecyclerView
+                <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
                     android:id="@+id/level_list"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -106,7 +106,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
         android:id="@+id/route_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -114,12 +114,21 @@
         android:padding="8dp"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="3"
+        app:placeholder="@+id/route_list_placeholder"
         tools:itemCount="6"
         tools:listitem="@layout/view_routecard" />
+
+    <TextView
+        android:id="@+id/route_list_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|bottom"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="64dp"
+        android:text="@string/route_no_results" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_button"

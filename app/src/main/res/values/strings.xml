@@ -11,7 +11,7 @@
     <string name="session_removed_snackbar">Session gelöscht.</string>
     <string name="session_removed_snackbar_undo">Wiederherstellen</string>
     <string name="timeline_title">Timeline</string>
-    <string name="session_route_list_placeholder">In dieser Session ist noch nichts los. Füge mit dem + Routen hinzu!</string>
+    <string name="session_route_list_placeholder">In dieser Session ist noch nichts los.\nFüge mit dem + Routen hinzu!</string>
     <string name="session_title">Session</string>
     <string name="remove_route_snackbar">Route entfernt.</string>
     <string name="remove_route_snackbar_undo">Wiederherstellen</string>
@@ -22,4 +22,8 @@
     <string name="new_session_gym_hint">Halle</string>
     <string name="route_search_gym_hint">Halle</string>
     <string name="route_title">Details</string>
+    <string name="route_position_section">Routendetails</string>
+    <string name="route_sessions_section">Sessions</string>
+    <string name="route_no_sessions">Diese Route kommt in keinen Sessions vor.</string>
+    <string name="route_no_results">Keine passenden Routen gefunden!</string>
 </resources>

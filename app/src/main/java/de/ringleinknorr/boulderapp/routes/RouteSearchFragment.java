@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.InjectableFragment;
+import de.ringleinknorr.boulderapp.PlaceholderRecyclerView;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.ViewModelFactory;
 
@@ -40,13 +40,13 @@ public class RouteSearchFragment extends InjectableFragment {
     @BindView(R.id.auto_complete_text_view)
     AutoCompleteTextView autoCompleteTextView;
     @BindView(R.id.route_list)
-    RecyclerView routeList;
+    PlaceholderRecyclerView routeList;
     @BindView(R.id.add_button)
     FloatingActionButton addButton;
     @BindView(R.id.gymSectorCanvasView2)
     GymSectorImageView gymSectorImage;
     @BindView(R.id.level_list)
-    RecyclerView levelList;
+    PlaceholderRecyclerView levelList;
     @BindView(R.id.route_transition_image)
     ImageView routeTransitionImage;
     @BindView(R.id.appbar)

@@ -11,8 +11,7 @@ import java.util.List;
 public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Adapter<ItemListAdapter.ViewHolder> {
 
     private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_PLACEHOLDER = 1;
-    private final int VIEW_TYPE_SECTION_ITEM = 2;
+    private final int VIEW_TYPE_SECTION_ITEM = 1;
 
     private List<I> items;
     private OnItemClickListener<I, V> onItemClickListener = (position, item, view) -> {
@@ -42,9 +41,6 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
-            case VIEW_TYPE_PLACEHOLDER:
-                ((ViewHolder<EmptyListPlaceholder>) holder).view.setText(placeholderText);
-                break;
             case VIEW_TYPE_SECTION_ITEM:
                 SectionTitle<V> sectionTitle = ((ViewHolder<SectionTitle<V>>) holder).view;
                 sectionTitle.getView().setOnClickListener((view -> onItemClickListener.onItemClicked(position, items.get(position), sectionTitle.getView())));
@@ -73,8 +69,6 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case VIEW_TYPE_PLACEHOLDER:
-                return new ViewHolder<>(new EmptyListPlaceholder(parent.getContext()));
             case VIEW_TYPE_SECTION_ITEM:
                 return new ViewHolder<>(new SectionTitle<>(parent.getContext(), onCreateView(parent, viewType)));
             case VIEW_TYPE_ITEM:
@@ -107,11 +101,7 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
 
     @Override
     public int getItemViewType(int position) {
-        if (isPlaceholderShown()) {
-            return VIEW_TYPE_PLACEHOLDER;
-        } else {
-            return hasSectionTitle(position) ? VIEW_TYPE_SECTION_ITEM : VIEW_TYPE_ITEM;
-        }
+        return hasSectionTitle(position) ? VIEW_TYPE_SECTION_ITEM : VIEW_TYPE_ITEM;
     }
 
     /**
@@ -126,16 +116,7 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
 
     @Override
     public int getItemCount() {
-        if (isPlaceholderShown()) {
-            // return 1 for the placeholder item
-            return 1;
-        } else {
-            return items.size();
-        }
-    }
-
-    private boolean isPlaceholderShown() {
-        return items.isEmpty() && !placeholderText.isEmpty();
+        return items.size();
     }
 
     public OnItemClickListener<I, V> getOnItemClickListener() {
@@ -144,14 +125,6 @@ public abstract class ItemListAdapter<I, V extends View> extends RecyclerView.Ad
 
     public void setOnItemClickListener(OnItemClickListener<I, V> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-    }
-
-    public String getPlaceholderText() {
-        return placeholderText;
-    }
-
-    public void setPlaceholderText(@NonNull String placeholderText) {
-        this.placeholderText = placeholderText;
     }
 
     public ImageProvider getImageProvider() {

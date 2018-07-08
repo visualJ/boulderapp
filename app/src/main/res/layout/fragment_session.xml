@@ -34,17 +34,26 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
         android:id="@+id/session_route_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:clipToPadding="false"
         android:padding="8dp"
+        app:placeholder="@+id/session_route_list_placeholder"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:spanCount="2"
         tools:listitem="@layout/view_sessionroutecard" />
+
+    <TextView
+        android:id="@+id/session_route_list_placeholder"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/session_route_list_placeholder"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"
