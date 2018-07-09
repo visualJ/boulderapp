@@ -1,7 +1,7 @@
 package de.ringleinknorr.boulderapp.routes;
 
-import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,13 +16,20 @@ public class SessionRouteCardViewTransition extends ViewTransition<SessionRouteC
 
     @Override
     protected void prepareAnimation(Rect dest, Rect src) {
-        final Point offset = new Point();
-        destination.setImageDrawable(source.getImage().getDrawable());
+        Drawable drawable = source.getImage().getDrawable();
+        destination.setImageDrawable(drawable);
 
-        destination.getGlobalVisibleRect(dest, offset);
+        // GlobalVisibleRect can't be used here, since the image views height is not determined yet.
+        // Instead, use the image aspect ratio to compute the height.
+        float ratio = drawable.getIntrinsicHeight() / (float) drawable.getIntrinsicWidth();
+        int height = (int) (destination.getMeasuredWidth() * ratio);
+        int[] pos = new int[2];
+        destination.getLocationInWindow(pos);
+
+        destination.getGlobalVisibleRect(dest);
         source.getImage().getGlobalVisibleRect(src);
-        src.offset(-offset.x, -offset.y);
-        dest.offset(-offset.x, -offset.y);
+        src.offset(-pos[0], -pos[1]);
+        dest.set(0, 0, destination.getMeasuredWidth(), height);
     }
 
 }

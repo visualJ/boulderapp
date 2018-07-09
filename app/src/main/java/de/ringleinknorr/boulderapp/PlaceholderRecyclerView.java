@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class PlaceholderRecyclerView extends RecyclerView {
 
@@ -35,8 +34,8 @@ public class PlaceholderRecyclerView extends RecyclerView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (placeholderId != -1 && getParent() instanceof ViewGroup) {
-            placeholder = ((ViewGroup) getParent()).findViewById(placeholderId);
+        if (placeholderId != -1) {
+            placeholder = getRootView().findViewById(placeholderId);
             emptyObserver.onChanged();
         }
     }
