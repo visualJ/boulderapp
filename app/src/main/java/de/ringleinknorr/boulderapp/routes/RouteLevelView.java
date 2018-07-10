@@ -41,7 +41,7 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.view_route_level, this);
         ButterKnife.bind(this);
-        setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
+        setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.WRAP_CONTENT, Constraints.LayoutParams.WRAP_CONTENT));
 
     }
 

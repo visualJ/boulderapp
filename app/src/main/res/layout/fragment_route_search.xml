@@ -40,10 +40,11 @@
                     android:layout_marginRight="32dp"
                     android:clipToPadding="false"
                     android:padding="0dp"
-                    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-                    app:spanCount="8"
                     tools:itemCount="6"
                     tools:listitem="@layout/view_route_level" />
 
