@@ -99,6 +99,8 @@ public class RouteSearchFragment extends InjectableFragment {
             if (viewModel.getSelectedRouteLevelPositions() != null) {
                 routeLevelListAdapter.setSelectedPositions(viewModel.getSelectedRouteLevelPositions());
             }
+
+            onSearchButton();
         });
 
         Bundle arguments = getArguments();
@@ -130,7 +132,6 @@ public class RouteSearchFragment extends InjectableFragment {
 
         autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
             viewModel.setSelectedGym(gymRepository.getGymWithName(autoCompleteTextView.getText().toString()));
-            onSearchButton();
         });
         autoCompleteTextView.setAdapter(gymAdapter);
         gymRepository.getAllGymNames().observe(this, names -> {
@@ -160,7 +161,6 @@ public class RouteSearchFragment extends InjectableFragment {
             autoCompleteTextView.setText(session.getGym().getTarget().getName());
             autoCompleteTextView.setEnabled(false);
             viewModel.setSelectedGym(session.getGym().getTarget());
-            onSearchButton();
         });
         routeListAdapter.setOnSelectionChangedListener((selectedPositions, itemsChanged) -> {
             if (selectedPositions.size() > 0) {
