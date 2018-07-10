@@ -69,7 +69,7 @@ public class RouteFragment extends InjectableFragment {
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_ROUTE_ID));
         gymSectorImageView.setClickable(false);
 
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, view1) -> navigateToSession(item));
+        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, view1) -> navigateToSession(item));
         sessionList.setAdapter(adapter);
 
         viewModel.getRoute().observe(this, route -> {

@@ -58,7 +58,7 @@ public class TimelineFragment extends InjectableFragment {
         viewModel.getSessions().observe(this, sessions -> adapter.setItems(sessions));
 
         sessionList.setHasFixedSize(true);
-        adapter = new SessionListAdapter(new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start());
+        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start());
         sessionList.setAdapter(adapter);
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
             Session session = adapter.getItems().get(position);

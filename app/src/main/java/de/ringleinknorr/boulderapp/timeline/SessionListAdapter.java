@@ -1,5 +1,6 @@
 package de.ringleinknorr.boulderapp.timeline;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
 import android.view.ViewGroup;
@@ -10,14 +11,14 @@ import java.util.Locale;
 
 import de.ringleinknorr.boulderapp.ItemListAdapter;
 
-import static de.ringleinknorr.boulderapp.App.getContext;
-
 public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView> {
 
     private Locale locale;
+    private Context context;
 
-    public SessionListAdapter(List<Session> sessions, Locale locale, OnItemClickListener<Session, SessionCardView> onItemClickListener) {
+    public SessionListAdapter(Context context, List<Session> sessions, Locale locale, OnItemClickListener<Session, SessionCardView> onItemClickListener) {
         super(sessions, onItemClickListener);
+        this.context = context;
         this.locale = locale;
     }
 
@@ -46,7 +47,7 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
         if (position == 0 || isMothDifferent(position)) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(getItems().get(position).getDate());
-            String date = DateUtils.formatDateTime(getContext(), cal.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE + DateUtils.FORMAT_SHOW_YEAR + DateUtils.FORMAT_NO_MONTH_DAY);
+            String date = DateUtils.formatDateTime(context, cal.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE + DateUtils.FORMAT_SHOW_YEAR + DateUtils.FORMAT_NO_MONTH_DAY);
             return date;
         } else {
             return "";
