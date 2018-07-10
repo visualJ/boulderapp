@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.content.res.AppCompatResources;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -147,6 +148,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
 
     private void showCalendar() {
         calendar.setVisibility(View.VISIBLE);
+        dateText.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_expand_less), null);
         calendar.animate()
                 .alpha(1)
                 .translationY(0)
@@ -156,6 +158,7 @@ public class NewSessionFragment extends InjectableDialogBottomSheetFragment {
     }
 
     private void hideCalendar() {
+        dateText.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_expand_more), null);
         calendar.animate()
                 .alpha(0)
                 .translationY(200)
