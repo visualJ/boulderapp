@@ -1,5 +1,11 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import de.ringleinknorr.boulderapp.timeline.Session;
 import de.ringleinknorr.boulderapp.timeline.SessionRoute;
 import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
@@ -28,6 +34,22 @@ public class Route {
 
     public Route() {
 
+    }
+
+    /**
+     * Retrieve a list of distinct sessions that contain this route.
+     *
+     * @return A list of sessions this route is referenced in
+     */
+    public List<Session> getSessions() {
+        Set<Session> sessionSet = new HashSet<>();
+        for (SessionRoute sessionRoute : getSessionRoutes()) {
+            Session session = sessionRoute.getSession().getTarget();
+            if (session != null) {
+                sessionSet.add(session);
+            }
+        }
+        return new ArrayList<>(sessionSet);
     }
 
     public ToOne<GymSector> getGymSector() {

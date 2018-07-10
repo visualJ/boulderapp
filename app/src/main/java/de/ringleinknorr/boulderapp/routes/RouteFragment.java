@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -29,7 +29,6 @@ import de.ringleinknorr.boulderapp.ViewModelFactory;
 import de.ringleinknorr.boulderapp.timeline.Session;
 import de.ringleinknorr.boulderapp.timeline.SessionFragment;
 import de.ringleinknorr.boulderapp.timeline.SessionListAdapter;
-import de.ringleinknorr.boulderapp.timeline.SessionRoute;
 
 public class RouteFragment extends InjectableFragment {
 
@@ -86,14 +85,9 @@ public class RouteFragment extends InjectableFragment {
             gymSectorImageView.setGym(gym);
             gymSectorImageView.setSelectedSector(route.getGymSector().getTarget());
 
-            Set<Session> sessionSet = new HashSet<>();
-            for (SessionRoute sessionRoute : route.getSessionRoutes()) {
-                Session session = sessionRoute.getSession().getTarget();
-                if (session != null) {
-                    sessionSet.add(session);
-                }
-            }
-            adapter.setItems(new ArrayList<>(sessionSet));
+            List<Session> sessions = route.getSessions();
+            Collections.sort(sessions, (s1, s2) -> s1.getDate().compareTo(s2.getDate()));
+            adapter.setItems(sessions);
         });
 
         setTitle(getString(R.string.route_title));
