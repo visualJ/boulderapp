@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,7 +38,10 @@ public class RouteSearchViewModel extends ViewModel {
     }
 
     public void queryRoutes(RouteSearchParameter routeSearchParameter) {
-        routes.addSource(routeRepository.queryRoutes(routeSearchParameter), routeList -> routes.postValue(routeList));
+        routes.addSource(routeRepository.queryRoutes(routeSearchParameter), routeList -> {
+            Collections.sort(routeList);
+            routes.postValue(routeList);
+        });
     }
 
     public long getSessionId() {

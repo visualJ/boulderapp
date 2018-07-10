@@ -10,7 +10,7 @@ import io.objectbox.converter.PropertyConverter;
 import io.objectbox.relation.ToOne;
 
 @Entity
-public class SessionRoute {
+public class SessionRoute implements Comparable<SessionRoute> {
     @Id
     private long id;
     @Convert(converter = ResultConverter.class, dbType = Integer.class)
@@ -64,6 +64,11 @@ public class SessionRoute {
 
     public void setResult(@NonNull Result result) {
         this.result = result;
+    }
+
+    @Override
+    public int compareTo(@NonNull SessionRoute sessionRoute) {
+        return getRoute().getTarget().compareTo(sessionRoute.getRoute().getTarget());
     }
 
     public enum Result {

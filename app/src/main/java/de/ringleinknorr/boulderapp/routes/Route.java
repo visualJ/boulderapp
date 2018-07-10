@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.routes;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +16,7 @@ import io.objectbox.relation.ToMany;
 import io.objectbox.relation.ToOne;
 
 @Entity
-public class Route {
+public class Route implements Comparable<Route> {
     @Id
     private long id;
 
@@ -86,5 +88,10 @@ public class Route {
 
     public ToMany<SessionRoute> getSessionRoutes() {
         return sessionRoutes;
+    }
+
+    @Override
+    public int compareTo(@NonNull Route route) {
+        return getRouteLevel().getTarget().getLevelNumber() - route.getRouteLevel().getTarget().getLevelNumber();
     }
 }

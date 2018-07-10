@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ import de.ringleinknorr.boulderapp.routes.RouteFragment;
 import de.ringleinknorr.boulderapp.routes.RouteSearchFragment;
 import de.ringleinknorr.boulderapp.routes.SessionRouteCardViewTransition;
 import de.ringleinknorr.boulderapp.statistics.StatisticsService;
+import io.objectbox.relation.ToMany;
 
 public class SessionFragment extends InjectableFragment {
 
@@ -72,7 +74,9 @@ public class SessionFragment extends InjectableFragment {
             sessionCard.setRoutes(session.getRoutes().size());
             sessionCard.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
             statisticsService.getMonthlyTrendForSession(session).observe(this, sessionCard::setSessionTrend);
-            adapter.setItems(session.getRoutes());
+            ToMany<SessionRoute> routes = session.getRoutes();
+            Collections.sort(routes);
+            adapter.setItems(routes);
         });
 
         sessionRouteList.setHasFixedSize(true);

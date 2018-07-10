@@ -115,7 +115,7 @@ public class RouteSearchFragment extends InjectableFragment {
             onSearchButton();
         });
 
-        viewModel.getRoutes().observe(this, routes -> routeListAdapter.setItems(routes));
+        viewModel.getRoutes().observe(this, routeListAdapter::setItems);
         routeList.setHasFixedSize(false);
         routeList.setAdapter(routeListAdapter);
         levelList.setHasFixedSize(false);
