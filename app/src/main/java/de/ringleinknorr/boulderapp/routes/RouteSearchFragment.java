@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,9 +86,12 @@ public class RouteSearchFragment extends InjectableFragment {
         gymAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
 
+        Log.i(getClass().getSimpleName(), "onCreateView: " + viewModel);
+
         viewModel.getSelectedGym().observe(this, gym -> {
             imageRepository.loadImage(gym.getImageId(), gymSectorImage);
             gymSectorImage.setGym(gym);
+            Log.i(getClass().getSimpleName(), "onCreateView: " + viewModel.getSelectedGymSector());
             if (viewModel.getSelectedGymSector() != null) {
                 gymSectorImage.setSelectedSector(viewModel.getSelectedGymSector());
             }
@@ -96,6 +100,7 @@ public class RouteSearchFragment extends InjectableFragment {
             Collections.sort(routeLevels, (routeLevel1, routeLevel2) -> routeLevel1.getLevelNumber() - routeLevel2.getLevelNumber());
 
             routeLevelListAdapter.setItems(routeLevels);
+            Log.i(getClass().getSimpleName(), "onCreateView: " + viewModel.getSelectedRouteLevelPositions());
             if (viewModel.getSelectedRouteLevelPositions() != null) {
                 routeLevelListAdapter.setSelectedPositions(viewModel.getSelectedRouteLevelPositions());
             }
@@ -114,18 +119,20 @@ public class RouteSearchFragment extends InjectableFragment {
 
         gymSectorImage.setOnSectorSelectedListener(sector -> {
             viewModel.setSelectedGymSector(sector);
+            routeListAdapter.setSelectedPositions(new ArrayList<>());
             onSearchButton();
         });
 
-        viewModel.getRoutes().observe(this, routeListAdapter::setItems);
         routeList.setHasFixedSize(false);
         routeList.setAdapter(routeListAdapter);
+        viewModel.getRoutes().observe(this, routeListAdapter::setItems);
         levelList.setHasFixedSize(false);
         levelList.setAdapter(routeLevelListAdapter);
 
         routeLevelListAdapter.setOnSelectionChangedListener((selectedPositions, itemsChanged) -> {
             if (!itemsChanged) {
                 viewModel.setSelectedRouteLevelPositions(selectedPositions);
+                routeListAdapter.setSelectedPositions(new ArrayList<>());
                 onSearchButton();
             }
         });

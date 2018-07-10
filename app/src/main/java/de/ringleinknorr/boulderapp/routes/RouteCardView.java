@@ -94,8 +94,12 @@ public class RouteCardView extends ConstraintLayout implements SelectableItemLis
         this.itemSelected = selected;
         if (selected) {
             selectedIcon.setAlpha(SELECTED_ICON_APLHA);
+            selectedIcon.setScaleX(SELECTED_ICON_SCALE);
+            selectedIcon.setScaleY(SELECTED_ICON_SCALE);
         } else {
             selectedIcon.setAlpha(DESELECTED_ICON_APLHA);
+            selectedIcon.setScaleX(DESELECTED_ICON_SCALE);
+            selectedIcon.setScaleY(DESELECTED_ICON_SCALE);
         }
     }
 
