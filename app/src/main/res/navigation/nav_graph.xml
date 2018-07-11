@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/timelineFragment"
-        android:name="de.ringleinknorr.boulderapp.timeline.TimelineFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.TimelineFragment"
         android:label="Timeline"
         tools:layout="@layout/fragment_timeline">
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/sessionFragment"
-        android:name="de.ringleinknorr.boulderapp.timeline.SessionFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.SessionFragment"
         android:label="Session"
         tools:layout="@layout/fragment_session">
         <argument android:name="sessionId" />
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/addRouteSearchFragment"
-        android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.RouteSearchFragment"
         android:label="AddRoute"
         tools:layout="@layout/fragment_route_search">
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/routeSearchFragment"
-        android:name="de.ringleinknorr.boulderapp.routes.RouteSearchFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.RouteSearchFragment"
         android:label="RouteSearch"
         tools:layout="@layout/fragment_route_search">
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/routeFragment"
-        android:name="de.ringleinknorr.boulderapp.routes.RouteFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.RouteFragment"
         android:label="Route"
         tools:layout="@layout/fragment_route">
         <action
@@ -85,7 +85,7 @@
 
     <fragment
         android:id="@+id/statistics"
-        android:name="de.ringleinknorr.boulderapp.statistics.StatisticsFragment"
+        android:name="de.ringleinknorr.boulderapp.fragments.StatisticsFragment"
         android:label="Statistics"
         tools:layout="@layout/fragment_statistics" />
 

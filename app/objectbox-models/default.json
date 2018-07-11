@@ -4,18 +4,6 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:6748154789515528912",
-      "lastPropertyId": "1:1341363714493511092",
-      "name": "Comment",
-      "properties": [
-        {
-          "id": "1:1341363714493511092",
-          "name": "id"
-        }
-      ],
-      "relations": []
-    },
-    {
       "id": "2:3309816179731553913",
       "lastPropertyId": "3:2769400514447001991",
       "name": "Gym",
@@ -115,18 +103,6 @@
       "relations": []
     },
     {
-      "id": "6:3884213150038417823",
-      "lastPropertyId": "1:4052234543536358285",
-      "name": "SessionWorkout",
-      "properties": [
-        {
-          "id": "1:4052234543536358285",
-          "name": "id"
-        }
-      ],
-      "relations": []
-    },
-    {
       "id": "7:4948500242175966623",
       "lastPropertyId": "2:8345893524098451393",
       "name": "GymSector",
@@ -204,10 +180,15 @@
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    6748154789515528912,
+    3884213150038417823
+  ],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
-    2565296634231265729
+    2565296634231265729,
+    1341363714493511092,
+    4052234543536358285
   ],
   "retiredRelationUids": [],
   "version": 1

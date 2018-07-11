@@ -3,12 +3,12 @@ package de.ringleinknorr.boulderapp;
 import android.content.Context;
 import android.graphics.Color;
 
-import de.ringleinknorr.boulderapp.routes.Gym;
-import de.ringleinknorr.boulderapp.routes.GymSector;
-import de.ringleinknorr.boulderapp.routes.GymSectorCoord;
-import de.ringleinknorr.boulderapp.routes.Route;
-import de.ringleinknorr.boulderapp.routes.RouteLevel;
-import de.ringleinknorr.boulderapp.timeline.Session;
+import de.ringleinknorr.boulderapp.models.Gym;
+import de.ringleinknorr.boulderapp.models.GymSector;
+import de.ringleinknorr.boulderapp.models.GymSectorCoord;
+import de.ringleinknorr.boulderapp.models.Route;
+import de.ringleinknorr.boulderapp.models.RouteLevel;
+import de.ringleinknorr.boulderapp.models.Session;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 

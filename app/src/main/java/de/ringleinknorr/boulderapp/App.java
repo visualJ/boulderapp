@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import de.ringleinknorr.boulderapp.dependencyinjection.DaggerAppDIComponent;
+import de.ringleinknorr.boulderapp.models.MyObjectBox;
 import io.objectbox.BoxStore;
 
 public class App extends Application implements HasSupportFragmentInjector {

@@ -24,7 +24,7 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|snap">
 
-            <de.ringleinknorr.boulderapp.timeline.SessionCardView
+            <de.ringleinknorr.boulderapp.views.SessionCardView
                 android:id="@+id/session_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
+    <de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView
         android:id="@+id/session_route_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -109,7 +109,7 @@
                         app:layout_constraintTop_toBottomOf="@id/gym_sector"
                         tools:text="Wiesbadener Nordwand" />
 
-                    <de.ringleinknorr.boulderapp.routes.GymSectorView
+                    <de.ringleinknorr.boulderapp.views.GymSectorView
                         android:id="@+id/gym_sector"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/position_section" />
 
-            <de.ringleinknorr.boulderapp.PlaceholderRecyclerView
+            <de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView
                 android:id="@+id/session_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
