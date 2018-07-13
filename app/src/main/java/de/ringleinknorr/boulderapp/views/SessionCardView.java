@@ -21,20 +21,22 @@ import de.ringleinknorr.boulderapp.R;
 
 public class SessionCardView extends ConstraintLayout {
 
-    @BindView(R.id.dayText)
+    @BindView(R.id.day_text)
     TextView dayText;
-    @BindView(R.id.monthText)
+    @BindView(R.id.month_text)
     TextView monthText;
     @BindView(R.id.gym_text)
     TextView gymText;
-    @BindView(R.id.routesText)
+    @BindView(R.id.routes_text)
     TextView routesText;
     @BindView(R.id.successful_routes)
     TextView successfulRoutes;
-    @BindView(R.id.workoutsText)
+    @BindView(R.id.workouts_text)
     TextView workoutsText;
-    @BindView(R.id.sessionTrendIcon)
+    @BindView(R.id.session_trend_icon)
     ImageView trendIcon;
+    @BindView(R.id.session_trend_value)
+    TextView trendValueTextView;
 
     public TextView getDayText() {
         return dayText;
@@ -115,6 +117,7 @@ public class SessionCardView extends ConstraintLayout {
         } else {
             trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
         }
+        trendValueTextView.setText(getResources().getString(R.string.trend_value_placeholder, (trend)));
     }
 
     public void setWorkouts(int workouts) {
