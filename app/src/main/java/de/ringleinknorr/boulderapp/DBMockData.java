@@ -21,6 +21,7 @@ public class DBMockData {
         Box<Session> sessionBox = boxStore.boxFor(Session.class);
         Box<Route> routeBox = boxStore.boxFor(Route.class);
         Box<GymSectorCoord> gymSectorCoordsBox = boxStore.boxFor(GymSectorCoord.class);
+        Box<RouteLevel> routeLevelBox = boxStore.boxFor(RouteLevel.class);
 
 
         if (routeBox.count() <= 0) {
@@ -39,32 +40,7 @@ public class DBMockData {
             RouteLevel level2 = new RouteLevel("Anspruchsvoll", 1, Color.argb(1, 255, 0, 0), gym2);
             RouteLevel level3 = new RouteLevel("Sportlich", 2, Color.BLUE, gym3);
 
-            Route routes[] = {
-                    new Route(gym1, "black1.jpg", 2, gym1levelblack),
-                    new Route(gym1, "blue1.jpg", 4, gym1levelblue),
-                    new Route(gym1, "blue2.jpg", 2, gym1levelblue),
-                    new Route(gym1, "blue3.jpg", 1, gym1levelblue),
-                    new Route(gym1, "blue4.jpg", 2, gym1levelblue),
-                    new Route(gym1, "blue5.jpg", 3, gym1levelblue),
-                    new Route(gym1, "yellow1.jpg", 1, gym1levelyellow),
-                    new Route(gym1, "yellow2.jpg", 3, gym1levelyellow),
-                    new Route(gym1, "yellow3.jpg", 3, gym1levelyellow),
-                    new Route(gym1, "yellow4.jpg", 1, gym1levelyellow),
-                    new Route(gym1, "yellow5.jpg", 1, gym1levelyellow),
-                    new Route(gym1, "white1.jpg", 1, gym1levelwhite),
-                    new Route(gym1, "green1.jpg", 4, gym1levelgreen),
-                    new Route(gym1, "green2.jpg", 1, gym1levelgreen),
-                    new Route(gym1, "green3.jpg", 3, gym1levelgreen),
-                    new Route(gym1, "green4.jpg", 3, gym1levelgreen),
-                    new Route(gym1, "red1.jpg", 1, gym1levelred),
-                    new Route(gym1, "red2.jpg", 4, gym1levelred),
-                    new Route(gym1, "red3.jpg", 1, gym1levelred),
-
-                    new Route(gym2, "red1.jpg", 5, level2),
-                    new Route(gym2, "red2.jpg", 6, level2),
-
-                    new Route(gym3, "blue6.jpg", 1, level3),
-            };
+            RouteLevel routeLevels[] = {gym1levelblack, gym1levelblue, gym1levelyellow, gym1levelwhite, gym1levelgreen, gym1levelred, level2, level3};
 
             GymSector gym1Sector1 = new GymSector(gym1);
             GymSector gym1Sector2 = new GymSector(gym1);
@@ -147,7 +123,7 @@ public class DBMockData {
 
             };
 
-            routeBox.put(routes);
+            routeLevelBox.put(routeLevels);
             gymSectorCoordsBox.put(coords);
         }
 

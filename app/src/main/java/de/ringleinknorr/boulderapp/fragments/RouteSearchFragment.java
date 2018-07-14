@@ -197,7 +197,7 @@ public class RouteSearchFragment extends InjectableFragment {
     public void onSearchButton() {
         String gymName = String.valueOf(autoCompleteTextView.getText());
         GymSector selectedSector = viewModel.getSelectedGymSector();
-        viewModel.queryRoutes(new RouteSearchParameter(gymName, selectedSector != null ? selectedSector.getId() : null, routeLevelListAdapter.getSelectedItems()));
+        viewModel.queryRoutes(new RouteSearchParameter(gymRepository.getGymWithName(gymName).getId(), selectedSector != null ? selectedSector.getId() : null, routeLevelListAdapter.getSelectedItems()));
     }
 
     @OnClick(R.id.add_button)

@@ -29,6 +29,7 @@ public class RouteSearchViewModel extends ViewModel {
     private MutableLiveData<Gym> selectedGym;
     private List<Integer> selectedRouteLevelPositions;
     private GymSector selectedGymSector;
+    private LiveData<List<Route>> queryRoutesSource;
 
     @Inject
     public RouteSearchViewModel(RouteRepository routeRepository, SessionRepository sessionRepository) {
@@ -43,7 +44,11 @@ public class RouteSearchViewModel extends ViewModel {
     }
 
     public void queryRoutes(RouteSearchParameter routeSearchParameter) {
-        routes.addSource(routeRepository.queryRoutes(routeSearchParameter), routeList -> {
+        if (queryRoutesSource != null) {
+            routes.removeSource(queryRoutesSource);
+        }
+        queryRoutesSource = routeRepository.queryRoutes(routeSearchParameter);
+        routes.addSource(queryRoutesSource, routeList -> {
             Collections.sort(routeList);
             routes.postValue(routeList);
         });

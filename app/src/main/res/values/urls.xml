@@ -2,4 +2,5 @@
 <resources>
     <string name="url_images">http://www.mi.hs-rm.de/~bring002/bolder/images/</string>
     <string name="url_thumbnail">http://www.mi.hs-rm.de/~bring002/bolder/images/thumbnails/</string>
+    <string name="url_data">http://www.mi.hs-rm.de/~bring002/bolder/data/</string>
 </resources>

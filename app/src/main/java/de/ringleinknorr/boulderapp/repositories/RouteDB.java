@@ -31,6 +31,10 @@ public class RouteDB {
         return new ObjectBoxLiveData<>(box.query().build());
     }
 
+    public void putRoutes(List<Route> routes) {
+        box.put(routes);
+    }
+
     public LiveData<Route> getRoute(long routeId) {
         MediatorLiveData<Route> liveData = new MediatorLiveData<>();
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(box.query().equal(Route_.id, routeId).build());
@@ -39,29 +43,25 @@ public class RouteDB {
     }
 
     public LiveData<List<Route>> queryRoutes(RouteSearchParameter routeSearchParameter) {
-        String gymName = routeSearchParameter.getGymName();
+        long gymId = routeSearchParameter.getGymId();
         Long gymSectorId = routeSearchParameter.getSectorId();
-        MediatorLiveData<List<Route>> liveData = new MediatorLiveData<>();
-        QueryBuilder<Route> builder = box.query();
         List<RouteLevel> routeLevels = routeSearchParameter.getRouteLevels();
+        QueryBuilder<Route> builder = box.query();
 
         if (gymSectorId != null) {
             builder.equal(Route_.gymSectorId, gymSectorId);
         }
 
-        List<String> routeLevelNames = new ArrayList<>();
-        if (routeSearchParameter.getRouteLevels() != null && !routeSearchParameter.getRouteLevels().isEmpty()) {
-            for (RouteLevel level : routeSearchParameter.getRouteLevels()) {
-                routeLevelNames.add(level.getLevelName());
+        builder.equal(Route_.gymId, gymId);
 
+        List<String> routeLevelNames = new ArrayList<>();
+        if (routeLevels != null && !routeLevels.isEmpty()) {
+            for (RouteLevel level : routeLevels) {
+                routeLevelNames.add(level.getLevelName());
             }
-            builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName) && routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
-        } else {
-            builder.filter((route) -> route.getGym().getTarget().getName().equals(gymName));
+            builder.filter((route) -> routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
         }
 
-        LiveData<List<Route>> query = new ObjectBoxLiveData<>(builder.build());
-        liveData.addSource(query, liveData::postValue);
-        return liveData;
+        return new ObjectBoxLiveData<>(builder.build());
     }
 }

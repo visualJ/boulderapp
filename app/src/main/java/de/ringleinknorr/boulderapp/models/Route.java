@@ -15,11 +15,14 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class Route implements Comparable<Route> {
-    @Id
+    @Id(assignable = true)
     private long id;
 
-    private ToOne<Gym> gym;
     private String imageId;
+    private long gymId;
+    private long gymSectorId;
+    private long routeLevelId;
+    private ToOne<Gym> gym;
     private ToOne<GymSector> gymSector;
     private ToOne<RouteLevel> routeLevel;
     @Backlink
@@ -33,7 +36,7 @@ public class Route implements Comparable<Route> {
     }
 
     public Route() {
-
+        // Required empty constructor
     }
 
     /**
@@ -91,5 +94,29 @@ public class Route implements Comparable<Route> {
     @Override
     public int compareTo(@NonNull Route route) {
         return getRouteLevel().getTarget().getLevelNumber() - route.getRouteLevel().getTarget().getLevelNumber();
+    }
+
+    public long getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(long gymId) {
+        this.gymId = gymId;
+    }
+
+    public long getGymSectorId() {
+        return gymSectorId;
+    }
+
+    public void setGymSectorId(long gymSectorId) {
+        this.gymSectorId = gymSectorId;
+    }
+
+    public long getRouteLevelId() {
+        return routeLevelId;
+    }
+
+    public void setRouteLevelId(long routeLevelId) {
+        this.routeLevelId = routeLevelId;
     }
 }

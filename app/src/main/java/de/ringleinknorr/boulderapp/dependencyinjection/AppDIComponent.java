@@ -5,6 +5,7 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import de.ringleinknorr.boulderapp.App;
+import de.ringleinknorr.boulderapp.annotations.DataUrl;
 import de.ringleinknorr.boulderapp.annotations.ImageUrl;
 import de.ringleinknorr.boulderapp.annotations.ThumbnailUrl;
 import io.objectbox.BoxStore;
@@ -21,6 +22,9 @@ public interface AppDIComponent extends AndroidInjector<App> {
 
         @BindsInstance
         Builder thumbnailUrl(@ThumbnailUrl String thumbnailUrl);
+
+        @BindsInstance
+        Builder dataUrl(@DataUrl String dataUrl);
 
         AppDIComponent build();
     }

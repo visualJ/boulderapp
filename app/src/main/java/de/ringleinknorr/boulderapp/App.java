@@ -26,6 +26,7 @@ public class App extends Application implements HasSupportFragmentInjector {
                 .boxStore(boxStore)
                 .imageUrl(getResources().getString(R.string.url_images))
                 .thumbnailUrl(getResources().getString(R.string.url_thumbnail))
+                .dataUrl(getResources().getString(R.string.url_data))
                 .build().inject(this);
         DBMockData.createMockData(this, boxStore);
     }
