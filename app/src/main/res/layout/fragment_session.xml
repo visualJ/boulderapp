@@ -24,13 +24,44 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|snap">
 
-            <de.ringleinknorr.boulderapp.views.SessionCardView
-                android:id="@+id/session_card"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fitsSystemWindows="true"
-                app:docked="true" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon_statistic_expander"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/session_card"
+                    app:srcCompat="@drawable/ic_expand_more" />
+
+                <de.ringleinknorr.boulderapp.views.SessionsStatisticsView
+                    android:id="@+id/session_statistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:animateLayoutChanges="true"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/session_card"
+                    tools:layout_editor_absoluteX="26dp" />
+
+                <de.ringleinknorr.boulderapp.views.SessionCardView
+                    android:id="@+id/session_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fitsSystemWindows="true"
+                    app:docked="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 

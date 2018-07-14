@@ -33,6 +33,7 @@ import de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView;
 import de.ringleinknorr.boulderapp.views.SessionCardView;
 import de.ringleinknorr.boulderapp.views.SessionRouteCardViewTransition;
 import de.ringleinknorr.boulderapp.views.SessionRouteListAdapter;
+import de.ringleinknorr.boulderapp.views.SessionsStatisticsView;
 import de.ringleinknorr.boulderapp.views.SwypeItemTouchHelper;
 import io.objectbox.relation.ToMany;
 
@@ -48,6 +49,12 @@ public class SessionFragment extends InjectableFragment {
 
     @BindView(R.id.route_transition_image)
     ImageView routeTransitionImage;
+
+    @BindView(R.id.icon_statistic_expander)
+    ImageView statisticExpander;
+
+    @BindView(R.id.session_statistics)
+    SessionsStatisticsView sessionStatisticView;
 
     @Inject
     ImageRepository imageRepository;
@@ -121,4 +128,17 @@ public class SessionFragment extends InjectableFragment {
         bundle.putLong(RouteSearchFragment.KEY_SESSION_ID, viewModel.getSessionId());
         NavHostFragment.findNavController(this).navigate(R.id.addRoute, bundle);
     }
+
+    @OnClick(R.id.icon_statistic_expander)
+    public void onExpandSessionStatistics() {
+        sessionStatisticView.setVisibility(View.VISIBLE);
+        statisticExpander.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.close_statistics)
+    public void onCloseSessionStatistics() {
+        sessionStatisticView.setVisibility(View.GONE);
+        statisticExpander.setVisibility(View.VISIBLE);
+    }
+
 }
