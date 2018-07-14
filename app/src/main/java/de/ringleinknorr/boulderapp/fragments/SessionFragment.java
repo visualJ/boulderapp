@@ -83,7 +83,9 @@ public class SessionFragment extends InjectableFragment {
             sessionCard.setGym(session.getGym().getTarget().getName());
             sessionCard.setRoutes(session.getRoutes().size());
             sessionCard.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
-            statisticsService.getMonthlyTrendForSession(session).observe(this, sessionCard::setSessionTrend);
+            statisticsService.getPreviousMonthTrend(session).observe(this, sessionCard::setSessionTrend);
+            statisticsService.getPreviousMonthTrend(session).observe(this, sessionStatisticView::setMonthlyTrend);
+            statisticsService.getPreviousSessionTrend(session).observe(this, sessionStatisticView::setPreviousSessionTrend);
             ToMany<SessionRoute> routes = session.getRoutes();
             Collections.sort(routes);
             adapter.setItems(routes);

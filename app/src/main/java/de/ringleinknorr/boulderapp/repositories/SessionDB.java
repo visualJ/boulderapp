@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.repositories;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -38,7 +39,19 @@ public class SessionDB {
         return liveData;
     }
 
-    public LiveData<List<Session>> getSessionsInMonth(Date date) {
+    public LiveData<Session> getPreviousSession(Session session) {
+        MediatorLiveData<Session> previousSession = new MediatorLiveData<>();
+        List<Session> orderedSession = box.query().order(Session_.date).build().find();
+
+        int index = orderedSession.indexOf(session);
+        if (index >= 1){
+            previousSession.postValue( orderedSession.get(index-1) );
+        }
+
+        return previousSession;
+    }
+
+    public LiveData<List<Session>> getSessionsFromPreviousMonth(Date date) {
         QueryBuilder<Session> builder = box.query();
 
         builder.filter((session) -> {
@@ -49,14 +62,18 @@ public class SessionDB {
             cal.setTime(date);
             int month = cal.get(Calendar.MONTH);
             int year = cal.get(Calendar.YEAR);
-            return monthTemp == month && yearTemp == year;
+
+            if(month == Calendar.JANUARY){
+                return monthTemp == Calendar.DECEMBER && yearTemp == year-1;
+            }else{
+                return monthTemp == monthTemp-1 && yearTemp == year;
+            }
+
         });
 
         return new ObjectBoxLiveData<>(builder.build());
 
     }
-
-
 
     public long addSession(Session session) {
         return box.put(session);

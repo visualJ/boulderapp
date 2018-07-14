@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.services;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class StatisticsService {
         this.sessionRepository = sessionRepository;
     }
 
-    public MediatorLiveData<Double> getMonthlyTrendForSession(Session session) {
-        LiveData<List<Session>> sessionsInMonth = sessionRepository.getSessionsInMonth(session.getDate());
+    public MediatorLiveData<Double> getPreviousMonthTrend(Session session) {
+        LiveData<List<Session>> sessionsInMonth = sessionRepository.getSessionsFromPreviousMonth(session.getDate());
         MediatorLiveData<Double> trendLiveData = new MediatorLiveData<>();
         trendLiveData.addSource(sessionsInMonth, sessions -> {
             List<Session> sessionInMonthList = sessionsInMonth.getValue();
@@ -45,4 +46,20 @@ public class StatisticsService {
         });
         return trendLiveData;
     }
+
+    public MediatorLiveData<Double> getPreviousSessionTrend(Session session){
+        LiveData<Session> previousSessionLiveData = sessionRepository.getPreviousSession(session);
+        MediatorLiveData<Double> trendLiveData = new MediatorLiveData<>();
+        trendLiveData.addSource(previousSessionLiveData, previousSession -> {
+            if(previousSession != null) {
+                int previousSessionCompletedRoutes =  previousSession.getSuccessfulSessionRoutes().size();
+                int completedRoutes = session.getSuccessfulSessionRoutes().size();
+                double trend = previousSessionCompletedRoutes == 0 ? 100 * completedRoutes : ((100 / previousSessionCompletedRoutes) * completedRoutes) - 100;
+                trendLiveData.postValue(trend);
+            }
+        });
+
+        return trendLiveData;
+    }
+
 }

@@ -32,8 +32,12 @@ public class SessionRepository {
         return db.addSession(session);
     }
 
-    public LiveData<List<Session>> getSessionsInMonth(Date date) {
-        return db.getSessionsInMonth(date);
+    public LiveData<List<Session>> getSessionsFromPreviousMonth(Date date) {
+        return db.getSessionsFromPreviousMonth(date);
+    }
+
+    public LiveData<Session> getPreviousSession(Session session) {
+        return db.getPreviousSession(session);
     }
 
     public void removeAllSessions() {
