@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+/**
+ * Helper for enabling the swype to delete behavior in recycler views.
+ */
 public class SwypeItemTouchHelper extends ItemTouchHelper {
 
     private static class SimpleSwypeCallback extends SimpleCallback {

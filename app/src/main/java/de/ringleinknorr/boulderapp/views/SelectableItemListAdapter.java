@@ -6,6 +6,13 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An {@link ItemListAdapter} that can also handle item selection.
+ * This features internal selection state handling and a selection listener via {@link OnSelectionChangedListener}.
+ *
+ * @param <I> The item type to use in the adapter.
+ * @param <V> The view type that displays the item data, needs to implement {@link Selectable}.
+ */
 public abstract class SelectableItemListAdapter<I, V extends View & SelectableItemListAdapter.Selectable> extends ItemListAdapter<I, V> {
 
     private List<Integer> selectedPositions = new ArrayList<>();

@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.util.ColorUtil;
 
+/**
+ * Displays information about a route within a session, like image, difficulty and result.
+ */
 public class SessionRouteCardView extends ConstraintLayout {
     @BindView(R.id.route_level_text)
     TextView routeLevelText;

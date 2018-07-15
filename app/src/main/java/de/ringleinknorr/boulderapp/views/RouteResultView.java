@@ -10,6 +10,9 @@ import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.models.SessionRoute;
 
+/**
+ * Displays and enables setting the result (successful/unsuccessful) of a route.
+ */
 public class RouteResultView extends android.support.v7.widget.AppCompatImageButton {
 
     private SessionRoute.Result result;
@@ -47,6 +50,9 @@ public class RouteResultView extends android.support.v7.widget.AppCompatImageBut
         updateUI();
     }
 
+    /**
+     * Update the ui to reflect the buttons selection status.
+     */
     private void updateUI() {
         switch (result) {
             case SUCCESS:
@@ -67,6 +73,11 @@ public class RouteResultView extends android.support.v7.widget.AppCompatImageBut
     }
 
     public interface OnResultChangedListener {
+        /**
+         * Called when the result is changed.
+         *
+         * @param result The new result state.
+         */
         void onResultChanged(SessionRoute.Result result);
     }
 

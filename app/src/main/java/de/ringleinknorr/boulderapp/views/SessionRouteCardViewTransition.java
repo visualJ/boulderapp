@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * A transition animation between a {@link SessionRouteCardView} and the route detail screen.
+ */
 public class SessionRouteCardViewTransition extends ViewTransition<SessionRouteCardView, ImageView> {
 
     public SessionRouteCardViewTransition(SessionRouteCardView source, ImageView destination, OnTransitionFinishedListener onTransitionFinishedListener, View... fade) {

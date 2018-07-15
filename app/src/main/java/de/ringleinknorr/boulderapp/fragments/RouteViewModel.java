@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import de.ringleinknorr.boulderapp.models.Route;
 import de.ringleinknorr.boulderapp.repositories.RouteRepository;
 
+/**
+ * The view model for {@link RouteFragment}.
+ */
 public class RouteViewModel extends ViewModel {
 
     private long routeId;

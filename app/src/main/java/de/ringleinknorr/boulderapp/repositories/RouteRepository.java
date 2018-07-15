@@ -23,14 +23,29 @@ public class RouteRepository {
         this.routeService = routeService;
     }
 
+    /**
+     * Retrieve all routes in the db.
+     *
+     * @return All routes.
+     */
     public LiveData<List<Route>> getAllRoutes() {
         return db.getAllRoutes();
     }
 
+    /**
+     * Get a specific route.
+     * @param routeId The id of the route to retrieve.
+     * @return The route or null, if no route with the given id exists.
+     */
     public LiveData<Route> getRoute(long routeId) {
         return db.getRoute(routeId);
     }
 
+    /**
+     * Query for routes with certain parameters. Load routes from service first, if available.
+     * @param routeSearchParameter The parameters to search for.
+     * @return A live list of matching routes.
+     */
     public LiveData<List<Route>> queryRoutes(RouteSearchParameter routeSearchParameter) {
         routeService.getRoutes(routeSearchParameter.getGymId()).enqueue(new Callback<List<Route>>() {
             @Override

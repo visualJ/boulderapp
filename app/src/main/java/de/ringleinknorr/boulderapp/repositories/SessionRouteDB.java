@@ -1,12 +1,13 @@
 package de.ringleinknorr.boulderapp.repositories;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import de.ringleinknorr.boulderapp.models.SessionRoute;
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
-import io.objectbox.relation.ToMany;
 
 @Singleton
 public class SessionRouteDB {
@@ -22,7 +23,7 @@ public class SessionRouteDB {
         return box.put(sessionRoute);
     }
 
-    public void putSessionRoutes(ToMany<SessionRoute> routes) {
+    public void putSessionRoutes(List<SessionRoute> routes) {
         box.put(routes);
     }
 }

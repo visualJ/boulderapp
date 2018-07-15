@@ -1,10 +1,11 @@
 package de.ringleinknorr.boulderapp.repositories;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import de.ringleinknorr.boulderapp.models.SessionRoute;
-import io.objectbox.relation.ToMany;
 
 @Singleton
 public class SessionRouteRepository {
@@ -16,11 +17,22 @@ public class SessionRouteRepository {
         this.sessionRouteDB = sessionRouteDB;
     }
 
+    /**
+     * Save a session route (route in a session with additional meta data).
+     *
+     * @param sessionRoute The session route to put into the db.
+     * @return The session route id.
+     */
     public long putSessionRoute(SessionRoute sessionRoute) {
         return sessionRouteDB.putSessionRoute(sessionRoute);
     }
 
-    public void putSessionRoutes(ToMany<SessionRoute> routes) {
+    /**
+     * Save multiple session routes. This is more efficient than using putSessionRoute multiple times.
+     *
+     * @param routes The routes to save.
+     */
+    public void putSessionRoutes(List<SessionRoute> routes) {
         sessionRouteDB.putSessionRoutes(routes);
     }
 }

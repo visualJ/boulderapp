@@ -20,6 +20,9 @@ import de.ringleinknorr.boulderapp.models.SessionRoute;
 import de.ringleinknorr.boulderapp.repositories.RouteRepository;
 import de.ringleinknorr.boulderapp.repositories.SessionRepository;
 
+/**
+ * The view model for {@link RouteSearchFragment}.
+ */
 public class RouteSearchViewModel extends ViewModel {
     private MediatorLiveData<List<Route>> routes;
     private RouteRepository routeRepository;

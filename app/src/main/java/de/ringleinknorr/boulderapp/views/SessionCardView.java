@@ -19,6 +19,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
 
+/**
+ * Displays basic information about a session, like date and gym name.
+ * Can be used as a standalone card (round corners, shadow) or docked by setting app:docked='true/false' in the xml.
+ */
 public class SessionCardView extends ConstraintLayout {
 
     @BindView(R.id.day_text)
@@ -37,6 +41,34 @@ public class SessionCardView extends ConstraintLayout {
     ImageView trendIcon;
     @BindView(R.id.session_trend_value)
     TextView trendValueTextView;
+    @BindView(R.id.card_view)
+    CardView cardView;
+
+    public SessionCardView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        LayoutInflater.from(context).inflate(R.layout.view_sessioncard, this);
+        ButterKnife.bind(this);
+        setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
+
+        // get attributes from xml
+        TypedArray attributes = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.SessionCardView,
+                0, 0);
+        try {
+            boolean docked = attributes.getBoolean(R.styleable.SessionCardView_docked, false);
+            if (docked) {
+                cardView.setRadius(0);
+                cardView.setUseCompatPadding(false);
+            }
+        } finally {
+            attributes.recycle();
+        }
+    }
+
+    public SessionCardView(Context context) {
+        this(context, null);
+    }
 
     public TextView getDayText() {
         return dayText;
@@ -58,36 +90,16 @@ public class SessionCardView extends ConstraintLayout {
         return successfulRoutes;
     }
 
+    public void setSuccessfulRoutes(int routes) {
+        successfulRoutes.setText(String.valueOf(routes));
+    }
+
     public TextView getWorkoutsText() {
         return workoutsText;
     }
 
     public CardView getCardView() {
         return cardView;
-    }
-
-    @BindView(R.id.card_view)
-
-    CardView cardView;
-
-    public SessionCardView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.view_sessioncard, this);
-        ButterKnife.bind(this);
-        setLayoutParams(new Constraints.LayoutParams(-1,-2));
-        TypedArray attributes = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.SessionCardView,
-                0, 0);
-        try {
-            boolean docked = attributes.getBoolean(R.styleable.SessionCardView_docked, false);
-            if (docked) {
-                cardView.setRadius(0);
-                cardView.setUseCompatPadding(false);
-            }
-        } finally {
-            attributes.recycle();
-        }
     }
 
     public void setDate(Date date, Locale locale) {
@@ -107,10 +119,6 @@ public class SessionCardView extends ConstraintLayout {
         routesText.setText(String.valueOf(routes));
     }
 
-    public void setSuccessfulRoutes(int routes) {
-        successfulRoutes.setText(String.valueOf(routes));
-    }
-
     public void setSessionTrend(double trend) {
         if (trend < 0) {
             trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_black_24dp));
@@ -122,10 +130,6 @@ public class SessionCardView extends ConstraintLayout {
 
     public void setWorkouts(int workouts) {
         workoutsText.setText(String.valueOf(workouts));
-    }
-
-    public SessionCardView(Context context) {
-        this(context, null);
     }
 
     public void setData(SessionCardView other) {

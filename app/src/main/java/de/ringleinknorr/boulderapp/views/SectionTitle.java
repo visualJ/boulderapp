@@ -7,6 +7,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * A section title for recycler views. This displays a label above some generic view.
+ * This is intended to be used with {@link ItemListAdapter}.
+ *
+ * @param <T> The view type that is displayed below the section label.
+ */
 public class SectionTitle<T extends View> extends LinearLayoutCompat {
 
     private TextView title;

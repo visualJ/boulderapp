@@ -21,13 +21,19 @@ public class App extends Application implements HasSupportFragmentInjector {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // create the objectbox database instance. Only one instance may exist at a time.
         boxStore = MyObjectBox.builder().androidContext(App.this).build();
+
+        // prepare dependecy and configuration injection
         DaggerAppDIComponent.builder()
                 .boxStore(boxStore)
                 .imageUrl(getResources().getString(R.string.url_images))
                 .thumbnailUrl(getResources().getString(R.string.url_thumbnail))
                 .dataUrl(getResources().getString(R.string.url_data))
                 .build().inject(this);
+
+        // create some mock data, since not everything is loaded from a web service yet.
         DBMockData.createMockData(this, boxStore);
     }
 

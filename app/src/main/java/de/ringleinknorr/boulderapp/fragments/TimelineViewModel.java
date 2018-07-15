@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import de.ringleinknorr.boulderapp.models.Session;
 import de.ringleinknorr.boulderapp.repositories.SessionRepository;
 
+/**
+ * The view model for {@link TimelineFragment}.
+ */
 public class TimelineViewModel extends ViewModel {
 
     private LiveData<List<Session>> sessions;

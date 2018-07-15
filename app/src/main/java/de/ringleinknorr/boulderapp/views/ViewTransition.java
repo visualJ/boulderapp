@@ -11,12 +11,27 @@ import android.view.animation.DecelerateInterpolator;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A generic transition for views. A destination view is transformed from the bounds
+ * of a source view to its original bounds. At the beginning of the transition, the source
+ * view is hidden. During the animation, some additional view may be faded.
+ *
+ * @param <S> The source view type. This is where the transition starts.
+ * @param <D> The desstination view type. This is transformed during the transition.
+ */
 public abstract class ViewTransition<S extends View, D extends View> {
     protected S source;
     protected D destination;
     protected OnTransitionFinishedListener onTransitionFinishedListener;
     protected List<View> fade;
 
+    /**
+     * Create a new Transition
+     * @param onTransitionFinishedListener The listener to be called when the transition animation finishes
+     * @param source The source view to start the animation from.
+     * @param destination The destination view to transform during the animation.
+     * @param fade Optional views to fade during the transition.
+     */
     public ViewTransition(OnTransitionFinishedListener onTransitionFinishedListener, S source, D destination, View... fade) {
         this.onTransitionFinishedListener = onTransitionFinishedListener;
         this.source = source;
@@ -24,6 +39,12 @@ public abstract class ViewTransition<S extends View, D extends View> {
         this.fade = Arrays.asList(fade);
     }
 
+    /**
+     * Prepare the animation by at least setting source and target bounds. Additionally any other
+     * preparations like setting view data can be made here.
+     * @param dest
+     * @param src
+     */
     protected abstract void prepareAnimation(Rect dest, Rect src);
 
     public void start() {

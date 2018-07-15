@@ -13,6 +13,9 @@ import androidx.navigation.ui.NavigationUI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * The main activity manages navigation and sets up the toolbar and navigation drawer.
+ */
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.nav_drawer)
     NavigationView navDrawer;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        // setup the toolbar
         setSupportActionBar(appToolbar);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, appToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(view -> onBackPressed());
 
+        // setup navigation and control the back arrow
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.addOnNavigatedListener((controller, destination) -> {
             showBackArrow(false);

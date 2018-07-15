@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import de.ringleinknorr.boulderapp.models.Session;
 import de.ringleinknorr.boulderapp.repositories.SessionRepository;
 
+/**
+ * The view model for {@link SessionFragment}.
+ */
 public class SessionViewModel extends ViewModel {
 
     private SessionRepository sessionRepository;

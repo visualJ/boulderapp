@@ -8,6 +8,9 @@ import java.util.Objects;
 
 import dagger.android.support.AndroidSupportInjection;
 
+/**
+ * A fragment base class that injects dependencies.
+ */
 public abstract class InjectableFragment extends Fragment {
     @Override
     public void onAttach(Context context) {

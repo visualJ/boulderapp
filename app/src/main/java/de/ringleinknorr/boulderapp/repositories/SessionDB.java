@@ -2,7 +2,6 @@ package de.ringleinknorr.boulderapp.repositories;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class SessionDB {
     public LiveData<Session> getSession(long sessionId) {
         MediatorLiveData<Session> liveData = new MediatorLiveData<>();
         LiveData<List<Session>> query = new ObjectBoxLiveData<>(box.query().equal(Session_.id, sessionId).build());
-        liveData.addSource(query, list -> liveData.postValue(list.get(0)) );
+        liveData.addSource(query, list -> liveData.postValue(list != null && list.size() > 0 ? list.get(0) : null));
         return liveData;
     }
 

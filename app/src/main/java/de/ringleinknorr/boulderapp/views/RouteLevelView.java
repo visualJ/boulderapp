@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.R;
 
+/**
+ * An item view for the route level selection. THe level is displayed as its level color.
+ */
 public class RouteLevelView extends ConstraintLayout implements SelectableItemListAdapter.Selectable {
 
     public static final int SELECTED_ELEVATION = 12;
@@ -59,6 +62,9 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
         onSelectedListener.onSelected(isSelected);
     }
 
+    /**
+     * Animate the selection / deselection of the item.
+     */
     private void animateUI() {
         if (isSelected) {
             levelSelectionCardView.setCardElevation(SELECTED_ELEVATION);
@@ -69,6 +75,9 @@ public class RouteLevelView extends ConstraintLayout implements SelectableItemLi
         }
     }
 
+    /**
+     * Update the UI to reflect the current selection state.
+     */
     private void updateUI() {
         if (isSelected) {
             levelSelectionCardView.setCardElevation(SELECTED_ELEVATION);

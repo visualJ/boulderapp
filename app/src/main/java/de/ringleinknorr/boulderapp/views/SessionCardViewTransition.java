@@ -4,6 +4,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.View;
 
+/**
+ * A transition animation between a {@link SessionCardView} and the session detail screen.
+ */
 public class SessionCardViewTransition extends ViewTransition<SessionCardView, SessionCardView> {
 
     public SessionCardViewTransition(SessionCardView source, SessionCardView destination, OnTransitionFinishedListener onTransitionFinishedListener, View fade) {

@@ -9,6 +9,10 @@ import android.view.View;
 
 import de.ringleinknorr.boulderapp.R;
 
+/**
+ * A {@link RecyclerView} that can use another view as a placeholder, if no items are being displayed.
+ * The placeholder to use can be set via xml with app:placeholder='@id/your_view_id'.
+ */
 public class PlaceholderRecyclerView extends RecyclerView {
 
     private View placeholder;

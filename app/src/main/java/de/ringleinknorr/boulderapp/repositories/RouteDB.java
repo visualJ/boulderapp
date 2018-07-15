@@ -38,7 +38,7 @@ public class RouteDB {
     public LiveData<Route> getRoute(long routeId) {
         MediatorLiveData<Route> liveData = new MediatorLiveData<>();
         LiveData<List<Route>> query = new ObjectBoxLiveData<>(box.query().equal(Route_.id, routeId).build());
-        liveData.addSource(query, list -> liveData.postValue(list.get(0)));
+        liveData.addSource(query, list -> liveData.postValue(list != null && list.size() > 0 ? list.get(0) : null));
         return liveData;
     }
 

@@ -20,6 +20,10 @@ import butterknife.OnClick;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.util.ColorUtil;
 
+/**
+ * Displays details of a route including image and difficulty label.
+ * The view also features a selection state and is compatible with {@link SelectableItemListAdapter}.
+ */
 public class RouteCardView extends ConstraintLayout implements SelectableItemListAdapter.Selectable {
 
     public final float SELECTED_ICON_APLHA = 1;
