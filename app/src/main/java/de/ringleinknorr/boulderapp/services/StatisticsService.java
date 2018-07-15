@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.util.Log;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,6 +61,19 @@ public class StatisticsService {
         });
 
         return trendLiveData;
+    }
+
+    public MediatorLiveData<List<Session>> getPreviousSessionsGraphData(Session session, int count){
+        LiveData<List<Session>> previousSessionsLivaData = sessionRepository.getPreviousSessions(session, count);
+        MediatorLiveData<List<Session>> graphLiveData = new MediatorLiveData<>();
+
+        graphLiveData.addSource(previousSessionsLivaData, previousSessionsList -> {
+            Collections.reverse(previousSessionsList);
+            previousSessionsList.add(session);
+            graphLiveData.postValue(previousSessionsList);
+        });
+
+        return graphLiveData;
     }
 
 }

@@ -50,10 +50,20 @@ public class SessionRepository {
     /**
      * Return sessions from the month previous to the given date.
      * @param date The date that should be used as reference.
-     * @return A live list off sessions that are dated in the month before the given date.
+     * @return A live list of sessions that are dated in the month before the given date.
      */
     public LiveData<List<Session>> getSessionsFromPreviousMonth(Date date) {
         return db.getSessionsFromPreviousMonth(date);
+    }
+
+    /**
+     * Return sessions previous to the given session.
+     * @param session The session that should be used as reference.
+     * @param count The maximal number of session that should be returned.
+     * @return A live list of sessions that are previous to the given session.
+     */
+    public LiveData<List<Session>> getPreviousSessions(Session session, int count) {
+        return db.getPreviousSessions(session, count);
     }
 
     /**

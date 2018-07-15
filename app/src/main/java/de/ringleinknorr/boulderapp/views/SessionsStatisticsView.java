@@ -1,17 +1,37 @@
 package de.ringleinknorr.boulderapp.views;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
+import android.graphics.Point;
+import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
+import de.ringleinknorr.boulderapp.models.Session;
 
 public class SessionsStatisticsView extends ConstraintLayout {
 
@@ -19,6 +39,13 @@ public class SessionsStatisticsView extends ConstraintLayout {
     TextView sessionStatisticsMonthTrend;
     @BindView(R.id.session_statistics_previous_session_trend)
     TextView sessionStatisticsPreviousSessionTrend;
+    @BindView(R.id.session_statistics_chart)
+    LineChart chart;
+
+    @BindColor(R.color.colorPrimary)
+    int colorGreen;
+    @BindColor(R.color.colorDarkGrey)
+    int colorGrey;
 
     public SessionsStatisticsView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -34,6 +61,71 @@ public class SessionsStatisticsView extends ConstraintLayout {
 
     public void setPreviousSessionTrend(double trend){
         sessionStatisticsPreviousSessionTrend.setText(getResources().getString(R.string.trend_value, (trend)));
+    }
+
+    public void setLineChart(List<Session> previousSessions){
+        List<Entry> entries1 = new ArrayList<>();
+        List<Entry> entries2 = new ArrayList<>();
+
+       final List<String> xAxisLabels = new ArrayList<>();
+
+        for (Session session : previousSessions) {
+            entries2.add(new Entry(previousSessions.indexOf(session), session.getSuccessfulSessionRoutes().size()));
+            entries1.add(new Entry(previousSessions.indexOf(session), session.getRoutes().size()));
+            xAxisLabels.add(String.valueOf(session.getId()));
+        }
+
+        LineDataSet dataSet1 = new LineDataSet(entries1, "total Routes");
+        dataSet1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        dataSet1.setColor(colorGrey);
+        dataSet1.setValueTextColor(colorGrey);
+        dataSet1.setValueTextSize(10f);
+        dataSet1.setCircleRadius(5f);
+        dataSet1.setCircleColor(colorGrey);
+        dataSet1.setLineWidth(2f);
+
+        LineDataSet dataSet2 = new LineDataSet(entries2, "completed Routes");
+        dataSet2.setAxisDependency(YAxis.AxisDependency.LEFT);
+        dataSet2.setColor(colorGreen);
+        dataSet2.setValueTextColor(colorGrey);
+        dataSet2.setValueTextSize(10f);
+        dataSet2.setCircleRadius(5f);
+        dataSet2.setCircleColor(colorGreen);
+        dataSet2.setLineWidth(2f);
+        dataSet2.enableDashedLine(20f,10f,4f);
+
+        LineData lineData1 = new LineData(dataSet1,dataSet2);
+        chart.setData(lineData1);
+        YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setEnabled(false);
+        leftAxis.setDrawGridLines(false);
+        YAxis rightAxis = chart.getAxisRight();
+        rightAxis.setEnabled(false);
+        rightAxis.setDrawGridLines(false);
+
+        IAxisValueFormatter formatter = (value, axis) -> {
+            if(value >= 0) {
+                if (xAxisLabels.size() > (int) value) {
+                    return xAxisLabels.get((int) value);
+                } else return "";
+            }else {
+                return "";
+            }
+        };
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(formatter);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+
+        chart.setDrawGridBackground(false);
+        chart.setDrawBorders(false);
+        Description chartDescription = new Description();
+        chartDescription.setText("");
+        chart.setDescription(chartDescription);
+        chart.invalidate();
     }
 
 }

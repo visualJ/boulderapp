@@ -2,7 +2,9 @@ package de.ringleinknorr.boulderapp.repositories;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -40,14 +42,29 @@ public class SessionDB {
 
     public LiveData<Session> getPreviousSession(Session session) {
         MediatorLiveData<Session> previousSession = new MediatorLiveData<>();
-        List<Session> orderedSession = box.query().order(Session_.date).build().find();
+        List<Session> orderedSessions = box.query().order(Session_.date).build().find();
 
-        int index = orderedSession.indexOf(session);
-        if (index >= 1){
-            previousSession.postValue( orderedSession.get(index-1) );
+        int index = orderedSessions.indexOf(session);
+        if (index >= 1) {
+            previousSession.postValue(orderedSessions.get(index - 1));
         }
 
         return previousSession;
+    }
+
+    public LiveData<List<Session>> getPreviousSessions(Session session, int count) {
+        MediatorLiveData<List<Session>> previousSessionsLiveData = new MediatorLiveData<>();
+        List<Session> orderedSessions = box.query().order(Session_.date).build().find();
+        List<Session> previousSessions = new ArrayList<>();
+
+        int index = orderedSessions.indexOf(session);
+        for (int i = 1; i <= count; i++) {
+            if (i <= index) {
+                previousSessions.add(orderedSessions.get(index - i));
+            }
+        }
+        previousSessionsLiveData.postValue(previousSessions);
+        return previousSessionsLiveData;
     }
 
     public LiveData<List<Session>> getSessionsFromPreviousMonth(Date date) {
@@ -62,16 +79,15 @@ public class SessionDB {
             int month = cal.get(Calendar.MONTH);
             int year = cal.get(Calendar.YEAR);
 
-            if(month == Calendar.JANUARY){
-                return monthTemp == Calendar.DECEMBER && yearTemp == year-1;
-            }else{
-                return monthTemp == monthTemp-1 && yearTemp == year;
+            if (month == Calendar.JANUARY) {
+                return monthTemp == Calendar.DECEMBER && yearTemp == year - 1;
+            } else {
+                return monthTemp == monthTemp - 1 && yearTemp == year;
             }
 
         });
 
         return new ObjectBoxLiveData<>(builder.build());
-
     }
 
     public long addSession(Session session) {
