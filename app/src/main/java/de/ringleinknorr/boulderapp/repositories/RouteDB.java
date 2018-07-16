@@ -3,6 +3,7 @@ package de.ringleinknorr.boulderapp.repositories;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,6 @@ import javax.inject.Singleton;
 
 import de.ringleinknorr.boulderapp.models.Route;
 import de.ringleinknorr.boulderapp.models.RouteLevel;
-import de.ringleinknorr.boulderapp.models.RouteLevel_;
 import de.ringleinknorr.boulderapp.models.RouteSearchParameter;
 import de.ringleinknorr.boulderapp.models.Route_;
 import io.objectbox.Box;
@@ -54,12 +54,12 @@ public class RouteDB {
 
         builder.equal(Route_.gymId, gymId);
 
+        List<String> routeLevelNames = new ArrayList<>();
         if (routeLevels != null && !routeLevels.isEmpty()) {
-            long levelIds[] = new long[routeLevels.size()];
-            for (int i = 0; i < routeLevels.size(); i++) {
-                levelIds[i] = routeLevels.get(i).getId();
+            for (RouteLevel level : routeLevels) {
+                routeLevelNames.add(level.getLevelName());
             }
-            builder.link(Route_.routeLevel).notIn(RouteLevel_.__ID_PROPERTY, levelIds);
+            builder.filter((route) -> routeLevelNames.contains(route.getRouteLevel().getTarget().getLevelName()));
         }
 
         return new ObjectBoxLiveData<>(builder.build());

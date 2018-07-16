@@ -32,10 +32,11 @@ public class DBMockData {
             RouteLevel gym1levelwhite = new RouteLevel("Schwer", 5, context.getResources().getColor(R.color.colorLevelWhite), gym1);
             RouteLevel gym1levelblack = new RouteLevel("Brutal", 6, context.getResources().getColor(R.color.colorLevelBlack), gym1);
 
-            RouteLevel level2 = new RouteLevel("Anspruchsvoll", 1, Color.argb(255, 255, 0, 0), gym2);
+            RouteLevel gym2level1 = new RouteLevel("Einfach", 1, Color.argb(255, 255, 100, 200), gym2);
+            RouteLevel gym2level2 = new RouteLevel("Schwierig", 2, Color.argb(255, 200, 150, 0), gym2);
             RouteLevel level3 = new RouteLevel("Sportlich", 2, Color.BLUE, gym3);
 
-            RouteLevel routeLevels[] = {gym1levelblack, gym1levelblue, gym1levelyellow, gym1levelwhite, gym1levelgreen, gym1levelred, level2, level3};
+            RouteLevel routeLevels[] = {gym1levelblack, gym1levelblue, gym1levelyellow, gym1levelwhite, gym1levelgreen, gym1levelred, gym2level1, gym2level2, level3};
 
             GymSector gym1Sector1 = new GymSector(gym1);
             GymSector gym1Sector2 = new GymSector(gym1);
