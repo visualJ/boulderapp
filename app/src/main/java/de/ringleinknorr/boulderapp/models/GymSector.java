@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.models;
 
+import com.google.gson.annotations.Expose;
+
 import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
@@ -8,8 +10,11 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class GymSector {
-    @Id
+    @Id(assignable = true)
+    @Expose
     private long id;
+    @Expose
+    private long gymId;
     private ToOne<Gym> gym;
     @Backlink
     private ToMany<GymSectorCoord> gymSectorCoords;
@@ -56,5 +61,13 @@ public class GymSector {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(long gymId) {
+        this.gymId = gymId;
     }
 }

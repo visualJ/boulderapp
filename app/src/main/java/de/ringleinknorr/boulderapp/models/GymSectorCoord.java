@@ -1,16 +1,23 @@
 package de.ringleinknorr.boulderapp.models;
 
+import com.google.gson.annotations.Expose;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.relation.ToOne;
 
 @Entity
 public class GymSectorCoord {
-    @Id
+    @Id(assignable = true)
+    @Expose
     private long id;
 
+    @Expose
     private int x;
+    @Expose
     private int y;
+    @Expose
+    private long gymSectorId;
 
     private ToOne<GymSector> gymSector;
 
@@ -58,5 +65,13 @@ public class GymSectorCoord {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getGymSectorId() {
+        return gymSectorId;
+    }
+
+    public void setGymSectorId(long gymSectorId) {
+        this.gymSectorId = gymSectorId;
     }
 }

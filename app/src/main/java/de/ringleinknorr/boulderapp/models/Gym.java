@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.models;
 
+import com.google.gson.annotations.Expose;
+
 import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
@@ -8,10 +10,13 @@ import io.objectbox.relation.ToMany;
 
 @Entity
 public class Gym {
-    @Id
+    @Id(assignable = true)
+    @Expose
     private long id;
     @Index
+    @Expose
     private String name;
+    @Expose
     private String imageId;
 
     @Backlink

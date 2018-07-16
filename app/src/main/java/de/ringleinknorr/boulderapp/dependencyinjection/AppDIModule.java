@@ -12,6 +12,7 @@ import de.ringleinknorr.boulderapp.fragments.RouteSearchFragment;
 import de.ringleinknorr.boulderapp.fragments.SessionFragment;
 import de.ringleinknorr.boulderapp.fragments.StatisticsFragment;
 import de.ringleinknorr.boulderapp.fragments.TimelineFragment;
+import de.ringleinknorr.boulderapp.repositories.GymService;
 import de.ringleinknorr.boulderapp.repositories.RouteService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -49,5 +50,15 @@ public abstract class AppDIModule {
                 .build();
 
         return retrofit.create(RouteService.class);
+    }
+
+    @Provides
+    static GymService getGymService(@DataUrl String dataUrl) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(dataUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(GymService.class);
     }
 }

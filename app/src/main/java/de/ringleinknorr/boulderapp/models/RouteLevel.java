@@ -1,5 +1,7 @@
 package de.ringleinknorr.boulderapp.models;
 
+import com.google.gson.annotations.Expose;
+
 import io.objectbox.annotation.Backlink;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
@@ -8,11 +10,17 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class RouteLevel {
-    @Id
+    @Id(assignable = true)
+    @Expose
     private long id;
+    @Expose
     private String levelName;
+    @Expose
     private int levelColor;
+    @Expose
     private int levelNumber;
+    @Expose
+    private long gymId;
     @Backlink
     private ToMany<Route> routes;
     private ToOne<Gym> gym;
@@ -74,5 +82,13 @@ public class RouteLevel {
 
     public int getLevelNumber() {
         return levelNumber;
+    }
+
+    public long getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(long gymId) {
+        this.gymId = gymId;
     }
 }

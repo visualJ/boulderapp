@@ -33,8 +33,6 @@ public class App extends Application implements HasSupportFragmentInjector {
                 .dataUrl(getResources().getString(R.string.url_data))
                 .build().inject(this);
 
-        // create some mock data, since not everything is loaded from a web service yet.
-        DBMockData.createMockData(this, boxStore);
     }
 
     @Override
