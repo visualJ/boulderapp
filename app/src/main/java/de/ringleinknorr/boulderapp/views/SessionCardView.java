@@ -125,6 +125,7 @@ public class SessionCardView extends ConstraintLayout {
         } else {
             trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
         }
+        trendIcon.setVisibility(VISIBLE);
         trendValueTextView.setText(getResources().getString(R.string.trend_value_placeholder, (trend)));
     }
 

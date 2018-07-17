@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <TextView
+        android:id="@+id/session_route_list_placeholder"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/session_route_list_placeholder"
+        android:layout_height="match_parent" />
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -22,7 +30,7 @@
             android:fitsSystemWindows="true"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|snap">
+            app:layout_scrollFlags="scroll">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -69,7 +77,6 @@
         android:id="@+id/session_route_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
         android:clipToPadding="false"
         android:padding="8dp"
         app:placeholder="@+id/session_route_list_placeholder"
@@ -77,14 +84,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:spanCount="2"
         tools:listitem="@layout/view_sessionroutecard" />
-
-    <TextView
-        android:id="@+id/session_route_list_placeholder"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/session_route_list_placeholder"
-        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"

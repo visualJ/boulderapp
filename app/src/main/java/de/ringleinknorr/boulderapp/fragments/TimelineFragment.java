@@ -23,6 +23,7 @@ import de.ringleinknorr.boulderapp.dependencyinjection.DIViewModelFactory;
 import de.ringleinknorr.boulderapp.models.Session;
 import de.ringleinknorr.boulderapp.repositories.SessionRepository;
 import de.ringleinknorr.boulderapp.repositories.SessionRouteRepository;
+import de.ringleinknorr.boulderapp.services.StatisticsService;
 import de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView;
 import de.ringleinknorr.boulderapp.views.SessionCardView;
 import de.ringleinknorr.boulderapp.views.SessionCardViewTransition;
@@ -42,6 +43,9 @@ public class TimelineFragment extends InjectableFragment {
 
     @Inject
     SessionRepository sessionRepository;
+
+    @Inject
+    StatisticsService statisticsService;
 
     @Inject
     SessionRouteRepository sessionRouteRepository;
@@ -64,7 +68,9 @@ public class TimelineFragment extends InjectableFragment {
         viewModel.getSessions().observe(this, sessions -> adapter.setItems(sessions));
 
         sessionList.setHasFixedSize(true);
-        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start());
+        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, targetView) -> new SessionCardViewTransition(targetView, transitionSessionCard, () -> navigateToSession(item), sessionList).start(), (session, callback) -> {
+            statisticsService.getPreviousMonthTrend(session).observe(this, callback::call);
+        });
         sessionList.setAdapter(adapter);
         SwypeItemTouchHelper swypeItemTouchHelper = new SwypeItemTouchHelper(position -> {
             Session session = adapter.getItems().get(position);

@@ -1,19 +1,13 @@
 package de.ringleinknorr.boulderapp.views;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.graphics.Point;
-import android.graphics.Typeface;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -75,7 +69,7 @@ public class SessionsStatisticsView extends ConstraintLayout {
             xAxisLabels.add(String.valueOf(session.getId()));
         }
 
-        LineDataSet dataSet1 = new LineDataSet(entries1, "total Routes");
+        LineDataSet dataSet1 = new LineDataSet(entries1, "Hinzugefügte Routen");
         dataSet1.setAxisDependency(YAxis.AxisDependency.LEFT);
         dataSet1.setColor(colorGrey);
         dataSet1.setValueTextColor(colorGrey);
@@ -83,8 +77,10 @@ public class SessionsStatisticsView extends ConstraintLayout {
         dataSet1.setCircleRadius(5f);
         dataSet1.setCircleColor(colorGrey);
         dataSet1.setLineWidth(2f);
+        dataSet1.enableDashedLine(20f, 10f, 4f);
 
-        LineDataSet dataSet2 = new LineDataSet(entries2, "completed Routes");
+
+        LineDataSet dataSet2 = new LineDataSet(entries2, "Geschaffte Routen");
         dataSet2.setAxisDependency(YAxis.AxisDependency.LEFT);
         dataSet2.setColor(colorGreen);
         dataSet2.setValueTextColor(colorGrey);
@@ -92,7 +88,6 @@ public class SessionsStatisticsView extends ConstraintLayout {
         dataSet2.setCircleRadius(5f);
         dataSet2.setCircleColor(colorGreen);
         dataSet2.setLineWidth(2f);
-        dataSet2.enableDashedLine(20f,10f,4f);
 
         LineData lineData1 = new LineData(dataSet1,dataSet2);
         chart.setData(lineData1);

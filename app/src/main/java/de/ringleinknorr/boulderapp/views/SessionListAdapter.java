@@ -15,11 +15,13 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
 
     private Locale locale;
     private Context context;
+    private TrendProvider trendProvider;
 
-    public SessionListAdapter(Context context, List<Session> sessions, Locale locale, OnItemClickListener<Session, SessionCardView> onItemClickListener) {
+    public SessionListAdapter(Context context, List<Session> sessions, Locale locale, OnItemClickListener<Session, SessionCardView> onItemClickListener, TrendProvider trendProvider) {
         super(sessions, onItemClickListener);
         this.context = context;
         this.locale = locale;
+        this.trendProvider = trendProvider;
     }
 
     @Override
@@ -34,6 +36,10 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
         sessionCardView.gymText.setText(String.valueOf(session.getGym().getTarget().getName()));
         sessionCardView.setRoutes(session.getRoutes().size());
         sessionCardView.setSuccessfulRoutes(session.getSuccessfulSessionRoutes().size());
+
+        if (trendProvider != null) {
+            trendProvider.provideTrend(session, sessionCardView::setSessionTrend);
+        }
     }
 
     @Override
@@ -60,5 +66,13 @@ public class SessionListAdapter extends ItemListAdapter<Session, SessionCardView
         cal1.setTime(getItems().get(position - 1).getDate());
         cal2.setTime(getItems().get(position).getDate());
         return cal1.get(Calendar.MONTH) != cal2.get(Calendar.MONTH) || cal1.get(Calendar.YEAR) != cal2.get(Calendar.YEAR);
+    }
+
+    public interface TrendCallback {
+        void call(double trend);
+    }
+
+    public interface TrendProvider {
+        void provideTrend(Session session, TrendCallback callback);
     }
 }

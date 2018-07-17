@@ -2,7 +2,6 @@ package de.ringleinknorr.boulderapp.services;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.util.Log;
 
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +39,7 @@ public class StatisticsService {
                             completedRoutesInMonth += sessionTemp.getSuccessfulSessionRoutes().size();
                     }
                     double successRateMonth = sessionInMonthList.size() == 0 ? 0 : completedRoutesInMonth / (double) (sessionInMonthList.size() - 1);
-                    trend = successRateMonth == 0 ? 100 * successfullRoutes : ((100 / successRateMonth) * successfullRoutes) - 100;
+                    trend = successRateMonth == 0 ? successfullRoutes : (successfullRoutes - successRateMonth);
                 }
             }
             trendLiveData.postValue(trend);
@@ -55,7 +54,7 @@ public class StatisticsService {
             if(previousSession != null) {
                 int previousSessionCompletedRoutes =  previousSession.getSuccessfulSessionRoutes().size();
                 int completedRoutes = session.getSuccessfulSessionRoutes().size();
-                double trend = previousSessionCompletedRoutes == 0 ? 100 * completedRoutes : ((100 / previousSessionCompletedRoutes) * completedRoutes) - 100;
+                double trend = previousSessionCompletedRoutes == 0 ? completedRoutes : (completedRoutes - previousSessionCompletedRoutes);
                 trendLiveData.postValue(trend);
             }
         });

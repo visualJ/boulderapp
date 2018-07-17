@@ -27,6 +27,7 @@ import de.ringleinknorr.boulderapp.models.Gym;
 import de.ringleinknorr.boulderapp.models.RouteLevel;
 import de.ringleinknorr.boulderapp.models.Session;
 import de.ringleinknorr.boulderapp.repositories.ImageRepository;
+import de.ringleinknorr.boulderapp.services.StatisticsService;
 import de.ringleinknorr.boulderapp.util.ColorUtil;
 import de.ringleinknorr.boulderapp.views.GymSectorImageView;
 import de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView;
@@ -55,6 +56,9 @@ public class RouteFragment extends InjectableFragment {
     DIViewModelFactory<RouteViewModel> viewModelFactory;
 
     @Inject
+    StatisticsService statisticsService;
+
+    @Inject
     ImageRepository imageRepository;
 
     private RouteViewModel viewModel;
@@ -70,8 +74,9 @@ public class RouteFragment extends InjectableFragment {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteViewModel.class);
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_ROUTE_ID));
         gymSectorImageView.setClickable(false);
-
-        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, view1) -> navigateToSession(item));
+        // TODO:
+        adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, view1) -> navigateToSession(item), (session, callback) ->
+                statisticsService.getPreviousMonthTrend(session).observe(this, callback::call));
         sessionList.setAdapter(adapter);
 
         viewModel.getRoute().observe(this, route -> {
