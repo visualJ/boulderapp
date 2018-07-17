@@ -36,28 +36,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/icon_statistic_expander"
+
+                <TextView
+                    android:id="@+id/label_statistic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:drawableEnd="@drawable/ic_expand_more"
+                    android:drawableRight="@drawable/ic_expand_more"
+                    android:text="Statistiken"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/session_card"
-                    app:srcCompat="@drawable/ic_expand_more" />
+                    app:layout_constraintTop_toBottomOf="@+id/session_card" />
 
                 <de.ringleinknorr.boulderapp.views.SessionsStatisticsView
                     android:id="@+id/session_statistics"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
                     android:animateLayoutChanges="true"
                     android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/session_card"
-                    tools:layout_editor_absoluteX="26dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_statistic" />
 
                 <de.ringleinknorr.boulderapp.views.SessionCardView
                     android:id="@+id/session_card"

@@ -9,13 +9,18 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +71,9 @@ public class SessionsStatisticsView extends ConstraintLayout {
         for (Session session : previousSessions) {
             entries2.add(new Entry(previousSessions.indexOf(session), session.getSuccessfulSessionRoutes().size()));
             entries1.add(new Entry(previousSessions.indexOf(session), session.getRoutes().size()));
-            xAxisLabels.add(String.valueOf(session.getId()));
+            DateFormat df = new SimpleDateFormat("dd.MM");
+
+            xAxisLabels.add(df.format(session.getDate()));
         }
 
         LineDataSet dataSet1 = new LineDataSet(entries1, "Hinzugefügte Routen");
@@ -108,15 +115,26 @@ public class SessionsStatisticsView extends ConstraintLayout {
             }
         };
 
+        IValueFormatter valueFormatter = (value, entry, dataSetIndex, viewport) -> {
+            DecimalFormat mFormat = new DecimalFormat("0");
+            return mFormat.format(value);
+        };
+
+        dataSet1.setValueFormatter(valueFormatter);
+        dataSet2.setValueFormatter(valueFormatter);
+
         XAxis xAxis = chart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setDrawGridLines(false);
         xAxis.setValueFormatter(formatter);
+        xAxis.setAvoidFirstLastClipping(true);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
 
         chart.setDrawGridBackground(false);
         chart.setDrawBorders(false);
+
+        Legend chartLegend = chart.getLegend();
+        chartLegend.setForm(Legend.LegendForm.LINE);
         Description chartDescription = new Description();
         chartDescription.setText("");
         chart.setDescription(chartDescription);

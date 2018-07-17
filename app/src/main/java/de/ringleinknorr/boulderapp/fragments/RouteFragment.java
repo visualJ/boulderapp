@@ -74,7 +74,6 @@ public class RouteFragment extends InjectableFragment {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(RouteViewModel.class);
         viewModel.init(Objects.requireNonNull(getArguments()).getLong(ARG_ROUTE_ID));
         gymSectorImageView.setClickable(false);
-        // TODO:
         adapter = new SessionListAdapter(getContext(), new ArrayList<>(), Locale.getDefault(), (position, item, view1) -> navigateToSession(item), (session, callback) ->
                 statisticsService.getPreviousMonthTrend(session).observe(this, callback::call));
         sessionList.setAdapter(adapter);

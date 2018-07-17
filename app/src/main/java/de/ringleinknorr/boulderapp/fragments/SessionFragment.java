@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.content.res.AppCompatResources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,14 +46,14 @@ public class SessionFragment extends InjectableFragment {
     @BindView(R.id.session_card)
     SessionCardView sessionCard;
 
+    @BindView(R.id.label_statistic)
+    TextView labelStatistic;
+
     @BindView(R.id.session_route_list)
     PlaceholderRecyclerView sessionRouteList;
 
     @BindView(R.id.route_transition_image)
     ImageView routeTransitionImage;
-
-    @BindView(R.id.icon_statistic_expander)
-    ImageView statisticExpander;
 
     @BindView(R.id.session_statistics)
     SessionsStatisticsView sessionStatisticView;
@@ -135,16 +137,17 @@ public class SessionFragment extends InjectableFragment {
         NavHostFragment.findNavController(this).navigate(R.id.addRoute, bundle);
     }
 
-    @OnClick(R.id.icon_statistic_expander)
-    public void onExpandSessionStatistics() {
-        sessionStatisticView.setVisibility(View.VISIBLE);
-        statisticExpander.setVisibility(View.GONE);
-    }
 
-    @OnClick(R.id.close_statistics)
-    public void onCloseSessionStatistics() {
-        sessionStatisticView.setVisibility(View.GONE);
-        statisticExpander.setVisibility(View.VISIBLE);
+    @OnClick(R.id.label_statistic)
+    public void onDateClicked() {
+        if (sessionStatisticView.getVisibility() == View.VISIBLE) {
+            sessionStatisticView.setVisibility(View.GONE);
+            labelStatistic.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_expand_more), null);
+        } else {
+            sessionStatisticView.setVisibility(View.VISIBLE);
+            labelStatistic.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_expand_less), null);
+
+        }
     }
 
 }
