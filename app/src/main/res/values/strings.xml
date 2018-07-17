@@ -26,6 +26,7 @@
     <string name="route_sessions_section">Sessions</string>
     <string name="route_no_sessions">Diese Route kommt in keinen Sessions vor.</string>
     <string name="route_no_results">Keine passenden Routen gefunden!</string>
-    <string name="trend_value_placeholder">( %1$+,.0f )</string>
+    <string name="trend_value_placeholder">( %1$+,.1f )</string>
+    <string name="trend_value_with_decimals">%1$+,.1f</string>
     <string name="trend_value">%1$+,.0f</string>
 </resources>

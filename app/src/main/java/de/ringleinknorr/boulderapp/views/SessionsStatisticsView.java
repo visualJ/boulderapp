@@ -55,7 +55,7 @@ public class SessionsStatisticsView extends ConstraintLayout {
     }
 
     public void setMonthlyTrend(double trend) {
-        sessionStatisticsMonthTrend.setText(getResources().getString(R.string.trend_value, (trend)));
+        sessionStatisticsMonthTrend.setText(getResources().getString(R.string.trend_value_with_decimals, (trend)));
     }
 
     public void setPreviousSessionTrend(double trend){

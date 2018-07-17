@@ -82,7 +82,7 @@ public class SessionDB {
             if (month == Calendar.JANUARY) {
                 return monthTemp == Calendar.DECEMBER && yearTemp == year - 1;
             } else {
-                return monthTemp == monthTemp - 1 && yearTemp == year;
+                return monthTemp == month - 1 && yearTemp == year;
             }
 
         });

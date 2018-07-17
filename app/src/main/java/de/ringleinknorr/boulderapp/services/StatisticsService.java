@@ -2,6 +2,7 @@ package de.ringleinknorr.boulderapp.services;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.util.Log;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,24 +24,21 @@ public class StatisticsService {
     }
 
     public MediatorLiveData<Double> getPreviousMonthTrend(Session session) {
-        LiveData<List<Session>> sessionsInMonth = sessionRepository.getSessionsFromPreviousMonth(session.getDate());
+        LiveData<List<Session>> previousMonthSessions = sessionRepository.getSessionsFromPreviousMonth(session.getDate());
         MediatorLiveData<Double> trendLiveData = new MediatorLiveData<>();
-        trendLiveData.addSource(sessionsInMonth, sessions -> {
-            List<Session> sessionInMonthList = sessionsInMonth.getValue();
-            int successfullRoutes = session.getSuccessfulSessionRoutes().size();
-            double trend = 0;
+        trendLiveData.addSource(previousMonthSessions, sessions -> {
+            List<Session> sessionInMonthList = previousMonthSessions.getValue();
+            int completedRoutes = session.getSuccessfulSessionRoutes().size();
             int completedRoutesInMonth = 0;
-            if (sessionInMonthList != null) {
-                if (sessionInMonthList.size() == 1) {
-                    trend = 0;
-                } else {
+            double trend = 0;
+            double averageCompletedRoutesPreviousMonth;
+            if (sessionInMonthList != null ) {
                     for (Session sessionTemp : sessionInMonthList) {
                         if (sessionTemp.getId() != session.getId())
                             completedRoutesInMonth += sessionTemp.getSuccessfulSessionRoutes().size();
                     }
-                    double successRateMonth = sessionInMonthList.size() == 0 ? 0 : completedRoutesInMonth / (double) (sessionInMonthList.size() - 1);
-                    trend = successRateMonth == 0 ? successfullRoutes : (successfullRoutes - successRateMonth);
-                }
+                    averageCompletedRoutesPreviousMonth = sessionInMonthList.size() == 0 ? 0 : completedRoutesInMonth / (double) (sessionInMonthList.size());
+                    trend = averageCompletedRoutesPreviousMonth == 0 ? completedRoutes : (completedRoutes - averageCompletedRoutesPreviousMonth);
             }
             trendLiveData.postValue(trend);
         });
