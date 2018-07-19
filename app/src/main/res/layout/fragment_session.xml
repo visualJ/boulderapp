@@ -9,10 +9,22 @@
     <TextView
         android:id="@+id/session_route_list_placeholder"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/session_route_list_placeholder"
-        android:layout_height="match_parent" />
+        android:text="@string/session_route_list_placeholder" />
+
+    <de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView
+        android:id="@+id/session_route_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:placeholder="@+id/session_route_list_placeholder"
+        app:spanCount="2"
+        tools:listitem="@layout/view_sessionroutecard" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -34,8 +46,8 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/label_statistic"
@@ -57,9 +69,8 @@
                     android:id="@+id/session_statistics"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
-                    android:animateLayoutChanges="true"
+                    android:layout_marginStart="0dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/label_statistic" />
@@ -78,18 +89,6 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView
-        android:id="@+id/session_route_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="8dp"
-        app:placeholder="@+id/session_route_list_placeholder"
-        app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:spanCount="2"
-        tools:listitem="@layout/view_sessionroutecard" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
@@ -104,9 +103,9 @@
     <ImageView
         android:id="@+id/route_transition_image"
         android:layout_width="match_parent"
-        android:scaleType="centerCrop"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:visibility="invisible" />
 
 </android.support.design.widget.CoordinatorLayout>
