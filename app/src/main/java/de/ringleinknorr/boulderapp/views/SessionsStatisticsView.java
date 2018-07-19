@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -40,6 +41,10 @@ public class SessionsStatisticsView extends ConstraintLayout {
     TextView sessionStatisticsPreviousSessionTrend;
     @BindView(R.id.session_statistics_chart)
     LineChart chart;
+    @BindView(R.id.icon_session_statistics_prev_session_trend)
+    ImageView prevSessionTrendIcon;
+    @BindView(R.id.icon_session_statistics_monthly_trend)
+    ImageView monthlyTrendIcon;
 
     @BindColor(R.color.colorPrimary)
     int colorGreen;
@@ -55,10 +60,26 @@ public class SessionsStatisticsView extends ConstraintLayout {
     }
 
     public void setMonthlyTrend(double trend) {
+        if (trend < 0) {
+            monthlyTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_black_24dp));
+        } else if (trend == 0) {
+            monthlyTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_flat_black_24dp));
+        } else {
+            monthlyTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
+        }
+        monthlyTrendIcon.setVisibility(VISIBLE);
         sessionStatisticsMonthTrend.setText(getResources().getString(R.string.trend_value_with_decimals, (trend)));
     }
 
     public void setPreviousSessionTrend(double trend){
+        if (trend < 0) {
+            prevSessionTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_black_24dp));
+        } else if (trend == 0) {
+            prevSessionTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_flat_black_24dp));
+        } else {
+            prevSessionTrendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
+        }
+        prevSessionTrendIcon.setVisibility(VISIBLE);
         sessionStatisticsPreviousSessionTrend.setText(getResources().getString(R.string.trend_value, (trend)));
     }
 

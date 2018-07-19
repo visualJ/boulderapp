@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:text="letzten Monat:"
+        android:text="letztem Monat:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -33,11 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/label_last_month_trend"
-        app:layout_constraintStart_toEndOf="@+id/barrier2"
+        app:layout_constraintStart_toEndOf="@+id/icon_session_statistics_monthly_trend"
         app:layout_constraintTop_toTopOf="@+id/label_last_month_trend"
         tools:text="+0" />
 
@@ -46,11 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/label_previous_session_trend"
-        app:layout_constraintStart_toEndOf="@+id/barrier2"
+        app:layout_constraintStart_toEndOf="@+id/icon_session_statistics_prev_session_trend"
         app:layout_constraintTop_toTopOf="@+id/label_previous_session_trend"
         tools:text="+0" />
 
@@ -86,7 +86,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="right"
-        app:constraint_referenced_ids="label_last_month_trend, label_previous_session_trend"
-        tools:layout_editor_absoluteX="384dp" />
+        app:constraint_referenced_ids="label_last_month_trend, label_previous_session_trend" />
+
+    <ImageView
+        android:id="@+id/icon_session_statistics_monthly_trend"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/session_statistics_previous_session_trend"
+        app:layout_constraintStart_toEndOf="@+id/barrier2"
+        app:layout_constraintTop_toTopOf="@+id/session_statistics_month_trend"
+        app:srcCompat="@drawable/ic_trending_flat_black_24dp" />
+
+    <ImageView
+        android:id="@+id/icon_session_statistics_prev_session_trend"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/session_statistics_previous_session_trend"
+        app:layout_constraintStart_toEndOf="@+id/barrier2"
+        app:layout_constraintTop_toTopOf="@+id/session_statistics_previous_session_trend"
+        app:srcCompat="@drawable/ic_trending_flat_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

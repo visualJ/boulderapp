@@ -122,6 +122,8 @@ public class SessionCardView extends ConstraintLayout {
     public void setSessionTrend(double trend) {
         if (trend < 0) {
             trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_down_black_24dp));
+        } else if (trend == 0) {
+            trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_flat_black_24dp));
         } else {
             trendIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_trending_up_black_24dp));
         }
