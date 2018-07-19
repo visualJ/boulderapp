@@ -52,6 +52,12 @@ public class RouteFragment extends InjectableFragment {
     @BindView(R.id.session_list)
     PlaceholderRecyclerView sessionList;
 
+    @BindView(R.id.statistics_route_added_value)
+    TextView routeAddedCountValue;
+
+    @BindView(R.id.statistics_route_completed_value)
+    TextView routeCompletedCountValue;
+
     @Inject
     DIViewModelFactory<RouteViewModel> viewModelFactory;
 
@@ -90,6 +96,8 @@ public class RouteFragment extends InjectableFragment {
             imageRepository.loadImage(gym.getImageId(), gymSectorImageView);
             gymSectorImageView.setGym(gym);
             gymSectorImageView.setSelectedSector(route.getGymSector().getTarget());
+            routeAddedCountValue.setText(String.valueOf(getResources().getString(R.string.statistic_route_value, (route.getRouteAddedCount()))));
+            routeCompletedCountValue.setText(getResources().getString(R.string.statistic_route_value, (route.getRouteCompletedCount())));
 
             List<Session> sessions = route.getSessions();
             Collections.sort(sessions, (s1, s2) -> s1.getDate().compareTo(s2.getDate()));

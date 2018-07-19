@@ -29,4 +29,8 @@
     <string name="trend_value_placeholder">( %1$+,.1f )</string>
     <string name="trend_value_with_decimals">%1$+,.1f</string>
     <string name="trend_value">%1$+,.0f</string>
+    <string name="statistic_label">Statistik</string>
+    <string name="statistic_route_completed_label">Route wurde geschafft:</string>
+    <string name="statistic_route_added_label">Route enthalten in einer Session:</string>
+    <string name="statistic_route_value">%1$dx</string>
 </resources>

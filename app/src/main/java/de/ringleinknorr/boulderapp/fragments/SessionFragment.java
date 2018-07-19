@@ -139,7 +139,7 @@ public class SessionFragment extends InjectableFragment {
 
 
     @OnClick(R.id.label_statistic)
-    public void onDateClicked() {
+    public void onStatisticLabelClicked() {
         if (sessionStatisticView.getVisibility() == View.VISIBLE) {
             sessionStatisticView.setVisibility(View.GONE);
             labelStatistic.setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(Objects.requireNonNull(getContext()), R.drawable.ic_expand_more), null);

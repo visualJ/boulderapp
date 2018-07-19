@@ -55,6 +55,31 @@ public class Route implements Comparable<Route> {
         return new ArrayList<>(sessionSet);
     }
 
+    /**
+     * Get the number of times this route was completed in a session.
+     *
+     * @return The count this route was completed as an int
+     */
+    public int getRouteCompletedCount(){
+        int routeCompletedCount = 0;
+        for(SessionRoute sessionRoute : getSessionRoutes()){
+            if (sessionRoute.getResult() == SessionRoute.Result.SUCCESS){
+                routeCompletedCount++;
+            }
+        }
+        return routeCompletedCount;
+    }
+
+    /**
+     * Get the count of how often this route is included in a session.
+     *
+     * @return The count this route is included in a session as an int
+     */
+    public int getRouteAddedCount(){
+        return getSessionRoutes().size();
+    }
+
+
     public ToOne<GymSector> getGymSector() {
         return gymSector;
     }

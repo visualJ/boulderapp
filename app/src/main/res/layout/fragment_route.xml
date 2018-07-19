@@ -73,8 +73,8 @@
                 android:id="@+id/position_section_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/route_position_section"
                 android:textSize="24sp"
@@ -98,10 +98,10 @@
                         android:id="@+id/gym_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -123,13 +123,13 @@
                 android:id="@+id/sessions_section_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/route_sessions_section"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/position_section" />
+                app:layout_constraintTop_toBottomOf="@+id/statistics_route_completed_label" />
 
             <de.ringleinknorr.boulderapp.views.PlaceholderRecyclerView
                 android:id="@+id/session_list"
@@ -137,9 +137,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorBackgroundGrey"
                 android:clipToPadding="false"
+                android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingBottom="16dp"
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/sessions_section_label"
                 app:placeholder="@+id/session_list_placeholder"
@@ -152,6 +152,65 @@
                 android:gravity="center"
                 android:text="@string/route_no_sessions"
                 app:layout_constraintTop_toBottomOf="@id/session_list" />
+
+            <TextView
+                android:id="@+id/rotue_statistic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/statistic_label"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/position_section" />
+
+            <TextView
+                android:id="@+id/statistics_route_added_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/statistics_route_added_label"
+                app:layout_constraintStart_toEndOf="@+id/barrier4"
+                app:layout_constraintTop_toTopOf="@+id/statistics_route_added_label" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrier4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="statistics_route_added_label, statistics_route_completed_label"/>
+
+            <TextView
+                android:id="@+id/statistics_route_completed_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/statistics_route_completed_label"
+                app:layout_constraintStart_toEndOf="@+id/barrier4"
+                app:layout_constraintTop_toTopOf="@+id/statistics_route_completed_label" />
+
+            <TextView
+                android:id="@+id/statistics_route_added_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
+                android:text="@string/statistic_route_added_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rotue_statistic_label" />
+
+            <TextView
+                android:id="@+id/statistics_route_completed_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
+                android:text="@string/statistic_route_completed_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statistics_route_added_label" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
