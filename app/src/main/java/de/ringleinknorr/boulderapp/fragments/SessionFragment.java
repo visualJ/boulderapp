@@ -92,6 +92,10 @@ public class SessionFragment extends InjectableFragment {
             statisticsService.getPreviousSessionTrend(session).observe(this, sessionStatisticView::setPreviousSessionTrend);
             statisticsService.getPreviousSessionsGraphData(session, 7).observe(this, sessionStatisticView::setLineChart);
 
+            if(!sessionStatisticView.isPreviousSessionTrendSet()){
+                sessionStatisticView.setNoDataForPreviousSessionTrend();
+            }
+
             ToMany<SessionRoute> routes = session.getRoutes();
             Collections.sort(routes);
             adapter.setItems(routes);

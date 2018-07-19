@@ -33,4 +33,9 @@
     <string name="statistic_route_completed_label">Route wurde geschafft:</string>
     <string name="statistic_route_added_label">Route enthalten in einer Session:</string>
     <string name="statistic_route_value">%1$dx</string>
+    <string name="no_data">keine Daten vorhanden</string>
+    <string name="last_month_trend_label">letztem Monat:</string>
+    <string name="previous_session_trend_label">vorheriger Session:</string>
+    <string name="sessions_statistics_completed_routes_topic">Geschaffte Routen im Vergleich zu</string>
+
 </resources>

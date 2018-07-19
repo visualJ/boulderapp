@@ -60,7 +60,7 @@ public class SessionRepository {
      * Return sessions previous to the given session.
      * @param session The session that should be used as reference.
      * @param count The maximal number of session that should be returned.
-     * @return A live list of sessions that are previous to the given session.
+     * @return A live list of sessions that are previous to the given session ordered by date.
      */
     public LiveData<List<Session>> getPreviousSessions(Session session, int count) {
         return db.getPreviousSessions(session, count);

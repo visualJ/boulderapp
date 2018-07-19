@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:text="letztem Monat:"
+        android:text="@string/last_month_trend_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/sessions_statistics_completed_routes_topic" />
 
     <TextView
         android:id="@+id/label_previous_session_trend"
@@ -23,8 +23,7 @@
         android:layout_height="19dp"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="0dp"
-        android:text="vorheriger Session:"
+        android:text="@string/previous_session_trend_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_last_month_trend" />
 
@@ -71,13 +70,13 @@
         app:layout_constraintTop_toBottomOf="@+id/label_previous_session_trend" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/sessions_statistics_completed_routes_topic"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Geschaffte Routen im Vergleich zu"
+        android:text="@string/sessions_statistics_completed_routes_topic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

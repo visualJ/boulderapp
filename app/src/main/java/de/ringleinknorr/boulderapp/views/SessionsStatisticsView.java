@@ -33,6 +33,9 @@ import butterknife.ButterKnife;
 import de.ringleinknorr.boulderapp.R;
 import de.ringleinknorr.boulderapp.models.Session;
 
+/**
+ * Displays statistic data for a session.
+ */
 public class SessionsStatisticsView extends ConstraintLayout {
 
     @BindView(R.id.session_statistics_month_trend)
@@ -56,7 +59,6 @@ public class SessionsStatisticsView extends ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.view_session_statistics, this);
         ButterKnife.bind(this);
         setLayoutParams(new Constraints.LayoutParams(Constraints.LayoutParams.MATCH_PARENT, Constraints.LayoutParams.WRAP_CONTENT));
-
     }
 
     public void setMonthlyTrend(double trend) {
@@ -81,6 +83,14 @@ public class SessionsStatisticsView extends ConstraintLayout {
         }
         prevSessionTrendIcon.setVisibility(VISIBLE);
         sessionStatisticsPreviousSessionTrend.setText(getResources().getString(R.string.trend_value, (trend)));
+    }
+
+    public boolean isPreviousSessionTrendSet(){
+        return prevSessionTrendIcon.getVisibility() == VISIBLE;
+    }
+
+    public void setNoDataForPreviousSessionTrend(){
+        sessionStatisticsPreviousSessionTrend.setText(getResources().getText(R.string.no_data));
     }
 
     public void setLineChart(List<Session> previousSessions){
